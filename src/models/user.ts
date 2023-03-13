@@ -1,7 +1,6 @@
 import { GuitarStructure } from './guitar';
 
-export type UserStructure = {
-  id: string;
+export type ProtoUserStructure = {
   userName: string;
   email: string;
   password?: string;
@@ -9,6 +8,8 @@ export type UserStructure = {
   myGuitars: GuitarStructure[];
   token?: string;
 };
+
+export type UserStructure = { id: string } & ProtoUserStructure;
 
 export type UserServerResponse = {
   results: UserStructure[];
