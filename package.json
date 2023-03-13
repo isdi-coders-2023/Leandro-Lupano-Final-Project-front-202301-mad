@@ -29,7 +29,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll --coverage",
-    "test:prod": "react-scripts test --watchAll --coverage --watchAll=false",
+    "test:prod": "react-scripts test --watchAll --coverage --watchAll=false --passWithNoTests",
     "eject": "react-scripts eject",
     "prepare": "husky install"
   },
@@ -38,10 +38,19 @@
   "prettier": {
     "singleQuote": true
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/reportWebVitals.ts",
+      "<rootDir>/src/index.ts",
+      "<rootDir>/src/services/firebase/firebase.config.ts",
+      "<rootDir>/src/store/store.ts"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier"
     ]
   },
   "browserslist": {
