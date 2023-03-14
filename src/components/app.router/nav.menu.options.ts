@@ -4,7 +4,7 @@ export type NavOption = {
 };
 
 export const navMenuOptions: NavOption[] = [
-  { label: 'Home', path: '/register' },
+  { label: 'Home', path: '/home' },
   { label: 'Login', path: '/login' },
   { label: 'Products', path: '/products' },
   { label: 'MyGuitars', path: '/myguitars' },

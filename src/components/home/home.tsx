@@ -14,23 +14,26 @@ export default function Home() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username
-        <input type="text" name="username" required />
-      </label>
+    <>
+      <h2>Guitar World</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username
+          <input type="text" name="username" required />
+        </label>
 
-      <label>
-        Email
-        <input type="email" name="email" required />
-      </label>
+        <label>
+          Email
+          <input type="email" name="email" required />
+        </label>
 
-      <label>
-        Password
-        <input type="password" name="password" required />
-      </label>
+        <label>
+          Password
+          <input type="password" name="password" required />
+        </label>
 
-      <button type="submit">Register</button>
-    </form>
+        <button type="submit">Register</button>
+      </form>
+    </>
   );
 }
