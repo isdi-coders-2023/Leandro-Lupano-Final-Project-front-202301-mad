@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
-// TEMP. FUTURE ROUTE: import { linkOptions } from './link.options';
+import { linkOptions } from './link.options';
 import { NavOption, navMenuOptions } from './nav.menu.options';
 
 // Routes from the navigation menu:
@@ -13,7 +13,7 @@ const Login = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE:const Error = lazy(() => import('../home/home'));
 
 // Routes from links:
-// TEMP. FUTURE ROUTE: const GuitarDetails = lazy(() => import('../home/home'));
+const GuitarDetails = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const EditGuitar = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const CreateGuitar = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const DeleteGuitar = lazy(() => import('../home/home'));
@@ -22,7 +22,7 @@ const Login = lazy(() => import('../home/home'));
 
 export function AppRouter() {
   const navMenuOptionsArray: NavOption[] = navMenuOptions;
-  // TEMP. FUTURE ROUTE: const linkOptionsArray: NavOption[] = linkOptions;
+  const linkOptionsArray: NavOption[] = linkOptions;
 
   return (
     <Suspense>
@@ -51,12 +51,12 @@ export function AppRouter() {
         TEMP. FUTURE ROUTE: <Route
           path={navMenuOptionsArray[5].path}
           element={<Users></Users>}
-        ></Route>
-        TEMP. FUTURE ROUTE: <Route
+        ></Route> */}
+        <Route
           path={linkOptionsArray[0].path}
           element={<GuitarDetails></GuitarDetails>}
         ></Route>
-        TEMP. FUTURE ROUTE: <Route
+        {/*TEMP. FUTURE ROUTE: <Route
           path={linkOptionsArray[1].path}
           element={<EditGuitar></EditGuitar>}
         ></Route>
