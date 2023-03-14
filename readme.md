@@ -18,7 +18,7 @@ Frontend of a guitar's e-commerce project developed in [React Redux](https://rea
 - **User:**
 
   - id: `string`
-  - userName: `string`
+  - username: `string`
   - email: `string`
   - password: `string`
   - role: `string`
