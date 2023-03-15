@@ -1,7 +1,9 @@
+import { AppRouter } from '../app.router/app.router';
+
 function App() {
   return (
     <div className="App">
-      <p>Working in progress...⛏</p>
+      <AppRouter></AppRouter>
     </div>
   );
 }
