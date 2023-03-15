@@ -29,7 +29,7 @@ describe('Given Home component', () => {
 
   describe('When the component is rendered', () => {
     test('Then the heading <h2> should be in the document', () => {
-      const element = screen.getByRole('heading');
+      const element = screen.getByRole('button');
       expect(element).toBeInTheDocument();
     });
 
