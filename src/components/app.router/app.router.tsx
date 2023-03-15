@@ -5,7 +5,7 @@ import { NavOption, navMenuOptions } from './nav.menu.options';
 
 // Routes from the navigation menu:
 const Home = lazy(() => import('../home/home'));
-const Login = lazy(() => import('../home/home'));
+const Login = lazy(() => import('../login/login'));
 // TEMP. FUTURE ROUTE: const Products = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE:const MyGuitars = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE:const About = lazy(() => import('../home/home'));

@@ -22,7 +22,7 @@ describe('Given AppRouter component', () => {
   describe('When it is render and the path is "/"', () => {
     test('Then, the "username" input should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(0));
-      const element = await screen.findByRole('heading');
+      const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
@@ -30,7 +30,7 @@ describe('Given AppRouter component', () => {
   describe('When it is render and the path is "/home"', () => {
     test('Then, the "username" input should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(1));
-      const element = await screen.findByRole('heading');
+      const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
@@ -38,7 +38,7 @@ describe('Given AppRouter component', () => {
   describe('When it is render and the path is "/login"', () => {
     test('Then, the "username" input should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(2));
-      const element = await screen.findByRole('heading');
+      const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
@@ -46,7 +46,7 @@ describe('Given AppRouter component', () => {
   describe('When it is render and the path is "/details"', () => {
     test('Then, the "username" input should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(3));
-      const element = await screen.findByRole('heading');
+      const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
