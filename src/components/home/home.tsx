@@ -1,7 +1,13 @@
-import { SyntheticEvent } from 'react';
+import { SyntheticEvent, useMemo } from 'react';
+import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
+import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 
 export default function Home() {
+  const userRepo = useMemo(() => new UsersApiRepo(), []);
+
+  const { registerUser } = useUsers(userRepo);
+
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const formNewUser = ev.currentTarget;
@@ -11,6 +17,8 @@ export default function Home() {
       email: (formNewUser[1] as HTMLFormElement).value,
       password: (formNewUser[2] as HTMLFormElement).value,
     };
+
+    registerUser(newUser);
   };
 
   return (
