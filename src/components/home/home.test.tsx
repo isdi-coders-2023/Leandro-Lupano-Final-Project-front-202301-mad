@@ -1,28 +1,73 @@
 /* eslint-disable testing-library/no-render-in-setup */
 /* eslint-disable testing-library/no-unnecessary-act */
-import { render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
+import { useUsers } from '../../hooks/use.users';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
+import { MemoryRouter as Router } from 'react-router-dom';
 import Home from './home';
-// TEMPORAL HASTA HABILITAR LA FUNCIÓN SUBMIT:
-// import userEvent from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
+import { UsersApiRepo } from '../../services/repositories/users.api.repo';
+
+jest.mock('../../hooks/use.users');
 
 describe('Given Home component', () => {
-  beforeEach(() => {
-    render(<Home></Home>);
+  beforeEach(async () => {
+    await act(async () => {
+      (useUsers as jest.Mock).mockReturnValue({
+        registerUser: jest.fn(),
+      });
+      render(
+        <Provider store={store}>
+          <Router>
+            <Home></Home>
+          </Router>
+        </Provider>
+      );
+    });
   });
 
   describe('When the component is rendered', () => {
-    test('Then the heading <h2> should be in the document', async () => {
-      const element = await screen.findByRole('heading');
+    test('Then the heading <h2> should be in the document', () => {
+      const element = screen.getByRole('heading');
+      expect(element).toBeInTheDocument();
+    });
+
+    test('Then the username <input> should be in the document', () => {
+      const element = screen.getByText(/Username/i);
+      expect(element).toBeInTheDocument();
+    });
+
+    test('Then the email <input> should be in the document', () => {
+      const element = screen.getByText(/Email/i);
+      expect(element).toBeInTheDocument();
+    });
+
+    test('Then the password <input> should be in the document', () => {
+      const element = screen.getByText(/Password/i);
+      expect(element).toBeInTheDocument();
+    });
+
+    test('Then the <button> should be in the document', () => {
+      const element = screen.getByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
 
-  // TEMPORAL HASTA HABILITAR LA FUNCIÓN SUBMIT:
-  // describe('When the submit button is clicked', () => {
-  //   test('Then, the handleSubmit function should be called', async () => {
-  //     const element = await screen.findByRole('button');
-  //     await (async () => userEvent.click(element));
-  //     expect(element).toBeInTheDocument();
-  //   });
-  // });
+  describe('When the submit button is clicked', () => {
+    test('Then, the handleSubmit function should be called', async () => {
+      const usersMockRepo = {} as unknown as UsersApiRepo;
+      const inputs = screen.getAllByRole('textbox') as HTMLFormElement[];
+      await userEvent.type(inputs[0], 'test');
+      await userEvent.type(inputs[1], 'test');
+      await userEvent.type(inputs[2], 'test');
+      const button = screen.getByRole('button');
+      await userEvent.click(button);
+      expect(useUsers(usersMockRepo).registerUser).toHaveBeenCalledWith({
+        username: 'test',
+        email: 'test',
+        password: 'test',
+      });
+    });
+  });
 });
