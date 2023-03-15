@@ -57,7 +57,7 @@ describe('Given Home component', () => {
   describe('When the submit button is clicked', () => {
     test('Then, the handleSubmit function should be called', async () => {
       const usersMockRepo = {} as unknown as UsersApiRepo;
-      const inputs = screen.getAllByRole('textbox') as HTMLFormElement[];
+      const inputs = screen.getAllByRole('textbox');
       await userEvent.type(inputs[0], 'test');
       await userEvent.type(inputs[1], 'test');
       await userEvent.type(inputs[2], 'test');

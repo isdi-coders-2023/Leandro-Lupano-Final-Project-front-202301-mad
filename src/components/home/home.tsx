@@ -12,10 +12,6 @@ export default function Home() {
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
     const formNewUser = ev.currentTarget;
-    console.log(formNewUser);
-    console.log(formNewUser.elements);
-    console.log(formNewUser.elements[0]);
-    console.log((formNewUser.elements[0] as HTMLFormElement).value);
 
     const newUser: Partial<UserStructure> = {
       username: (formNewUser.elements[0] as HTMLFormElement).value,
@@ -23,14 +19,13 @@ export default function Home() {
       password: (formNewUser.elements[2] as HTMLFormElement).value,
     };
 
-    console.log(newUser);
     registerUser(newUser);
   };
 
   return (
     <>
       <h2>Guitar World</h2>
-      <form onSubmit={handleSubmit} aria-label="testForm">
+      <form onSubmit={handleSubmit}>
         <label>
           Username
           <input type="text" name="username" required />
