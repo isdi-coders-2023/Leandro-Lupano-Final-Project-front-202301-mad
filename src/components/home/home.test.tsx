@@ -29,23 +29,23 @@ describe('Given Home component', () => {
 
   describe('When the component is rendered', () => {
     test('Then the heading <h2> should be in the document', () => {
-      const element = screen.getByRole('button');
-      expect(element).toBeInTheDocument();
+      const elements = screen.getAllByRole('heading');
+      expect(elements[0]).toBeInTheDocument();
     });
 
     test('Then the username <input> should be in the document', () => {
-      const element = screen.getByText(/Username/i);
-      expect(element).toBeInTheDocument();
+      const inputs = screen.getAllByRole('textbox');
+      expect(inputs[0]).toBeInTheDocument();
     });
 
     test('Then the email <input> should be in the document', () => {
-      const element = screen.getByText(/Email/i);
-      expect(element).toBeInTheDocument();
+      const inputs = screen.getAllByRole('textbox');
+      expect(inputs[1]).toBeInTheDocument();
     });
 
     test('Then the password <input> should be in the document', () => {
-      const element = screen.getByText(/Password/i);
-      expect(element).toBeInTheDocument();
+      const inputs = screen.getAllByRole('textbox');
+      expect(inputs[2]).toBeInTheDocument();
     });
 
     test('Then the <button> should be in the document', () => {

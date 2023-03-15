@@ -17,7 +17,8 @@
 */
 html,
 body {
-  min-height: 100%;
+  min-height: 100vh;
+  font-family: 'Open Sans', sans-serif;
 }
 /*
   Typographic tweaks!
@@ -27,7 +28,6 @@ body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  font-family: 'Inter', Arial, sans-serif;
 }
 
 /*
@@ -81,4 +81,9 @@ a {
   color: inherit;
   font-family: inherit;
   cursor: pointer;
+}
+
+button {
+  border: none;
+  background-color: inherit;
 }

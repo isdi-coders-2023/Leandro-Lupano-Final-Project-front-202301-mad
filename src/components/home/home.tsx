@@ -4,6 +4,8 @@ import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 
+import style from './home.style.module.scss';
+
 export default function Home() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
@@ -23,26 +25,40 @@ export default function Home() {
   };
 
   return (
-    <>
-      <h2>Guitar World</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input type="text" name="username" required />
-        </label>
+    <div className={style.home}>
+      <div className={style.homeHeader}>
+        <h2>Guitar World</h2>
+        <p>Welcome to the best guitar shop</p>
+        <p>Professional instruments, for professional musicians</p>
+      </div>
 
-        <label>
-          Email
-          <input type="email" name="email" required />
-        </label>
+      <div className={style.homeBody}>
+        <h3>New user?</h3>
+        <p>Be part of this magnificent world</p>
 
-        <label>
-          Password
-          <input type="password" name="password" role="textbox" required />
-        </label>
+        <div className={style.homeBodyForm}>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="username"
+              placeholder="Username:"
+              required
+            />
 
-        <button type="submit">Register</button>
-      </form>
-    </>
+            <input type="email" name="email" placeholder="Email:" required />
+
+            <input
+              type="password"
+              name="password"
+              role="textbox"
+              placeholder="Password:"
+              required
+            />
+
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
