@@ -34,13 +34,13 @@ describe('Given Login component', () => {
     });
 
     test('Then the username <input> should be in the document', () => {
-      const element = screen.getByText(/Username/i);
-      expect(element).toBeInTheDocument();
+      const inputs = screen.getAllByRole('textbox');
+      expect(inputs[0]).toBeInTheDocument();
     });
 
     test('Then the password <input> should be in the document', () => {
-      const element = screen.getByText(/Password/i);
-      expect(element).toBeInTheDocument();
+      const inputs = screen.getAllByRole('textbox');
+      expect(inputs[1]).toBeInTheDocument();
     });
 
     test('Then the <button> should be in the document', () => {

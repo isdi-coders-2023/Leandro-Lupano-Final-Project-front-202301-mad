@@ -1,8 +1,11 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
+
 import { SyntheticEvent, useMemo } from 'react';
 import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
+
+import style from './login.style.module.scss';
 
 export default function Login() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
@@ -20,24 +23,33 @@ export default function Login() {
     };
 
     loginUser(logUser);
+
+    formLoginUser.reset();
   };
 
   return (
-    <>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Username
-          <input type="text" name="username" required />
-        </label>
+    <div className={style.login}>
+      <div className={style.loginHeader}>
+        <h2>Login</h2>
+        <p>Good to see you again!</p>
+        <p>Let’s rock!</p>
+      </div>
 
-        <label>
-          Password
-          <input type="password" name="password" role="textbox" required />
-        </label>
+      <div className={style.loginBody}>
+        <form onSubmit={handleSubmit}>
+          <input type="text" name="username" placeholder="Username:" required />
 
-        <button type="submit">Login</button>
-      </form>
-    </>
+          <input
+            type="password"
+            name="password"
+            role="textbox"
+            placeholder="Password:"
+            required
+          />
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
   );
 }

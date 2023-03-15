@@ -13,6 +13,7 @@ export default function Home() {
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
+
     const formNewUser = ev.currentTarget;
 
     const newUser: Partial<UserStructure> = {
@@ -22,6 +23,8 @@ export default function Home() {
     };
 
     registerUser(newUser);
+
+    formNewUser.reset();
   };
 
   return (
