@@ -1,7 +1,7 @@
 import { GuitarStructure } from './guitar';
 
 export type ProtoUserStructure = {
-  userName: string;
+  username: string;
   email: string;
   password?: string;
   role: string;
