@@ -1,0 +1,49 @@
+.footer {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  background-color: hsl(210, 11, 15, 0.95);
+  padding: 1rem;
+
+  .footerCopyright {
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.8rem;
+    color: white;
+  }
+
+  .footerPickLogo {
+    display: none;
+  }
+
+  .footerFollowUs {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    img {
+      width: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+
+    .footerPickLogo {
+      display: flex;
+      width: 70px;
+    }
+
+    .footerFollowUs {
+      padding-left: 5rem;
+      img {
+        width: 40px;
+      }
+    }
+  }
+}
