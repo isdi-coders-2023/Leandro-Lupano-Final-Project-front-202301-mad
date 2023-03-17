@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 100px;
+  background-color: hsl(210, 11, 15, 0.95);
+
+  .headerLogo {
+    width: 35%;
+
+    .headerLogoImg {
+      width: 100px;
+    }
+  }
+
+  .headerNavMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 65%;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .header {
+    height: 120px;
+    gap: 2rem;
+
+    .headerLogo {
+      width: 20%;
+
+      .headerLogoImg {
+        width: 120px;
+      }
+    }
+
+    .headerNavMenu {
+      width: 80%;
+    }
+  }
+}
