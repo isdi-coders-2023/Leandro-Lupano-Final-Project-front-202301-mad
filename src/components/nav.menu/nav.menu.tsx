@@ -14,11 +14,13 @@ export function NavMenu() {
 
   return (
     <nav className={style.navMenu}>
-      <img
-        className={style.navMenuLogin}
-        src="./images/login-logo.png"
-        alt="login-logo"
-      />
+      <Link to={'/login'}>
+        <img
+          className={style.navMenuLogin}
+          src="./images/login-logo.png"
+          alt="login-logo"
+        />
+      </Link>
 
       <img
         className={style.navMenuBurger}
