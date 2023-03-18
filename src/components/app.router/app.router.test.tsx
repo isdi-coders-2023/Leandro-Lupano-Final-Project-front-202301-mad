@@ -10,7 +10,7 @@ describe('Given AppRouter component', () => {
     render(
       <Provider store={store}>
         <Router
-          initialEntries={['/', '/home', '/login', '/details']}
+          initialEntries={['/', '/home', '/login', '/about', '/details']}
           initialIndex={number}
         >
           <AppRouter></AppRouter>
@@ -43,9 +43,17 @@ describe('Given AppRouter component', () => {
     });
   });
 
-  describe('When it is render and the path is "/details"', () => {
+  describe('When it is render and the path is "/about"', () => {
     test('Then, the "username" input should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(3));
+      const elements = await screen.findAllByRole('heading');
+      expect(elements[0]).toBeInTheDocument();
+    });
+  });
+
+  describe('When it is render and the path is "/details"', () => {
+    test('Then, the "username" input should be in the document', async () => {
+      await waitFor(async () => prepareTestFunction(4));
       const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
     });
