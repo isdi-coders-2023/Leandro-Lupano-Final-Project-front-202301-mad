@@ -9,7 +9,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
 
   beforeEach(() => {
     mockInitialState = {
-      userToken: {} as UserStructure,
+      userLogged: {} as UserStructure,
       allUsers: [],
       user: {} as UserStructure,
     };
@@ -39,7 +39,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
       };
       const result = userReducer(mockInitialState, mockRegisterAction);
       expect(result).toEqual({
-        userToken: {} as UserStructure,
+        userLogged: {} as UserStructure,
         allUsers: [mockPayload],
         user: {},
       });
@@ -47,14 +47,14 @@ describe('Given the userSlice with payload and initial state mocked', () => {
   });
 
   describe('When the login action is called', () => {
-    test('Then, if the initial state userToken is empty, it should return the payload in the userToken property of the state', () => {
+    test('Then, if the initial state userLogged is empty, it should return the payload in the userLogged property of the state', () => {
       const mockLoginAction: PayloadAction<UserStructure> = {
         type: 'user/login',
         payload: mockPayload,
       };
       const result = userReducer(mockInitialState, mockLoginAction);
       expect(result).toEqual({
-        userToken: mockPayload,
+        userLogged: mockPayload,
         allUsers: [],
         user: {},
       });
@@ -69,7 +69,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
       };
       const result = userReducer(mockInitialState, mockReadIdAction);
       expect(result).toEqual({
-        userToken: {},
+        userLogged: {},
         allUsers: [],
         user: mockPayload,
       });
@@ -79,7 +79,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
   describe('When the update action is called', () => {
     test('Then, if the initial state allUsers is empty array, it should return the payload in the allUsers property of the state', () => {
       mockInitialState = {
-        userToken: {} as UserStructure,
+        userLogged: {} as UserStructure,
         allUsers: [mockUser, mockPayload],
         user: {} as UserStructure,
       };
@@ -96,7 +96,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
       };
       const result = userReducer(mockInitialState, mockUpdateAction);
       expect(result).toEqual({
-        userToken: {},
+        userLogged: {},
         allUsers: [
           mockUser,
           {

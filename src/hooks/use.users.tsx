@@ -5,7 +5,7 @@ import { UsersApiRepo } from '../services/repositories/users.api.repo';
 import { AppDispatch, RootState } from '../store/store';
 
 export function useUsers(repo: UsersApiRepo) {
-  const users = useSelector((state: RootState) => state.users);
+  const usersState = useSelector((state: RootState) => state.users);
 
   const usersDispatch = useDispatch<AppDispatch>();
 
@@ -29,7 +29,7 @@ export function useUsers(repo: UsersApiRepo) {
   };
 
   return {
-    users,
+    usersState,
     registerUser,
     loginUser,
   };

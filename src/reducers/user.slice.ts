@@ -3,13 +3,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { UserStructure } from '../models/user';
 
 export type State = {
-  userToken: UserStructure;
+  userLogged: UserStructure;
   allUsers: UserStructure[];
   user: UserStructure;
 };
 
 const initialState: State = {
-  userToken: {} as UserStructure,
+  userLogged: {} as UserStructure,
   allUsers: [],
   user: {} as UserStructure,
 };
@@ -24,7 +24,7 @@ const userSlice = createSlice({
     },
 
     login(state, action: PayloadAction<UserStructure>) {
-      state.userToken = action.payload;
+      state.userLogged = action.payload;
     },
 
     readId(state, action: PayloadAction<UserStructure>) {
