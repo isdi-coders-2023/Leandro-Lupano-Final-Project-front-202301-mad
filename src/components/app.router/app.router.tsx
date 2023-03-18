@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { linkOptions } from './link.options';
-import { NavOption, navMenuOptions } from './nav.menu.options';
+import { NavOption } from './nav.menu.options';
 
 // Routes from the navigation menu:
 const Home = lazy(() => import('../home/home'));
@@ -21,7 +21,8 @@ const GuitarDetails = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const DeleteUser = lazy(() => import('../home/home'));
 
 export function AppRouter() {
-  const navMenuOptionsArray: NavOption[] = navMenuOptions;
+  // TEMPORAL: Hasta tener disponibles los componentes:
+  // const navMenuOptionsArray: NavOption[] = navMenuOptions;
   const linkOptionsArray: NavOption[] = linkOptions;
 
   return (
