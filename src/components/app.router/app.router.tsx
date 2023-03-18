@@ -10,7 +10,7 @@ const Login = lazy(() => import('../login/login'));
 // TEMP. FUTURE ROUTE:const MyGuitars = lazy(() => import('../home/home'));
 const About = lazy(() => import('../about/about'));
 // TEMP. FUTURE ROUTE:const Users = lazy(() => import('../home/home'));
-// TEMP. FUTURE ROUTE:const Error = lazy(() => import('../home/home'));
+const ErrorPage = lazy(() => import('../error.page/error.page'));
 
 // Routes from links:
 const GuitarDetails = lazy(() => import('../home/home'));
@@ -38,7 +38,6 @@ export function AppRouter() {
           path={navMenuOptionsArray[1].path}
           element={<MyGuitars></MyGuitars>}
         ></Route>  */}
-
         <Route
           path={navMenuOptionsArray[2].path}
           element={<About></About>}
@@ -70,8 +69,8 @@ export function AppRouter() {
         TEMP. FUTURE ROUTE: <Route
           path={linkOptionsArray[5].path}
           element={<DeleteUser></DeleteUser>}
-        ></Route>
-        TEMP. FUTURE ROUTE: <Route path={'*'} element={<Error></Error>}></Route> */}
+        ></Route>  */}
+        <Route path={'*'} element={<ErrorPage></ErrorPage>}></Route>
       </Routes>
     </Suspense>
   );
