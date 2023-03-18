@@ -28,28 +28,22 @@ export function AppRouter() {
     <Suspense>
       <Routes>
         <Route path={'/'} element={<Home></Home>}></Route>
-        <Route
-          path={navMenuOptionsArray[0].path}
-          element={<Home></Home>}
-        ></Route>
-        <Route
-          path={navMenuOptionsArray[1].path}
-          element={<Login></Login>}
-        ></Route>
+        <Route path={'/home'} element={<Home></Home>}></Route>
+        <Route path={'/login'} element={<Login></Login>}></Route>
         {/* TEMP. FUTURE ROUTE: <Route
-          path={navMenuOptionsArray[2].path}
+          path={navMenuOptionsArray[0].path}
           element={<Products></Products>}
         ></Route>
         TEMP. FUTURE ROUTE: <Route
-          path={navMenuOptionsArray[3].path}
+          path={navMenuOptionsArray[1].path}
           element={<MyGuitars></MyGuitars>}
         ></Route>
         TEMP. FUTURE ROUTE: <Route
-          path={navMenuOptionsArray[4].path}
+          path={navMenuOptionsArray[2].path}
           element={<About></About>}
         ></Route>
         TEMP. FUTURE ROUTE: <Route
-          path={navMenuOptionsArray[5].path}
+          path={navMenuOptionsArray[3].path}
           element={<Users></Users>}
         ></Route> */}
         <Route

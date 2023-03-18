@@ -1,0 +1,138 @@
+// .navMenuBurgerLogo {
+//   position: relative;
+//   z-index: 10;
+
+//   img {
+//     vertical-align: top;
+//     width: 60px;
+//     cursor: pointer;
+//   }
+// }
+
+// .navMenuOptions {
+//   color: white;
+//   font-family: 'Raleway', sans-serif;
+//   background-color: hsl(0, 0, 45, 0.99);
+//   box-shadow: 2px 0px 5px 2px hsla(0, 1%, 32%, 0.99);
+//   width: 150px;
+//   position: absolute;
+//   top: 0;
+//   right: 0;
+//   padding: 1rem;
+//   transition: all 0.5s ease;
+
+//   .navMenuOptionsList {
+//   }
+// }
+
+// .navMenuOptions {
+//   position: absolute;
+//   top: 100%;
+//   left: 0;
+//   width: 100%;
+//   padding: 20px;
+//   background-color: #fff;
+//   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+//   transform: translateY(-100%);
+//   transition: transform 0.3s ease-in-out;
+// }
+
+// .navMenuOptions--active {
+//   transform: translateY(0%);
+// }
+
+// .navMenuOptionsList {
+//   display: flex;
+//   flex-direction: column;
+//   gap: 20px;
+// }
+
+// .navMenuBurgerLogoImg {
+//   width: 30px;
+//   height: 30px;
+//   cursor: pointer;
+// }
+
+// .navMenuOptionsList li {
+//   list-style: none;
+// }
+
+// .navMenuOptionsList li a {
+//   text-decoration: none;
+//   color: #333;
+//   font-weight: bold;
+//   font-size: 16px;
+// }
+
+// .navMenuOptionsList li a:hover {
+//   color: #666;
+// }
+
+// @media (max-width: 768px) {
+//   .navMenuBurgerLogo {
+//     display: block;
+//   }
+// }
+
+.navMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  height: 100%;
+  position: relative;
+
+  .navMenuLogin {
+    width: 60px;
+    cursor: pointer;
+  }
+  .navMenuBurger {
+    width: 80px;
+    cursor: pointer;
+  }
+
+  .navMenuOptions {
+    display: none;
+  }
+
+  .navMenuOptionsOpen {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1rem;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 150px;
+    background-color: hsl(0, 0, 45, 0.99);
+    box-shadow: 2px 0px 2px 2px hsla(0, 1%, 32%, 0.99);
+    z-index: 1;
+
+    li {
+      padding: 0.7rem 1rem;
+    }
+
+    li:hover {
+      background-color: hsl(210, 11, 15, 0.95);
+      border-radius: 1rem;
+    }
+  }
+}
+
+//   .navMenuOptionsList {
+//     padding: 0.8rem 1.1rem;
+//     border-bottom: 1px solid black;
+//     display: flex;
+//     align-items: center;
+//     color: white;
+//     font-family: 'Raleway', sans-serif;
+//     font-size: 1rem;
+//     cursor: pointer;
+//     border-bottom: none;
+//     transition: background-color 0.3s;
