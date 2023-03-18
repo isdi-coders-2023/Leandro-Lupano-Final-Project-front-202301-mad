@@ -32,6 +32,8 @@ const userSlice = createSlice({
     },
 
     update(state, action: PayloadAction<UserStructure>) {
+      state.userLogged = { ...state.userLogged, ...action.payload };
+
       const actualInfo = [...state.allUsers];
       state.allUsers = actualInfo.map((item) =>
         item.id === action.payload.id ? { ...item, ...action.payload } : item
@@ -40,5 +42,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { register, login } = userSlice.actions;
+export const { register, login, readId, update } = userSlice.actions;
 export const userReducer = userSlice.reducer;
