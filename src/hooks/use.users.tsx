@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { GuitarStructure } from '../models/guitar';
 import { UserStructure } from '../models/user';
-import { login, register } from '../reducers/user.slice';
+import { login, register, update } from '../reducers/user.slice';
 import { UsersApiRepo } from '../services/repositories/users.api.repo';
 import { AppDispatch, RootState } from '../store/store';
 
@@ -28,9 +29,24 @@ export function useUsers(repo: UsersApiRepo) {
     }
   };
 
+  const userCart = async (idGuitar: GuitarStructure['id'], action: string) => {
+    try {
+      const userToken = usersState.userLogged.token;
+
+      if (!userToken) throw new Error('Not authorized');
+
+      const userInfo = await repo.update(idGuitar, userToken, action);
+
+      usersDispatch(update(userInfo.results[0]));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
   return {
     usersState,
     registerUser,
     loginUser,
+    userCart,
   };
 }
