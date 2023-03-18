@@ -31,6 +31,7 @@ export function useUsers(repo: UsersApiRepo) {
 
   const userCart = async (idGuitar: GuitarStructure['id'], action: string) => {
     try {
+      debugger;
       const userToken = usersState.userLogged.token;
 
       if (!userToken) throw new Error('Not authorized');

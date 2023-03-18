@@ -96,7 +96,13 @@ describe('Given the userSlice with payload and initial state mocked', () => {
       };
       const result = userReducer(mockInitialState, mockUpdateAction);
       expect(result).toEqual({
-        userLogged: {},
+        userLogged: {
+          username: 'Test3-UPDATE',
+          email: 'test3',
+          role: 'test3',
+          myGuitars: [],
+          id: '3',
+        },
         allUsers: [
           mockUser,
           {
