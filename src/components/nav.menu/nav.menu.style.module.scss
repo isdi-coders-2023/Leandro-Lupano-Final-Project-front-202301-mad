@@ -1,0 +1,102 @@
+.navMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .navMenuLogin {
+    width: 60px;
+    cursor: pointer;
+  }
+
+  .navMenuBurger {
+    width: 80px;
+    cursor: pointer;
+  }
+
+  .navMenuOptions {
+    display: none;
+  }
+
+  .navMenuOptionsOpen {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 1rem;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 150px;
+    background-color: hsl(0, 0, 45, 0.99);
+    box-shadow: 2px 0px 2px 2px hsla(0, 1%, 32%, 0.99);
+
+    li {
+      padding: 0.7rem 1rem;
+    }
+
+    li:hover {
+      background-color: hsl(210, 11, 15, 0.95);
+      border-radius: 1rem;
+    }
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .navMenu {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+
+    .navMenuLogin {
+      width: 70px;
+      cursor: pointer;
+      margin: 1rem;
+    }
+
+    .navMenuBurger {
+      display: none;
+    }
+
+    .navMenuOptions,
+    .navMenuOptionsOpen {
+      position: static;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      color: white;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.5rem;
+      background-color: inherit;
+      box-shadow: none;
+
+      li:hover {
+        background-color: hsl(0, 0, 45, 0.99);
+        padding: 0.5rem;
+        border-radius: 1rem;
+      }
+    }
+    .navMenuOptions {
+      gap: 2rem;
+    }
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .navMenuOptions {
+    gap: 2.5rem;
+  }
+  .navMenuOptionsOpen {
+    gap: 2.2rem;
+  }
+}
