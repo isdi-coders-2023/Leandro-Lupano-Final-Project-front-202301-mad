@@ -8,7 +8,7 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 
-describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent', () => {
+describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestUserComponent', () => {
   let mockPayload: UserStructure;
   let mockRepo: UsersApiRepo;
   let mockResponse: UserServerResponse;
@@ -42,7 +42,7 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
       update: jest.fn(),
     } as unknown as UsersApiRepo;
 
-    const TestComponent = function () {
+    const TestUserComponent = function () {
       const { registerUser, loginUser, userCart } = useUsers(mockRepo);
 
       return (
@@ -57,20 +57,20 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     await act(async () =>
       render(
         <Provider store={store}>
-          <TestComponent></TestComponent>
+          <TestUserComponent></TestUserComponent>
         </Provider>
       )
     );
   });
 
-  describe('When the TestComponent is rendered', () => {
+  describe('When the TestUserComponent is rendered', () => {
     test('Then, the button should be in the document', async () => {
       const elements = await screen.findAllByRole('button');
       expect(elements[0]).toBeInTheDocument();
     });
   });
 
-  describe('When the TestComponent is rendered and the register button is clicked', () => {
+  describe('When the TestUserComponent is rendered and the register button is clicked', () => {
     test('Then, the registerUser function should be called', async () => {
       const elements = await screen.findAllByRole('button');
       await act(async () => userEvent.click(elements[0]));
@@ -78,7 +78,7 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     });
   });
 
-  describe('When the TestComponent is rendered and the login button is clicked', () => {
+  describe('When the TestUserComponent is rendered and the login button is clicked', () => {
     test('Then, the loginUser function should be called', async () => {
       const elements = await screen.findAllByRole('button');
       await act(async () => userEvent.click(elements[1]));
@@ -86,7 +86,7 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     });
   });
 
-  describe('When the TestComponent is rendered and the userCart button is clicked', () => {
+  describe('When the TestUserComponent is rendered and the userCart button is clicked', () => {
     test('Then, the userCart function should be called', async () => {
       const elements = await screen.findAllByRole('button');
       (mockRepo.create as jest.Mock).mockResolvedValueOnce(mockResponse);
@@ -96,7 +96,7 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestComponent
     });
   });
 
-  describe('When the TestComponent is rendered and the userCart button is clicked without token', () => {
+  describe('When the TestUserComponent is rendered and the userCart button is clicked without token', () => {
     test('Then, the update function should not been called', async () => {
       const elements = await screen.findAllByRole('button');
       (mockRepo.create as jest.Mock).mockResolvedValueOnce(mockResponseFalse);

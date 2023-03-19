@@ -11,7 +11,7 @@ import { store } from '../store/store';
 import { useGuitars } from './use.guitars';
 import { useUsers } from './use.users';
 
-describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestComponent', () => {
+describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuitarComponent', () => {
   let mockGuitarRepo: GuitarsApiRepo;
   let mockGuitarPayload: GuitarStructure;
 
@@ -79,7 +79,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
       );
     };
 
-    const TestComponent = function () {
+    const TestGuitarComponent = function () {
       const { loginUser } = useUsers(mockUserRepo);
       const {
         loadGuitars,
@@ -114,20 +114,20 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     await act(async () =>
       render(
         <Provider store={store}>
-          <TestComponent></TestComponent>
+          <TestGuitarComponent></TestGuitarComponent>
         </Provider>
       )
     );
   });
 
-  describe('When the TestComponent is rendered', () => {
+  describe('When the TestGuitarComponent is rendered', () => {
     test('Then, the button should be in the document', async () => {
       const elements = await screen.findAllByRole('button');
       expect(elements[0]).toBeInTheDocument();
     });
   });
 
-  describe('When the TestComponent is rendered and the loadGuitars button is clicked', () => {
+  describe('When the TestGuitarComponent is rendered and the loadGuitars button is clicked', () => {
     test('Then, if there is userToken, the read guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
       trueToken();
@@ -147,7 +147,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     });
   });
 
-  describe('When the TestComponent is rendered and the loadOneGuitars button is clicked', () => {
+  describe('When the TestGuitarComponent is rendered and the loadOneGuitars button is clicked', () => {
     test('Then, if there is userToken, the readId guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
       trueToken();
@@ -167,7 +167,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     });
   });
 
-  describe('When the TestComponent is rendered and the createGuitar button is clicked', () => {
+  describe('When the TestGuitarComponent is rendered and the createGuitar button is clicked', () => {
     test('Then, if there is userToken, the create guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
       trueToken();
@@ -187,7 +187,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     });
   });
 
-  describe('When the TestComponent is rendered and the updateGuitar button is clicked', () => {
+  describe('When the TestGuitarComponent is rendered and the updateGuitar button is clicked', () => {
     test('Then, if there is userToken, the update guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
       trueToken();
@@ -207,7 +207,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     });
   });
 
-  describe('When the TestComponent is rendered and the deleteOneGuitar button is clicked', () => {
+  describe('When the TestGuitarComponent is rendered and the deleteOneGuitar button is clicked', () => {
     test('Then, if there is userToken, the delete guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
       trueToken();
