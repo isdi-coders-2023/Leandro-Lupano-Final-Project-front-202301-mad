@@ -3,11 +3,11 @@ import { GuitarServerResponse, GuitarStructure } from '../../models/guitar';
 export interface GuitarsRepo<T> {
   read(token: string, style?: string, page?: string): Promise<T>;
   readId(token: string, idGuitar: GuitarStructure['id']): Promise<T>;
-  create(token: string, guitarInfo: Partial<GuitarStructure>): Promise<T>;
+  create(token: string, infoGuitar: Partial<GuitarStructure>): Promise<T>;
   update(
     token: string,
     idGuitar: GuitarStructure['id'],
-    guitarInfo: Partial<GuitarStructure>
+    infoGuitar: Partial<GuitarStructure>
   ): Promise<T>;
   delete(token: string, idGuitar: GuitarStructure['id']): Promise<void>;
 }
@@ -67,13 +67,13 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
 
   async create(
     token: string,
-    guitarInfo: Partial<GuitarStructure>
+    infoGuitar: Partial<GuitarStructure>
   ): Promise<GuitarServerResponse> {
     const url = this.url + '/create';
 
     const resp = await fetch(url, {
       method: 'POST',
-      body: JSON.stringify(guitarInfo),
+      body: JSON.stringify(infoGuitar),
       headers: {
         Authorization: 'Bearer ' + token,
       },
@@ -90,13 +90,13 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   async update(
     token: string,
     idGuitar: GuitarStructure['id'],
-    guitarInfo: Partial<GuitarStructure>
+    infoGuitar: Partial<GuitarStructure>
   ): Promise<GuitarServerResponse> {
     const url = this.url + '/edit/' + idGuitar;
 
     const resp = await fetch(url, {
       method: 'PATCH',
-      body: JSON.stringify(guitarInfo),
+      body: JSON.stringify(infoGuitar),
       headers: {
         Authorization: 'Bearer ' + token,
       },
