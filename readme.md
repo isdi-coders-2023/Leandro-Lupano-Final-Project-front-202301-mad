@@ -29,7 +29,7 @@ Frontend of a guitar's e-commerce project developed in [React Redux](https://rea
 - **Guitar:**
   - id: `string`
   - brand: `string`
-  - model: `string`
+  - modelGuitar: `string`
   - picture: `string`
   - style: `string`
   - material: `string`

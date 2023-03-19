@@ -1,6 +1,6 @@
 export type ProtoGuitarStructure = {
   brand: string;
-  model: string;
+  modelGuitar: string;
   picture: string;
   style: string;
   material: string;
