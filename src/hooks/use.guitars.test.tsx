@@ -20,6 +20,9 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   let mockUserResponse: UserServerResponse;
   let mockUserResponseFalse: UserServerResponse;
 
+  let falseToken: () => void;
+  let trueToken: () => void;
+
   beforeEach(async () => {
     mockGuitarRepo = {
       read: jest.fn(),
@@ -63,6 +66,18 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
     mockUserRepo = {
       create: jest.fn(),
     } as unknown as UsersApiRepo;
+
+    trueToken = () => {
+      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
+        mockUserResponse
+      );
+    };
+
+    falseToken = () => {
+      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
+        mockUserResponseFalse
+      );
+    };
 
     const TestComponent = function () {
       const { loginUser } = useUsers(mockUserRepo);
@@ -115,9 +130,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   describe('When the TestComponent is rendered and the loadGuitars button is clicked', () => {
     test('Then, if there is userToken, the read guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponse
-      );
+      trueToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[1]));
 
@@ -126,9 +139,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
 
     test('Then, if there is no userToken, the read guitar repo should NOT been called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponseFalse
-      );
+      falseToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[1]));
 
@@ -139,9 +150,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   describe('When the TestComponent is rendered and the loadOneGuitars button is clicked', () => {
     test('Then, if there is userToken, the readId guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponse
-      );
+      trueToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[2]));
 
@@ -150,9 +159,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
 
     test('Then, if there is no userToken, the readId guitar repo should NOT been called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponseFalse
-      );
+      falseToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[2]));
 
@@ -163,9 +170,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   describe('When the TestComponent is rendered and the createGuitar button is clicked', () => {
     test('Then, if there is userToken, the create guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponse
-      );
+      trueToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[3]));
 
@@ -174,9 +179,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
 
     test('Then, if there is no userToken, the create guitar repo should NOT been called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponseFalse
-      );
+      falseToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[3]));
 
@@ -187,9 +190,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   describe('When the TestComponent is rendered and the updateGuitar button is clicked', () => {
     test('Then, if there is userToken, the update guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponse
-      );
+      trueToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[4]));
 
@@ -198,9 +199,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
 
     test('Then, if there is no userToken, the update guitar repo should NOT been called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponseFalse
-      );
+      falseToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[4]));
 
@@ -211,9 +210,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
   describe('When the TestComponent is rendered and the deleteOneGuitar button is clicked', () => {
     test('Then, if there is userToken, the delete guitar repo method should be called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponse
-      );
+      trueToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[5]));
 
@@ -222,9 +219,7 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestCompo
 
     test('Then, if there is no userToken, the delete guitar repo should NOT been called', async () => {
       const elements = await screen.findAllByRole('button');
-      (mockUserRepo.create as jest.Mock).mockResolvedValueOnce(
-        mockUserResponseFalse
-      );
+      falseToken();
       await act(async () => userEvent.click(elements[0]));
       await act(async () => userEvent.click(elements[5]));
 
