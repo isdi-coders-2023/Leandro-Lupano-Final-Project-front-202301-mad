@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { UserStructure } from '../models/user';
 
-export type State = {
+export type UserState = {
   userLogged: UserStructure;
   allUsers: UserStructure[];
   user: UserStructure;
 };
 
-const initialState: State = {
+const initialState: UserState = {
   userLogged: {} as UserStructure,
   allUsers: [],
   user: {} as UserStructure,
