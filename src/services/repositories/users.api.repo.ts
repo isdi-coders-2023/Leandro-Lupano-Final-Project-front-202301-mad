@@ -56,9 +56,9 @@ export class UsersApiRepo implements UserRepo<UserServerResponse> {
     if (!resp.ok)
       throw new Error('Error http: ' + resp.status + resp.statusText);
 
-    const userInfo = (await resp.json()) as UserServerResponse;
+    const userData = (await resp.json()) as UserServerResponse;
 
-    return userInfo;
+    return userData;
   }
 
   async update(
@@ -78,8 +78,8 @@ export class UsersApiRepo implements UserRepo<UserServerResponse> {
     if (!resp.ok)
       throw new Error('Error http: ' + resp.status + resp.statusText);
 
-    const userInfo = (await resp.json()) as UserServerResponse;
+    const userData = (await resp.json()) as UserServerResponse;
 
-    return userInfo;
+    return userData;
   }
 }
