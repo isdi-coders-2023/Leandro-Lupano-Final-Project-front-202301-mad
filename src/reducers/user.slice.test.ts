@@ -77,7 +77,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
   });
 
   describe('When the update action is called', () => {
-    test('Then, if the initial state allUsers is empty array, it should return the payload in the allUsers property of the state', () => {
+    test('Then, if the initial state allUsers is an Array with mockUser and mockPayload, it should return the update with mockUpdateAction', () => {
       mockInitialState = {
         userLogged: {} as UserStructure,
         allUsers: [mockUser, mockPayload],
