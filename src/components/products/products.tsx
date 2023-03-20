@@ -27,7 +27,7 @@ export default function Products() {
         <ul className={style.productsCard}>
           {allGuitarsArray.map((item: GuitarStructure) => (
             <GuitarCard
-              key={item.modelGuitar}
+              key={item.id}
               guitar={item}
               action="products"
             ></GuitarCard>

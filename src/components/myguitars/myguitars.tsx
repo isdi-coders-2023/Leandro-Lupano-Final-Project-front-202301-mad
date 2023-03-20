@@ -21,17 +21,11 @@ export default function MyGuitars() {
       <div className={style.myguitarsCardList}>
         <ul className={style.myguitarsCard}>
           {userGuitarsArray.map((item: GuitarStructure) => (
-            <>
-              <GuitarCard
-                key={item.id}
-                guitar={item}
-                action="myguitars"
-              ></GuitarCard>
-              {/*
-          <button className={style.myguitarsCardButtonsRemove}>
-            <img src="./images/remove-button.png" alt="Remove-button" />
-          </button> */}
-            </>
+            <GuitarCard
+              key={item.id}
+              guitar={item}
+              action="myguitars"
+            ></GuitarCard>
           ))}
         </ul>
       </div>

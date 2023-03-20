@@ -4,9 +4,20 @@ import { AppRouter } from './app.router';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
+import { useUsers } from '../../hooks/use.users';
+
+jest.mock('../../hooks/use.users');
 
 describe('Given AppRouter component', () => {
   const prepareTestFunction = (number: number) => {
+    (useUsers as jest.Mock).mockReturnValue({
+      usersState: {
+        userLogged: {
+          myGuitars: [{ id: '1' }, { id: '2' }],
+        },
+      },
+    });
+
     render(
       <Provider store={store}>
         <Router
@@ -63,8 +74,8 @@ describe('Given AppRouter component', () => {
   describe('When it is rendered and the path is "/myguitars"', () => {
     test('Then, the main heading of MyGuitars page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(4));
-      const elements = await screen.findAllByRole('heading');
-      expect(elements[0]).toBeInTheDocument();
+      const element = await screen.findByRole('heading');
+      expect(element).toBeInTheDocument();
     });
   });
 
