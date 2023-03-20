@@ -3,7 +3,7 @@ import style from './error.page.style.module.scss';
 
 export default function ErrorPage() {
   return (
-    <div className={style.errorPage}>
+    <section className={style.errorPage}>
       <div className={style.errorPageTitle}>
         <p className={style.errorPageTitleCode}>404</p>
         <p className={style.errorPageTitleMessage}>Page not found</p>
@@ -15,6 +15,6 @@ export default function ErrorPage() {
           <span> home page</span>
         </Link>
       </p>
-    </div>
+    </section>
   );
 }

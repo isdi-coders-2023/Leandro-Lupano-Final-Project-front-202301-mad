@@ -6,7 +6,7 @@ import { NavOption, navMenuOptions } from './nav.menu.options';
 // Routes from the navigation menu:
 const Home = lazy(() => import('../home/home'));
 const Login = lazy(() => import('../login/login'));
-// TEMP. FUTURE ROUTE: const Products = lazy(() => import('../home/home'));
+const Products = lazy(() => import('../products/products'));
 // TEMP. FUTURE ROUTE:const MyGuitars = lazy(() => import('../home/home'));
 const About = lazy(() => import('../about/about'));
 // TEMP. FUTURE ROUTE:const Users = lazy(() => import('../home/home'));
@@ -30,11 +30,11 @@ export function AppRouter() {
         <Route path={'/'} element={<Home></Home>}></Route>
         <Route path={'/home'} element={<Home></Home>}></Route>
         <Route path={'/login'} element={<Login></Login>}></Route>
-        {/* TEMP. FUTURE ROUTE: <Route
+        <Route
           path={navMenuOptionsArray[0].path}
           element={<Products></Products>}
         ></Route>
-        TEMP. FUTURE ROUTE: <Route
+        {/* TEMP. FUTURE ROUTE: <Route
           path={navMenuOptionsArray[1].path}
           element={<MyGuitars></MyGuitars>}
         ></Route>  */}

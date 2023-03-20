@@ -28,11 +28,11 @@ export default function Login() {
   };
 
   return (
-    <div className={style.login}>
+    <section className={style.login}>
       <div className={style.loginHeader}>
         <h2>Login</h2>
         <p>Good to see you again!</p>
-        <p>Let’s rock!</p>
+        <p>Let`s rock!</p>
       </div>
 
       <div className={style.loginBody}>
@@ -50,6 +50,6 @@ export default function Login() {
           <button type="submit">Login</button>
         </form>
       </div>
-    </div>
+    </section>
   );
 }
