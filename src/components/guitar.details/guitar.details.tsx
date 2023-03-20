@@ -6,10 +6,6 @@ import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 
 import style from './guitar.details.style.module.scss';
 
-// type GuitarDetailsProps = {
-//   guitar: GuitarStructure;
-// };
-
 export default function GuitarDetails() {
   const location = useLocation();
   const { guitarProps } = location.state;
@@ -37,49 +33,55 @@ export default function GuitarDetails() {
           className={style.guitarDetailsHeaderBackButton}
           onClick={handlerNavigateBack}
         >
-          Back
+          ◄ Go back
         </button>
       </div>
 
       <div className={style.guitarDetailsBody}>
-        <div className={style.guitarDetailsBodyPicture}>
-          <img src={guitar.picture} alt={guitar.modelGuitar} />
-        </div>
-
-        <div className={style.guitarDetailsBodyInfo}>
-          <div className={style.guitarDetailsBodyInfoButtons}>
-            <button className={style.guitarDetailsBodyInfoButtonsEdit}>
-              Edit
-            </button>
-            <button
-              className={style.guitarDetailsBodyInfoButtonsDelete}
-              onClick={() => {
-                handlerDeleteGuitar(guitar.id);
-              }}
-            >
-              <img src="./images/delete-button.png" alt="Delete-button" />
-            </button>
+        <div className={style.guitarDetailsBodyMain}>
+          <div className={style.guitarDetailsBodyPicture}>
+            <img src={guitar.picture} alt={guitar.modelGuitar} />
           </div>
-          <p className={style.guitarDetailsBodyInfoBrand}>
-            Brand: {guitar.brand}
-          </p>
-          <p className={style.guitarDetailsBodyInfoModel}>
-            Model: {guitar.modelGuitar}
-          </p>
-          <p className={style.guitarDetailsBodyInfoStyle}>
-            Style: {guitar.style}
-          </p>
-          <p className={style.guitarDetailsBodyInfoBody}>
-            Material: {guitar.material}
-          </p>
-          <p className={style.guitarDetailsBodyInfoPrice}>
-            Price: {guitar.price} €
-          </p>
+
+          <div className={style.guitarDetailsBodyInfo}>
+            <div className={style.guitarDetailsBodyInfoButtons}>
+              <button className={style.guitarDetailsBodyInfoButtonsEdit}>
+                Edit
+              </button>
+              <button
+                className={style.guitarDetailsBodyInfoButtonsDelete}
+                onClick={() => {
+                  handlerDeleteGuitar(guitar.id);
+                }}
+              >
+                <img src="./images/delete-button.png" alt="Delete-button" />
+              </button>
+            </div>
+            <p className={style.guitarDetailsBodyInfoBrand}>
+              Brand: {guitar.brand}
+            </p>
+            <p className={style.guitarDetailsBodyInfoModel}>
+              Model: {guitar.modelGuitar}
+            </p>
+            <p className={style.guitarDetailsBodyInfoStyle}>
+              Style: {guitar.style}
+            </p>
+            <p className={style.guitarDetailsBodyInfoMaterial}>
+              Material: {guitar.material}
+            </p>
+            <p className={style.guitarDetailsBodyInfoPrice}>
+              Price: {guitar.price} €
+            </p>
+          </div>
         </div>
 
         <div className={style.guitarDetailsBodyDescription}>
           <p className={style.guitarDetailsBodyDescriptionText}>
-            Description: {guitar.description}
+            Description: {guitar.description} Lorem ipsum dolor sit amet
+            consectetur adipisicing elit. Tempore, officiis est magni
+            consequatur nisi consectetur quasi nihil magnam, ipsam blanditiis
+            possimus sint suscipit animi eligendi architecto error nesciunt
+            provident? Facilis?
           </p>
         </div>
       </div>

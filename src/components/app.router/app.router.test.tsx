@@ -90,7 +90,7 @@ describe('Given AppRouter component', () => {
   describe('When it is rendered and the path is "/details"', () => {
     test('Then, the main heading of Details page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(6));
-      const element = await screen.findByRole('button');
+      const element = await screen.findByRole('heading');
       expect(element).toBeInTheDocument();
     });
   });
