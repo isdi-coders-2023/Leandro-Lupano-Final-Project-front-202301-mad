@@ -1,4 +1,5 @@
 import { AppDispatch, RootState } from '../store/store';
+import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { GuitarStructure } from '../models/guitar';
 import { GuitarsApiRepo } from '../services/repositories/guitars.api.repo';
@@ -16,18 +17,21 @@ export function useGuitars(repo: GuitarsApiRepo) {
 
   const guitarsDispatch = useDispatch<AppDispatch>();
 
-  const loadGuitars = async (style?: string, page?: string) => {
-    try {
-      const userToken = usersState.userLogged.token;
-      if (!userToken) throw new Error('Not authorized');
+  const loadGuitars = useCallback(
+    async (style?: string, page?: string) => {
+      try {
+        const userToken = usersState.userLogged.token;
+        if (!userToken) throw new Error('Not authorized');
 
-      const guitarsInfo = await repo.read(userToken, style, page);
+        const guitarsInfo = await repo.read(userToken, style, page);
 
-      guitarsDispatch(read(guitarsInfo.results));
-    } catch (error) {
-      console.log((error as Error).message);
-    }
-  };
+        guitarsDispatch(read(guitarsInfo.results));
+      } catch (error) {
+        console.log((error as Error).message);
+      }
+    },
+    [guitarsDispatch, repo, usersState.userLogged.token]
+  );
 
   const loadOneGuitar = async (idGuitar: GuitarStructure['id']) => {
     try {

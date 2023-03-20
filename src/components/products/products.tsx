@@ -12,13 +12,13 @@ export default function Products() {
         <div className={style.productsCard}>
           GuitarCard
           <button className={style.productsCardButtonsAdd}>
-            <img src="./images/shop-trolley.png" alt="Previous-button" />
+            <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
           </button>
         </div>
         <div className={style.productsCard}>
           GuitarCard
           <button className={style.productsCardButtonsAdd}>
-            <img src="./images/shop-trolley.png" alt="Previous-button" />
+            <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
           </button>
         </div>
       </div>

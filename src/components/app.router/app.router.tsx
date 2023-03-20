@@ -7,7 +7,7 @@ import { NavOption, navMenuOptions } from './nav.menu.options';
 const Home = lazy(() => import('../home/home'));
 const Login = lazy(() => import('../login/login'));
 const Products = lazy(() => import('../products/products'));
-// TEMP. FUTURE ROUTE:const MyGuitars = lazy(() => import('../home/home'));
+const MyGuitars = lazy(() => import('../myguitars/myguitars'));
 const About = lazy(() => import('../about/about'));
 // TEMP. FUTURE ROUTE:const Users = lazy(() => import('../home/home'));
 const ErrorPage = lazy(() => import('../error.page/error.page'));
@@ -34,10 +34,10 @@ export function AppRouter() {
           path={navMenuOptionsArray[0].path}
           element={<Products></Products>}
         ></Route>
-        {/* TEMP. FUTURE ROUTE: <Route
+        <Route
           path={navMenuOptionsArray[1].path}
           element={<MyGuitars></MyGuitars>}
-        ></Route>  */}
+        ></Route>
         <Route
           path={navMenuOptionsArray[2].path}
           element={<About></About>}
