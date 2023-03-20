@@ -1,17 +1,37 @@
+import { GuitarStructure } from '../../models/guitar';
 import style from './guitar.card.style.module.scss';
 
-export default function GuitarCard() {
+type GuitarCardProps = {
+  guitar: GuitarStructure;
+  action: string;
+};
+
+export default function GuitarCard({ guitar, action }: GuitarCardProps) {
+  let addGuitar: boolean;
+
+  addGuitar = action === 'products' ? true : false;
+
   return (
-    <section className={style.guitarCard}>
+    <li className={style.guitarCard}>
       <div className={style.guitarCardInfo}>
-        <p className={style.guitarCardInfoBrand}>Brand</p>
-        <p className={style.guitarCardInfoModel}>Model</p>
-        <img src="./images/gibson-firebird.png" alt="Gibson-Firebird-Guitar" />
-        <p className={style.guitarCardInfoStyle}>Style</p>
-        <p className={style.guitarCardInfoPrice}>Price</p>
+        <p className={style.guitarCardInfoBrand}>{guitar.brand}</p>
+        <p className={style.guitarCardInfoModel}>{guitar.modelGuitar}</p>
+        <img src={guitar.picture} alt={guitar.modelGuitar} />
+        <p className={style.guitarCardInfoStyle}>{guitar.style}</p>
+        <p className={style.guitarCardInfoPrice}>{guitar.price}</p>
       </div>
 
       <button className={style.guitarCardMoreDetails}>More details</button>
-    </section>
+
+      {addGuitar ? (
+        <button className={style.guitarCardButtonsAdd}>
+          <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
+        </button>
+      ) : (
+        <button className={style.guitarCardButtonsRemove}>
+          <img src="./images/remove-button.png" alt="Remove-button" />
+        </button>
+      )}
+    </li>
   );
 }
