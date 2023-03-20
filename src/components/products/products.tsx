@@ -1,3 +1,4 @@
+import GuitarCard from '../guitar.card/guitar.card';
 import style from './products.style.module.scss';
 
 export default function Products() {
@@ -10,13 +11,13 @@ export default function Products() {
 
       <div className={style.productsCardList}>
         <div className={style.productsCard}>
-          GuitarCard
+          <GuitarCard></GuitarCard>
           <button className={style.productsCardButtonsAdd}>
             <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
           </button>
         </div>
         <div className={style.productsCard}>
-          GuitarCard
+          <GuitarCard></GuitarCard>
           <button className={style.productsCardButtonsAdd}>
             <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
           </button>
