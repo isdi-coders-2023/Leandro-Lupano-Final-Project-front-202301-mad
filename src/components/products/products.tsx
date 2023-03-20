@@ -1,6 +1,21 @@
+import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
+import GuitarCard from '../guitar.card/guitar.card';
+import { useEffect, useMemo } from 'react';
 import style from './products.style.module.scss';
+import { useGuitars } from '../../hooks/use.guitars';
+import { GuitarStructure } from '../../models/guitar';
 
 export default function Products() {
+  const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
+
+  const { guitarsState, loadGuitars } = useGuitars(guitarRepo);
+
+  useEffect(() => {
+    loadGuitars();
+  }, [loadGuitars]);
+
+  const allGuitarsArray = guitarsState.allGuitars;
+
   return (
     <section className={style.products}>
       <div className={style.productsHeader}>
@@ -9,18 +24,15 @@ export default function Products() {
       </div>
 
       <div className={style.productsCardList}>
-        <div className={style.productsCard}>
-          GuitarCard
-          <button className={style.productsCardButtonsAdd}>
-            <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
-          </button>
-        </div>
-        <div className={style.productsCard}>
-          GuitarCard
-          <button className={style.productsCardButtonsAdd}>
-            <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
-          </button>
-        </div>
+        <ul className={style.productsCard}>
+          {allGuitarsArray.map((item: GuitarStructure) => (
+            <GuitarCard
+              key={item.id}
+              guitar={item}
+              action="products"
+            ></GuitarCard>
+          ))}
+        </ul>
       </div>
 
       <div className={style.productsButtons}>
