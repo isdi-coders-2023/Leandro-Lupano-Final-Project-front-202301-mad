@@ -1,18 +1,16 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
-import Products from './products';
+import GuitarCard from './guitar.card';
 
-jest.mock('../guitar.card/guitar.card');
-
-describe('Given the Products component', () => {
+describe('Given the GuitarCard component', () => {
   describe('When the component is rendered', () => {
-    test('Then the main title should be in the document', () => {
+    test('Then the More details button should be in the document', () => {
       render(
         <Router>
-          <Products></Products>
+          <GuitarCard></GuitarCard>
         </Router>
       );
-      const element = screen.getByRole('heading');
+      const element = screen.getByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
