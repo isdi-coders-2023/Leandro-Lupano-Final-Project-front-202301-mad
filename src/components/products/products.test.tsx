@@ -1,17 +1,37 @@
-import { render, screen } from '@testing-library/react';
+/* eslint-disable testing-library/no-unnecessary-act */
+/* eslint-disable testing-library/no-render-in-setup */
+import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Products from './products';
+import { Provider } from 'react-redux';
+import { store } from '../../store/store';
+import { useGuitars } from '../../hooks/use.guitars';
 
 jest.mock('../guitar.card/guitar.card');
+jest.mock('../../hooks/use.guitars');
 
 describe('Given the Products component', () => {
+  beforeEach(async () => {
+    await act(async () => {
+      (useGuitars as jest.Mock).mockReturnValue({
+        loadGuitars: jest.fn(),
+        guitarsState: {
+          allGuitars: [{ id: '1' }, { id: '2' }],
+        },
+      });
+
+      render(
+        <Provider store={store}>
+          <Router>
+            <Products></Products>
+          </Router>
+        </Provider>
+      );
+    });
+  });
+
   describe('When the component is rendered', () => {
     test('Then the main title should be in the document', () => {
-      render(
-        <Router>
-          <Products></Products>
-        </Router>
-      );
       const element = screen.getByRole('heading');
       expect(element).toBeInTheDocument();
     });

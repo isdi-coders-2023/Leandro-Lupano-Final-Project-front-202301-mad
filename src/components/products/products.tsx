@@ -26,17 +26,11 @@ export default function Products() {
       <div className={style.productsCardList}>
         <ul className={style.productsCard}>
           {allGuitarsArray.map((item: GuitarStructure) => (
-            <>
-              <GuitarCard
-                key={item.modelGuitar}
-                guitar={item}
-                action="products"
-              ></GuitarCard>
-
-              {/* <button className={style.productsCardButtonsAdd}>
-                <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
-              </button> */}
-            </>
+            <GuitarCard
+              key={item.modelGuitar}
+              guitar={item}
+              action="products"
+            ></GuitarCard>
           ))}
         </ul>
       </div>
