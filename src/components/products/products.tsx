@@ -28,7 +28,7 @@ export default function Products() {
           {allGuitarsArray.map((item: GuitarStructure) => (
             <>
               <GuitarCard
-                key={item.id}
+                key={item.modelGuitar}
                 guitar={item}
                 action="products"
               ></GuitarCard>

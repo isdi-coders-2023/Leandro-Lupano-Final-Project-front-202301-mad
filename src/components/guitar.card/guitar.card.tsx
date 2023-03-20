@@ -1,5 +1,8 @@
 import { GuitarStructure } from '../../models/guitar';
 import style from './guitar.card.style.module.scss';
+import { useMemo } from 'react';
+import { UsersApiRepo } from '../../services/repositories/users.api.repo';
+import { useUsers } from '../../hooks/use.users';
 
 type GuitarCardProps = {
   guitar: GuitarStructure;
@@ -7,9 +10,21 @@ type GuitarCardProps = {
 };
 
 export default function GuitarCard({ guitar, action }: GuitarCardProps) {
+  const userRepo = useMemo(() => new UsersApiRepo(), []);
+
+  const { userCart } = useUsers(userRepo);
+
   let addGuitar: boolean;
 
   addGuitar = action === 'products' ? true : false;
+
+  const handlerAddGuitar = (idGuitar: GuitarStructure['id']) => {
+    userCart(idGuitar, 'add');
+  };
+
+  const handlerRemoveGuitar = (idGuitar: GuitarStructure['id']) => {
+    userCart(idGuitar, 'remove');
+  };
 
   return (
     <li className={style.guitarCard}>
@@ -24,11 +39,21 @@ export default function GuitarCard({ guitar, action }: GuitarCardProps) {
       <button className={style.guitarCardMoreDetails}>More details</button>
 
       {addGuitar ? (
-        <button className={style.guitarCardButtonsAdd}>
+        <button
+          className={style.guitarCardButtonsAdd}
+          onClick={() => {
+            handlerAddGuitar(guitar.id);
+          }}
+        >
           <img src="./images/shop-cart.png" alt="Shop-Cart-button" />
         </button>
       ) : (
-        <button className={style.guitarCardButtonsRemove}>
+        <button
+          className={style.guitarCardButtonsRemove}
+          onClick={() => {
+            handlerRemoveGuitar(guitar.id);
+          }}
+        >
           <img src="./images/remove-button.png" alt="Remove-button" />
         </button>
       )}
