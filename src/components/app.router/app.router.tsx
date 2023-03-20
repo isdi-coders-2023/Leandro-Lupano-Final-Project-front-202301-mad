@@ -13,7 +13,7 @@ const About = lazy(() => import('../about/about'));
 const ErrorPage = lazy(() => import('../error.page/error.page'));
 
 // Routes from links:
-const GuitarDetails = lazy(() => import('../home/home'));
+const GuitarDetails = lazy(() => import('../guitar.details/guitar.details'));
 // TEMP. FUTURE ROUTE: const EditGuitar = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const CreateGuitar = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const DeleteGuitar = lazy(() => import('../home/home'));
