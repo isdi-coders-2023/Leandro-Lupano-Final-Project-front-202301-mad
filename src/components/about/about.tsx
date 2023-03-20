@@ -2,7 +2,7 @@ import style from './about.style.module.scss';
 
 export default function About() {
   return (
-    <div className={style.about}>
+    <section className={style.about}>
       <h2 className={style.aboutTitle}>About us</h2>
 
       <div className={style.aboutBody}>
@@ -74,6 +74,6 @@ export default function About() {
           </p>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

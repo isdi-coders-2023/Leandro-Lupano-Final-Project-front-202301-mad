@@ -28,7 +28,7 @@ export default function Home() {
   };
 
   return (
-    <div className={style.home}>
+    <section className={style.home}>
       <div className={style.homeHeader}>
         <h2>Guitar World</h2>
         <p>Welcome to the best guitar shop</p>
@@ -62,6 +62,6 @@ export default function Home() {
           </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
