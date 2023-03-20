@@ -33,7 +33,7 @@ export default function GuitarCard({ guitar, action }: GuitarCardProps) {
         <p className={style.guitarCardInfoModel}>{guitar.modelGuitar}</p>
         <img src={guitar.picture} alt={guitar.modelGuitar} />
         <p className={style.guitarCardInfoStyle}>{guitar.style}</p>
-        <p className={style.guitarCardInfoPrice}>{guitar.price}</p>
+        <p className={style.guitarCardInfoPrice}>{guitar.price} €</p>
       </div>
 
       <button className={style.guitarCardMoreDetails}>More details</button>
