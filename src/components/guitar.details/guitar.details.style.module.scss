@@ -35,9 +35,11 @@
     .guitarDetailsBodyMain {
       display: flex;
       flex-direction: row;
-      gap: 2rem;
+      gap: 1rem;
 
       .guitarDetailsBodyPicture {
+        width: 100%;
+
         img {
           height: 400px;
           border: 2px solid hsl(210, 11, 15, 0.95);
@@ -58,7 +60,7 @@
           flex-direction: row;
           justify-content: flex-start;
           align-items: center;
-          gap: 2rem;
+          gap: 1rem;
 
           .guitarDetailsBodyInfoButtonsEdit {
             background-color: hsl(210, 11, 15, 0.95);
@@ -129,6 +131,8 @@
       flex-direction: row;
 
       .guitarDetailsBodyMain {
+        gap: 2rem;
+
         .guitarDetailsBodyPicture {
           img {
             height: 450px;
@@ -136,7 +140,6 @@
         }
 
         .guitarDetailsBodyInfo {
-          width: auto;
           .guitarDetailsBodyInfoButtons {
             gap: 4rem;
 
