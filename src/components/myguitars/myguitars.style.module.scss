@@ -1,0 +1,59 @@
+.myguitars {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem 1rem 4rem;
+
+  .myguitarsHeaderTitle {
+    font-size: 1.5rem;
+  }
+
+  .myguitarsCardList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 2rem;
+
+    .myguitarsCard {
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+
+      .myguitarsCardButtonsRemove {
+        img {
+          width: 30px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .myguitars {
+    font-size: 1.3rem;
+    padding: 5rem 2rem 6rem;
+
+    gap: 3rem;
+
+    .myguitarsHeaderTitle {
+      font-size: 2rem;
+    }
+
+    .myguitarsCardList {
+      .myguitarsCard {
+        height: 400px;
+        gap: 1.5rem;
+
+        .myguitarsCardButtonsRemove {
+          img {
+            width: 40px;
+          }
+        }
+      }
+    }
+  }
+}
