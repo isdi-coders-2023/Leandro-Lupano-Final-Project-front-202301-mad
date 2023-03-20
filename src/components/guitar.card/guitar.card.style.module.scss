@@ -13,13 +13,19 @@
     font-family: 'Raleway', sans-serif;
     color: hsl(210, 11, 15, 0.95);
     border: 2px solid hsl(210, 11, 15, 0.95);
+    width: 100%;
+    height: 420px;
 
     .guitarCardInfoBrand {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
     }
 
     .guitarCardInfoModel {
       font-size: 1rem;
+    }
+
+    img {
+      height: 300px;
     }
 
     .guitarCardInfoStyle {
@@ -31,10 +37,6 @@
       font-family: 'Lato', sans-serif;
       color: hsl(0, 100, 39, 0.99);
     }
-
-    img {
-      width: 150px;
-    }
   }
 
   .guitarCardMoreDetails {
@@ -45,6 +47,20 @@
     border-radius: 0.5rem;
     padding: 0.2rem 0.6rem;
   }
+
+  .guitarCardButtonsAdd {
+    img {
+      width: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .guitarCardButtonsRemove {
+    img {
+      width: 30px;
+      cursor: pointer;
+    }
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -53,12 +69,17 @@
     gap: 1rem;
 
     .guitarCardInfo {
+      height: 500px;
       .guitarCardInfoBrand {
         font-size: 1.3rem;
       }
 
       .guitarCardInfoModel {
         font-size: 1.1rem;
+      }
+
+      img {
+        height: 350px;
       }
 
       .guitarCardInfoStyle {
@@ -68,15 +89,23 @@
       .guitarCardInfoPrice {
         font-size: 1.5rem;
       }
-
-      img {
-        width: 200px;
-      }
     }
 
     .guitarCardMoreDetails {
       border-radius: 0.8rem;
       padding: 0.3rem 0.8rem;
+    }
+
+    .guitarCardButtonsAdd {
+      img {
+        width: 50px;
+      }
+    }
+
+    .guitarCardButtonsRemove {
+      img {
+        width: 40px;
+      }
     }
   }
 }
