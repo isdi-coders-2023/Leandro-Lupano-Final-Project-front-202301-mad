@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useGuitars } from '../../hooks/use.guitars';
@@ -87,6 +88,7 @@ export default function GuitarForm() {
                 type="file"
                 name="picture"
                 placeholder={guitar.picture}
+                role="textbox"
                 required
               />
 
@@ -143,6 +145,7 @@ export default function GuitarForm() {
                 type="file"
                 name="picture"
                 placeholder="Upload picture:"
+                role="textbox"
                 required
               />
 
