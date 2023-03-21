@@ -1,8 +1,5 @@
-import { useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
-import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 
 import style from './guitar.details.style.module.scss';
 
@@ -10,13 +7,6 @@ export default function GuitarDetails() {
   const location = useLocation();
   const { guitarProps } = location.state;
   const guitar: GuitarStructure = guitarProps;
-
-  const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
-  const { deleteOneGuitar } = useGuitars(guitarRepo);
-
-  const handlerDeleteGuitar = (idGuitar: GuitarStructure['id']) => {
-    deleteOneGuitar(idGuitar);
-  };
 
   const navigate = useNavigate();
 
@@ -54,14 +44,11 @@ export default function GuitarDetails() {
                 </button>
               </Link>
 
-              <button
-                className={style.guitarDetailsBodyInfoButtonsDelete}
-                onClick={() => {
-                  handlerDeleteGuitar(guitar.id);
-                }}
-              >
-                <img src="./images/delete-button.png" alt="Delete-button" />
-              </button>
+              <Link to="/delete/guitar" state={{ guitarIdProps: guitar.id }}>
+                <button className={style.guitarDetailsBodyInfoButtonsDelete}>
+                  <img src="./images/delete-button.png" alt="Delete-button" />
+                </button>
+              </Link>
             </div>
             <p className={style.guitarDetailsBodyInfoBrand}>
               Brand: {guitar.brand}

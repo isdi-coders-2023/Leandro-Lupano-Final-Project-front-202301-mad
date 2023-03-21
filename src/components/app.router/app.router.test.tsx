@@ -35,6 +35,7 @@ describe('Given AppRouter component', () => {
             '/about',
             '/details',
             '/guitar/form',
+            '/delete/guitar',
             '/error',
           ]}
           initialIndex={number}
@@ -141,6 +142,14 @@ describe('Given AppRouter component', () => {
       await waitFor(async () => prepareTestFunction(7));
       const elements = await screen.findAllByRole('heading');
       expect(elements[0]).toBeInTheDocument();
+    });
+  });
+
+  describe('When it is rendered and the path is "/delete/guitar"', () => {
+    test('Then, the main heading of Guitar Form should be in the document', async () => {
+      await waitFor(async () => prepareTestFunction(8));
+      const element = await screen.findByRole('heading');
+      expect(element).toBeInTheDocument();
     });
   });
 
