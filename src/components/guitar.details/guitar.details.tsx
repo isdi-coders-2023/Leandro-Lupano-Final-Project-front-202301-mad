@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
@@ -45,9 +45,15 @@ export default function GuitarDetails() {
 
           <div className={style.guitarDetailsBodyInfo}>
             <div className={style.guitarDetailsBodyInfoButtons}>
-              <button className={style.guitarDetailsBodyInfoButtonsEdit}>
-                Edit
-              </button>
+              <Link
+                to="/guitar/form"
+                state={{ guitarProps: guitar, actionProps: 'edit' }}
+              >
+                <button className={style.guitarDetailsBodyInfoButtonsEdit}>
+                  Edit
+                </button>
+              </Link>
+
               <button
                 className={style.guitarDetailsBodyInfoButtonsDelete}
                 onClick={() => {

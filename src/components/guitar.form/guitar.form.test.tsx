@@ -4,14 +4,14 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
-import EditGuitar from './edit.guitar';
+import GuitarForm from './guitar.form';
 
-describe('Given the EditGuitar component', () => {
+describe('Given the GuitarForm component', () => {
   beforeEach(async () => {
     render(
       <Provider store={store}>
         <Router>
-          <EditGuitar></EditGuitar>
+          <GuitarForm></GuitarForm>
         </Router>
       </Provider>
     );

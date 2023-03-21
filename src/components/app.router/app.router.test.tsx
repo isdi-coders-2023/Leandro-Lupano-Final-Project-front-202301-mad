@@ -34,8 +34,7 @@ describe('Given AppRouter component', () => {
             '/myguitars',
             '/about',
             '/details',
-            '/edit/guitar',
-            '/create/guitar',
+            '/guitar/form',
             '/error',
           ]}
           initialIndex={number}
@@ -119,17 +118,9 @@ describe('Given AppRouter component', () => {
     });
   });
 
-  describe('When it is rendered and the path is "/edit/guitar"', () => {
-    test('Then, the main heading of Edit Guitar should be in the document', async () => {
+  describe('When it is rendered and the path is "/guitar/form"', () => {
+    test('Then, the main heading of Guitar Form should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(7));
-      const elements = await screen.findAllByRole('heading');
-      expect(elements[0]).toBeInTheDocument();
-    });
-  });
-
-  describe('When it is rendered and the path is "/create/guitar"', () => {
-    test('Then, the main heading of Create Guitar should be in the document', async () => {
-      await waitFor(async () => prepareTestFunction(8));
       const elements = await screen.findAllByRole('heading');
       expect(elements[0]).toBeInTheDocument();
     });

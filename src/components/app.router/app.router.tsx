@@ -14,8 +14,7 @@ const ErrorPage = lazy(() => import('../error.page/error.page'));
 
 // Routes from links:
 const GuitarDetails = lazy(() => import('../guitar.details/guitar.details'));
-const EditGuitar = lazy(() => import('../edit.guitar/edit.guitar'));
-const CreateGuitar = lazy(() => import('../create.guitar/create.guitar'));
+const GuitarForm = lazy(() => import('../guitar.form/guitar.form'));
 // TEMP. FUTURE ROUTE: const DeleteGuitar = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const EditUser = lazy(() => import('../home/home'));
 // TEMP. FUTURE ROUTE: const DeleteUser = lazy(() => import('../home/home'));
@@ -52,22 +51,19 @@ export function AppRouter() {
         ></Route>
         <Route
           path={linkOptionsArray[1].path}
-          element={<EditGuitar></EditGuitar>}
+          element={<GuitarForm></GuitarForm>}
         ></Route>
-        <Route
-          path={linkOptionsArray[2].path}
-          element={<CreateGuitar></CreateGuitar>}
-        ></Route>
+
         {/* TEMP. FUTURE ROUTE: <Route
-          path={linkOptionsArray[3].path}
+          path={linkOptionsArray[2].path}
           element={<DeleteGuitar></DeleteGuitar>}
         ></Route>
         TEMP. FUTURE ROUTE: <Route
-          path={linkOptionsArray[4].path}
+          path={linkOptionsArray[3].path}
           element={<EditUser></EditUser>}
         ></Route>
         TEMP. FUTURE ROUTE: <Route
-          path={linkOptionsArray[5].path}
+          path={linkOptionsArray[4].path}
           element={<DeleteUser></DeleteUser>}
         ></Route>  */}
         <Route path={'*'} element={<ErrorPage></ErrorPage>}></Route>
