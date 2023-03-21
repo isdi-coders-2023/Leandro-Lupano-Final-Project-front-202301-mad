@@ -120,6 +120,24 @@ describe('Given AppRouter component', () => {
 
   describe('When it is rendered and the path is "/guitar/form"', () => {
     test('Then, the main heading of Guitar Form should be in the document', async () => {
+      const location = {
+        state: {
+          guitarProps: {
+            id: '1',
+            brand: 'testBrand',
+            modelGuitar: 'testModel',
+            picture: 'testPicture',
+            style: 'testStyle',
+            material: 'testMaterial',
+            price: 1,
+            description: 'testDescription',
+          },
+          actionProps: 'edit',
+        },
+      };
+
+      (useLocation as jest.Mock).mockReturnValue(location);
+
       await waitFor(async () => prepareTestFunction(7));
       const elements = await screen.findAllByRole('heading');
       expect(elements[0]).toBeInTheDocument();
