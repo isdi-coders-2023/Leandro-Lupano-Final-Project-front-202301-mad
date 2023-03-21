@@ -35,6 +35,7 @@ describe('Given AppRouter component', () => {
             '/about',
             '/details',
             '/edit/guitar',
+            '/create/guitar',
             '/error',
           ]}
           initialIndex={number}
@@ -119,8 +120,16 @@ describe('Given AppRouter component', () => {
   });
 
   describe('When it is rendered and the path is "/edit/guitar"', () => {
-    test('Then, the main heading of Edit page should be in the document', async () => {
+    test('Then, the main heading of Edit Guitar should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(7));
+      const elements = await screen.findAllByRole('heading');
+      expect(elements[0]).toBeInTheDocument();
+    });
+  });
+
+  describe('When it is rendered and the path is "/create/guitar"', () => {
+    test('Then, the main heading of Create Guitar should be in the document', async () => {
+      await waitFor(async () => prepareTestFunction(8));
       const elements = await screen.findAllByRole('heading');
       expect(elements[0]).toBeInTheDocument();
     });
@@ -128,7 +137,7 @@ describe('Given AppRouter component', () => {
 
   describe('When it is rendered and the path is any other', () => {
     test('Then, the image ErrorPage should be in the document', async () => {
-      await waitFor(async () => prepareTestFunction(8));
+      await waitFor(async () => prepareTestFunction(9));
       const element = await screen.findByRole('img');
       expect(element).toBeInTheDocument();
     });
