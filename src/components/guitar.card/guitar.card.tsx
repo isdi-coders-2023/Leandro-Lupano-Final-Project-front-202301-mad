@@ -3,6 +3,7 @@ import style from './guitar.card.style.module.scss';
 import { useMemo } from 'react';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 import { useUsers } from '../../hooks/use.users';
+import { Link } from 'react-router-dom';
 
 type GuitarCardProps = {
   guitar: GuitarStructure;
@@ -33,10 +34,11 @@ export default function GuitarCard({ guitar, action }: GuitarCardProps) {
         <p className={style.guitarCardInfoModel}>{guitar.modelGuitar}</p>
         <img src={guitar.picture} alt={guitar.modelGuitar} />
         <p className={style.guitarCardInfoStyle}>{guitar.style}</p>
-        <p className={style.guitarCardInfoPrice}>{guitar.price}</p>
+        <p className={style.guitarCardInfoPrice}>{guitar.price} €</p>
       </div>
-
-      <button className={style.guitarCardMoreDetails}>More details</button>
+      <Link to="/details" state={{ guitarProps: guitar }}>
+        <button className={style.guitarCardMoreDetails}>More details</button>
+      </Link>
 
       {addGuitar ? (
         <button

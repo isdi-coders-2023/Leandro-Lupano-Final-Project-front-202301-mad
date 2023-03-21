@@ -1,0 +1,21 @@
+.guitarForm {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 1rem 1rem 4rem;
+
+  .guitarFormHeader {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  .guitarForm {
+    font-size: 1.3rem;
+    padding: 5rem 2rem 6rem;
+
+    .guitarFormHeader {
+      font-size: 2rem;
+    }
+  }
+}

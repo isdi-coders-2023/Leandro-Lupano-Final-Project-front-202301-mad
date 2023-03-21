@@ -4,6 +4,7 @@ import { useEffect, useMemo } from 'react';
 import style from './products.style.module.scss';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
+import { Link } from 'react-router-dom';
 
 export default function Products() {
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
@@ -39,9 +40,16 @@ export default function Products() {
         <button className={style.productsButtonsPrev}>
           <img src="./images/prev-button.png" alt="Previous-button" />
         </button>
-        <button className={style.productsButtonsCreate}>
-          <img src="./images/create-button.png" alt="Create-button" />
-        </button>
+
+        <Link
+          to="/guitar/form"
+          state={{ guitarProps: {}, actionProps: 'create' }}
+        >
+          <button className={style.productsButtonsCreate}>
+            <img src="./images/create-button.png" alt="Create-button" />
+          </button>
+        </Link>
+
         <button className={style.productsButtonsNext}>
           <img src="./images/next-button.png" alt="Next-button" />
         </button>
