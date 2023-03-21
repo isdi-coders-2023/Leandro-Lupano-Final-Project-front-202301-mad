@@ -8,9 +8,11 @@ import { useUsers } from '../../hooks/use.users';
 
 jest.mock('../../hooks/use.users');
 
+const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useLocation: jest.fn(),
+  useNavigate: () => mockNavigate,
 }));
 
 describe('Given AppRouter component', () => {
@@ -22,6 +24,25 @@ describe('Given AppRouter component', () => {
         },
       },
     });
+
+    const location = {
+      state: {
+        guitarProps: {
+          id: '1',
+          brand: 'testBrand',
+          modelGuitar: 'testModel',
+          picture: 'testPicture',
+          style: 'testStyle',
+          material: 'testMaterial',
+          price: 1,
+          description: 'testDescription',
+        },
+        actionProps: 'edit',
+        guitarIdProps: { id: '1' },
+      },
+    };
+
+    (useLocation as jest.Mock).mockReturnValue(location);
 
     render(
       <Provider store={store}>
@@ -96,23 +117,6 @@ describe('Given AppRouter component', () => {
 
   describe('When it is rendered and the path is "/details"', () => {
     test('Then, the main heading of Details page should be in the document', async () => {
-      const location = {
-        state: {
-          guitarProps: {
-            id: '1',
-            brand: 'testBrand',
-            modelGuitar: 'testModel',
-            picture: 'testPicture',
-            style: 'testStyle',
-            material: 'testMaterial',
-            price: 1,
-            description: 'testDescription',
-          },
-        },
-      };
-
-      (useLocation as jest.Mock).mockReturnValue(location);
-
       await waitFor(async () => prepareTestFunction(6));
       const element = await screen.findByRole('heading');
       expect(element).toBeInTheDocument();
@@ -121,24 +125,6 @@ describe('Given AppRouter component', () => {
 
   describe('When it is rendered and the path is "/guitar/form"', () => {
     test('Then, the main heading of Guitar Form should be in the document', async () => {
-      const location = {
-        state: {
-          guitarProps: {
-            id: '1',
-            brand: 'testBrand',
-            modelGuitar: 'testModel',
-            picture: 'testPicture',
-            style: 'testStyle',
-            material: 'testMaterial',
-            price: 1,
-            description: 'testDescription',
-          },
-          actionProps: 'edit',
-        },
-      };
-
-      (useLocation as jest.Mock).mockReturnValue(location);
-
       await waitFor(async () => prepareTestFunction(7));
       const elements = await screen.findAllByRole('heading');
       expect(elements[0]).toBeInTheDocument();
@@ -146,7 +132,7 @@ describe('Given AppRouter component', () => {
   });
 
   describe('When it is rendered and the path is "/delete/guitar"', () => {
-    test('Then, the main heading of Guitar Form should be in the document', async () => {
+    test('Then, the main heading of DeleteGuitar should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(8));
       const element = await screen.findByRole('heading');
       expect(element).toBeInTheDocument();
