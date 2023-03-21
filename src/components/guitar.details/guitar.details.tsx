@@ -9,7 +9,7 @@ import style from './guitar.details.style.module.scss';
 export default function GuitarDetails() {
   const location = useLocation();
   const { guitarProps } = location.state;
-  const guitar = guitarProps as GuitarStructure;
+  const guitar: GuitarStructure = guitarProps;
 
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
   const { deleteOneGuitar } = useGuitars(guitarRepo);

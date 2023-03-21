@@ -1,4 +1,4 @@
-import { MemoryRouter as Router } from 'react-router-dom';
+import { MemoryRouter as Router, useLocation } from 'react-router-dom';
 import { render, screen, waitFor } from '@testing-library/react';
 import { AppRouter } from './app.router';
 import '@testing-library/jest-dom';
@@ -7,6 +7,11 @@ import { store } from '../../store/store';
 import { useUsers } from '../../hooks/use.users';
 
 jest.mock('../../hooks/use.users');
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useLocation: jest.fn(),
+}));
 
 describe('Given AppRouter component', () => {
   const prepareTestFunction = (number: number) => {
@@ -89,6 +94,23 @@ describe('Given AppRouter component', () => {
 
   describe('When it is rendered and the path is "/details"', () => {
     test('Then, the main heading of Details page should be in the document', async () => {
+      const location = {
+        state: {
+          guitarProps: {
+            id: '1',
+            brand: 'testBrand',
+            modelGuitar: 'testModel',
+            picture: 'testPicture',
+            style: 'testStyle',
+            material: 'testMaterial',
+            price: 1,
+            description: 'testDescription',
+          },
+        },
+      };
+
+      (useLocation as jest.Mock).mockReturnValue(location);
+
       await waitFor(async () => prepareTestFunction(6));
       const element = await screen.findByRole('heading');
       expect(element).toBeInTheDocument();
