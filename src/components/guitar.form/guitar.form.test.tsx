@@ -30,7 +30,7 @@ describe('Given the GuitarForm component', () => {
           createGuitar: jest.fn(),
         });
 
-        const location = {
+        const locationEditForm = {
           state: {
             guitarProps: {
               id: '1',
@@ -46,7 +46,7 @@ describe('Given the GuitarForm component', () => {
           },
         };
 
-        (useLocation as jest.Mock).mockReturnValue(location);
+        (useLocation as jest.Mock).mockReturnValue(locationEditForm);
 
         render(
           <Provider store={store}>
@@ -64,54 +64,54 @@ describe('Given the GuitarForm component', () => {
     });
 
     test('Then the Brand <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[0]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[0]).toBeInTheDocument();
     });
 
     test('Then the modelGuitar <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[1]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[1]).toBeInTheDocument();
     });
 
     test('Then the picture <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[2]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[2]).toBeInTheDocument();
     });
 
     test('Then the style <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[3]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[3]).toBeInTheDocument();
     });
 
     test('Then the material <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[4]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[4]).toBeInTheDocument();
     });
 
     test('Then the price <input> should be in the document', () => {
-      const input = screen.getByRole('spinbutton');
-      expect(input).toBeInTheDocument();
+      const editPriceInput = screen.getByRole('spinbutton');
+      expect(editPriceInput).toBeInTheDocument();
     });
 
     test('Then the description <input> should be in the document', () => {
-      const inputs = screen.getAllByRole('textbox');
-      expect(inputs[5]).toBeInTheDocument();
+      const editInputs = screen.getAllByRole('textbox');
+      expect(editInputs[5]).toBeInTheDocument();
     });
 
     test('Then the button should be in the document', () => {
-      const button = screen.getByRole('button');
-      expect(button).toBeInTheDocument();
+      const editButton = screen.getByRole('button');
+      expect(editButton).toBeInTheDocument();
     });
 
     test('Then if the submit button is clicked, the updateGuitar function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-      const inputs = screen.getAllByRole('textbox');
-      await userEvent.type(inputs[0], 'brand-test');
-      await userEvent.type(inputs[1], 'modelGuitar-test');
-      await userEvent.type(inputs[2], 'picture-test');
-      await userEvent.type(inputs[3], 'style-test');
-      await userEvent.type(inputs[4], 'material-test');
-      await userEvent.type(inputs[5], 'description-test');
+      const editInputs = screen.getAllByRole('textbox');
+      await userEvent.type(editInputs[0], 'brand-test');
+      await userEvent.type(editInputs[1], 'modelGuitar-test');
+      await userEvent.type(editInputs[2], 'picture-test');
+      await userEvent.type(editInputs[3], 'style-test');
+      await userEvent.type(editInputs[4], 'material-test');
+      await userEvent.type(editInputs[5], 'description-test');
 
       const input = screen.getByRole('spinbutton');
       await userEvent.type(input, '1000');
@@ -142,7 +142,7 @@ describe('Given the GuitarForm component', () => {
           createGuitar: jest.fn(),
         });
 
-        const location = {
+        const locationCreateForm = {
           state: {
             guitarProps: {
               id: '1',
@@ -158,7 +158,7 @@ describe('Given the GuitarForm component', () => {
           },
         };
 
-        (useLocation as jest.Mock).mockReturnValue(location);
+        (useLocation as jest.Mock).mockReturnValue(locationCreateForm);
 
         render(
           <Provider store={store}>
@@ -172,19 +172,19 @@ describe('Given the GuitarForm component', () => {
 
     test('Then if the submit button is clicked, the createGuitar function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-      const inputs = screen.getAllByRole('textbox');
-      await userEvent.type(inputs[0], 'brand-create');
-      await userEvent.type(inputs[1], 'modelGuitar-create');
-      await userEvent.type(inputs[2], 'picture-create');
-      await userEvent.type(inputs[3], 'style-create');
-      await userEvent.type(inputs[4], 'material-create');
-      await userEvent.type(inputs[5], 'description-create');
+      const createInputs = screen.getAllByRole('textbox');
+      await userEvent.type(createInputs[0], 'brand-create');
+      await userEvent.type(createInputs[1], 'modelGuitar-create');
+      await userEvent.type(createInputs[2], 'picture-create');
+      await userEvent.type(createInputs[3], 'style-create');
+      await userEvent.type(createInputs[4], 'material-create');
+      await userEvent.type(createInputs[5], 'description-create');
 
-      const input = screen.getByRole('spinbutton');
-      await userEvent.type(input, '2000');
+      const createPriceInput = screen.getByRole('spinbutton');
+      await userEvent.type(createPriceInput, '2000');
 
-      const button = screen.getByRole('button');
-      await userEvent.click(button);
+      const createButton = screen.getByRole('button');
+      await userEvent.click(createButton);
 
       expect(useGuitars(guitarsMockRepo).createGuitar).toHaveBeenCalledWith({
         brand: 'brand-create',
