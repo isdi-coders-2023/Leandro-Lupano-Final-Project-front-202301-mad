@@ -1,22 +1,28 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { initializeApp } from 'firebase/app';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 export const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
-// TEMPORAL HASTA VERIFICAR QUE FUNCIONE EL .ENV:
-// export const firebaseConfig = {
-//   apiKey: 'AIzaSyCCAEEdp1iC-fcQxaQLvBxH_hmogjjvqsw',
-//   authDomain: 'social-network-challenge.firebaseapp.com',
-//   projectId: 'social-network-challenge',
-//   storageBucket: 'social-network-challenge.appspot.com',
-//   messagingSenderId: '93609149558',
-//   appId: '1:93609149558:web:4795cdcbe7801e20c98b57',
-// };
+export async function firebaseUrl(fileName: string, filePicture: File) {
+  const app = initializeApp(firebaseConfig);
+  const storage = getStorage(app);
+
+  const pictureName: string = `${fileName}.png`;
+
+  const fileUserPicture = filePicture;
+
+  const storageRef = ref(storage, pictureName);
+
+  await uploadBytes(storageRef, fileUserPicture);
+
+  const urlUserPicture = await getDownloadURL(storageRef);
+
+  return urlUserPicture;
+}
