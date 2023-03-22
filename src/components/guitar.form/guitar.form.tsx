@@ -32,6 +32,7 @@ export default function GuitarForm() {
     const fileName = `${
       (formEditGuitar.elements[0] as HTMLFormElement).value
     }-${(formEditGuitar.elements[1] as HTMLFormElement).value}`;
+
     const filePicture = (
       formEditGuitar.elements[2] as HTMLInputElement
     ).files?.item(0);
@@ -52,7 +53,8 @@ export default function GuitarForm() {
     const guitarId = guitar.id;
 
     updateGuitar(guitarId, guitarToEdit);
-    console.log({ guitarToEdit });
+    debugger;
+    console.log(guitarToEdit);
 
     formEditGuitar.reset();
   };
@@ -65,6 +67,7 @@ export default function GuitarForm() {
     const fileName = `${
       (formCreateGuitar.elements[0] as HTMLFormElement).value
     }-${(formCreateGuitar.elements[1] as HTMLFormElement).value}`;
+
     const filePicture = (
       formCreateGuitar.elements[2] as HTMLInputElement
     ).files?.item(0);
@@ -81,6 +84,9 @@ export default function GuitarForm() {
       price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
       description: (formCreateGuitar.elements[7] as HTMLFormElement).value,
     };
+
+    debugger;
+    console.log(guitarToCreate);
 
     createGuitar(guitarToCreate);
 
@@ -134,7 +140,6 @@ export default function GuitarForm() {
                   id="guitarFormBodyPicture"
                   type="file"
                   name="picture"
-                  placeholder={guitar.picture}
                   role="textbox"
                   required
                 />

@@ -51,6 +51,8 @@ export function useGuitars(repo: GuitarsApiRepo) {
       const userToken = usersState.userLogged.token;
       if (!userToken) throw new Error('Not authorized');
 
+      console.log(userToken, infoGuitar);
+
       const guitarInfo = await repo.create(userToken, infoGuitar);
 
       guitarsDispatch(create(guitarInfo.results[0]));
@@ -64,6 +66,8 @@ export function useGuitars(repo: GuitarsApiRepo) {
     infoGuitar: Partial<GuitarStructure>
   ) => {
     try {
+      console.log(infoGuitar, idGuitar);
+
       const userToken = usersState.userLogged.token;
       if (!userToken) throw new Error('Not authorized');
 
