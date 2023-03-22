@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -78,14 +78,19 @@ describe('Given the GuitarForm component', () => {
       expect(editInputs[2]).toBeInTheDocument();
     });
 
-    test('Then the style <input> should be in the document', () => {
-      const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[3]).toBeInTheDocument();
+    test('Then the Electric style <input> should be in the document', () => {
+      const editRadioInputs = screen.getAllByRole('radio');
+      expect(editRadioInputs[0]).toBeInTheDocument();
+    });
+
+    test('Then the Acoustic style <input> should be in the document', () => {
+      const editRadioInputs = screen.getAllByRole('radio');
+      expect(editRadioInputs[1]).toBeInTheDocument();
     });
 
     test('Then the material <input> should be in the document', () => {
       const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[4]).toBeInTheDocument();
+      expect(editInputs[3]).toBeInTheDocument();
     });
 
     test('Then the price <input> should be in the document', () => {
@@ -95,7 +100,7 @@ describe('Given the GuitarForm component', () => {
 
     test('Then the description <input> should be in the document', () => {
       const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[5]).toBeInTheDocument();
+      expect(editInputs[4]).toBeInTheDocument();
     });
 
     test('Then the button should be in the document', () => {
@@ -109,9 +114,11 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(editInputs[0], 'brand-test');
       await userEvent.type(editInputs[1], 'modelGuitar-test');
       await userEvent.type(editInputs[2], 'picture-test');
-      await userEvent.type(editInputs[3], 'style-test');
-      await userEvent.type(editInputs[4], 'material-test');
-      await userEvent.type(editInputs[5], 'description-test');
+      await userEvent.type(editInputs[3], 'material-test');
+      await userEvent.type(editInputs[4], 'description-test');
+
+      const editRadioInputs = screen.getAllByRole('radio');
+      await userEvent.click(editRadioInputs[0]);
 
       const input = screen.getByRole('spinbutton');
       await userEvent.type(input, '1000');
@@ -125,7 +132,7 @@ describe('Given the GuitarForm component', () => {
           brand: 'brand-test',
           modelGuitar: 'modelGuitar-test',
           picture: '',
-          style: 'style-test',
+          style: 'Electric',
           material: 'material-test',
           price: 1000,
           description: 'description-test',
@@ -176,9 +183,11 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createInputs[0], 'brand-create');
       await userEvent.type(createInputs[1], 'modelGuitar-create');
       await userEvent.type(createInputs[2], 'picture-create');
-      await userEvent.type(createInputs[3], 'style-create');
-      await userEvent.type(createInputs[4], 'material-create');
-      await userEvent.type(createInputs[5], 'description-create');
+      await userEvent.type(createInputs[3], 'material-create');
+      await userEvent.type(createInputs[4], 'description-create');
+
+      const createRadioInputs = screen.getAllByRole('radio');
+      await fireEvent.click(createRadioInputs[0]);
 
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '2000');
@@ -190,7 +199,7 @@ describe('Given the GuitarForm component', () => {
         brand: 'brand-create',
         modelGuitar: 'modelGuitar-create',
         picture: '',
-        style: 'style-create',
+        style: 'Electric',
         material: 'material-create',
         price: 2000,
         description: 'description-create',

@@ -27,10 +27,11 @@ export default function GuitarForm() {
       brand: (formEditGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formEditGuitar.elements[1] as HTMLFormElement).value,
       picture: (formEditGuitar.elements[2] as HTMLFormElement).value,
-      style: (formEditGuitar.elements[3] as HTMLFormElement).value,
-      material: (formEditGuitar.elements[4] as HTMLFormElement).value,
-      price: Number((formEditGuitar.elements[5] as HTMLFormElement).value),
-      description: (formEditGuitar.elements[6] as HTMLFormElement).value,
+      style: (formEditGuitar.elements.namedItem('style') as HTMLFormElement)
+        .value,
+      material: (formEditGuitar.elements[5] as HTMLFormElement).value,
+      price: Number((formEditGuitar.elements[6] as HTMLFormElement).value),
+      description: (formEditGuitar.elements[7] as HTMLFormElement).value,
     };
 
     const guitarId = guitar.id;
@@ -49,10 +50,11 @@ export default function GuitarForm() {
       brand: (formCreateGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formCreateGuitar.elements[1] as HTMLFormElement).value,
       picture: (formCreateGuitar.elements[2] as HTMLFormElement).value,
-      style: (formCreateGuitar.elements[3] as HTMLFormElement).value,
-      material: (formCreateGuitar.elements[4] as HTMLFormElement).value,
-      price: Number((formCreateGuitar.elements[5] as HTMLFormElement).value),
-      description: (formCreateGuitar.elements[6] as HTMLFormElement).value,
+      style: (formCreateGuitar.elements.namedItem('style') as HTMLFormElement)
+        .value,
+      material: (formCreateGuitar.elements[5] as HTMLFormElement).value,
+      price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
+      description: (formCreateGuitar.elements[7] as HTMLFormElement).value,
     };
 
     createGuitar(guitarToCreate);
@@ -92,12 +94,20 @@ export default function GuitarForm() {
                 required
               />
 
-              <input
-                type="text"
-                name="style"
-                placeholder={guitar.style}
-                required
-              />
+              <label>
+                Electric
+                <input
+                  type="radio"
+                  name="style"
+                  value="Electric"
+                  defaultChecked
+                />
+              </label>
+
+              <label>
+                Acoustic
+                <input type="radio" name="style" value="Acoustic" />
+              </label>
 
               <input
                 type="text"
@@ -149,7 +159,15 @@ export default function GuitarForm() {
                 required
               />
 
-              <input type="text" name="style" placeholder="Style:" required />
+              <label>
+                Electric
+                <input type="radio" name="style" value="Electric" required />
+              </label>
+
+              <label>
+                Acoustic
+                <input type="radio" name="style" value="Acoustic" required />
+              </label>
 
               <input
                 type="text"
