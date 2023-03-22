@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -12,6 +12,7 @@ import userEvent from '@testing-library/user-event';
 import { GuitarStructure } from '../../models/guitar';
 
 jest.mock('../../hooks/use.guitars');
+jest.mock('../../services/firebase/firebase.config');
 
 const mockNavigate = jest.fn();
 
@@ -131,7 +132,7 @@ describe('Given the GuitarForm component', () => {
         {
           brand: 'brand-test',
           modelGuitar: 'modelGuitar-test',
-          picture: '',
+          picture: undefined,
           style: 'Electric',
           material: 'material-test',
           price: 1000,
@@ -187,7 +188,7 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createInputs[4], 'description-create');
 
       const createRadioInputs = screen.getAllByRole('radio');
-      await fireEvent.click(createRadioInputs[0]);
+      await userEvent.click(createRadioInputs[0]);
 
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '2000');
@@ -198,7 +199,7 @@ describe('Given the GuitarForm component', () => {
       expect(useGuitars(guitarsMockRepo).createGuitar).toHaveBeenCalledWith({
         brand: 'brand-create',
         modelGuitar: 'modelGuitar-create',
-        picture: '',
+        picture: undefined,
         style: 'Electric',
         material: 'material-create',
         price: 2000,
