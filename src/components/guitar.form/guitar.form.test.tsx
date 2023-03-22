@@ -104,39 +104,45 @@ describe('Given the GuitarForm component', () => {
       expect(editInputs[4]).toBeInTheDocument();
     });
 
-    test('Then the button should be in the document', () => {
-      const editButton = screen.getByRole('button');
-      expect(editButton).toBeInTheDocument();
+    test('Then the Edit button should be in the document', () => {
+      const buttons = screen.getAllByRole('button');
+      expect(buttons[1]).toBeInTheDocument();
+    });
+
+    test('Then if the user click on Back Button, the mockNavigate function should be called', async () => {
+      const elements = screen.getAllByRole('button');
+      await userEvent.click(elements[0]);
+      expect(mockNavigate).toHaveBeenCalled();
     });
 
     test('Then if the submit button is clicked, the updateGuitar function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const editInputs = screen.getAllByRole('textbox');
-      await userEvent.type(editInputs[0], 'brand-test');
-      await userEvent.type(editInputs[1], 'modelGuitar-test');
-      await userEvent.type(editInputs[2], 'picture-test');
-      await userEvent.type(editInputs[3], 'material-test');
-      await userEvent.type(editInputs[4], 'description-test');
+      await userEvent.type(editInputs[0], '-edit');
+      await userEvent.type(editInputs[1], '-edit');
+      await userEvent.type(editInputs[2], '-edit');
+      await userEvent.type(editInputs[3], '-edit');
+      await userEvent.type(editInputs[4], '-edit');
 
       const editRadioInputs = screen.getAllByRole('radio');
       await userEvent.click(editRadioInputs[0]);
 
       const input = screen.getByRole('spinbutton');
-      await userEvent.type(input, '1000');
+      await userEvent.type(input, '0');
 
-      const button = screen.getByRole('button');
-      await userEvent.click(button);
+      const buttons = screen.getAllByRole('button');
+      await userEvent.click(buttons[1]);
 
       expect(useGuitars(guitarsMockRepo).updateGuitar).toHaveBeenCalledWith(
         '1',
         {
-          brand: 'brand-test',
-          modelGuitar: 'modelGuitar-test',
+          brand: 'testBrand-edit',
+          modelGuitar: 'testModel-edit',
           picture: undefined,
           style: 'Electric',
-          material: 'material-test',
-          price: 1000,
-          description: 'description-test',
+          material: 'testMaterial-edit',
+          price: 10,
+          description: 'testDescription-edit',
         }
       );
     });
@@ -193,8 +199,8 @@ describe('Given the GuitarForm component', () => {
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '2000');
 
-      const createButton = screen.getByRole('button');
-      await userEvent.click(createButton);
+      const buttons = screen.getAllByRole('button');
+      await userEvent.click(buttons[1]);
 
       expect(useGuitars(guitarsMockRepo).createGuitar).toHaveBeenCalledWith({
         brand: 'brand-create',
