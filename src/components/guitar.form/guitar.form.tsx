@@ -29,15 +29,21 @@ export default function GuitarForm() {
 
     const formEditGuitar = ev.currentTarget;
 
-    const fileName = `${
-      (formEditGuitar.elements[0] as HTMLFormElement).value
-    }-${(formEditGuitar.elements[1] as HTMLFormElement).value}`;
-
     const filePicture = (
       formEditGuitar.elements[2] as HTMLInputElement
     ).files?.item(0);
 
-    const urlPicture = await firebaseUrl(fileName, filePicture!);
+    let urlPicture: string;
+
+    if (filePicture) {
+      const fileName = `${
+        (formEditGuitar.elements[0] as HTMLFormElement).value
+      }-${(formEditGuitar.elements[1] as HTMLFormElement).value}`;
+
+      urlPicture = await firebaseUrl(fileName, filePicture);
+    } else {
+      urlPicture = guitar.picture;
+    }
 
     const guitarToEdit: Partial<GuitarStructure> = {
       brand: (formEditGuitar.elements[0] as HTMLFormElement).value,
@@ -82,8 +88,6 @@ export default function GuitarForm() {
       price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
       description: (formCreateGuitar.elements[7] as HTMLFormElement).value,
     };
-
-    debugger;
 
     createGuitar(guitarToCreate);
 
@@ -138,7 +142,6 @@ export default function GuitarForm() {
                   type="file"
                   name="picture"
                   role="textbox"
-                  required
                 />
               </label>
 
