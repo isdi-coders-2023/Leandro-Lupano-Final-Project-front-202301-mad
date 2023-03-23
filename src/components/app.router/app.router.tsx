@@ -9,15 +9,15 @@ const Login = lazy(() => import('../login/login'));
 const Products = lazy(() => import('../products/products'));
 const MyGuitars = lazy(() => import('../myguitars/myguitars'));
 const About = lazy(() => import('../about/about'));
-// TEMP. FUTURE ROUTE:const Users = lazy(() => import('../home/home'));
+// EXTRA TEMP. FUTURE ROUTE:const Users = lazy(() => import('../home/home'));
 const ErrorPage = lazy(() => import('../error.page/error.page'));
 
 // Routes from links:
 const GuitarDetails = lazy(() => import('../guitar.details/guitar.details'));
 const GuitarForm = lazy(() => import('../guitar.form/guitar.form'));
 const DeleteGuitar = lazy(() => import('../delete.guitar/delete.guitar'));
-// TEMP. FUTURE ROUTE: const EditUser = lazy(() => import('../home/home'));
-// TEMP. FUTURE ROUTE: const DeleteUser = lazy(() => import('../home/home'));
+// EXTRA TEMP. FUTURE ROUTE: const EditUser = lazy(() => import('../home/home'));
+// EXTRA TEMP. FUTURE ROUTE: const DeleteUser = lazy(() => import('../home/home'));
 
 export function AppRouter() {
   const navMenuOptionsArray: NavOption[] = navMenuOptions;
@@ -41,7 +41,7 @@ export function AppRouter() {
           path={navMenuOptionsArray[2].path}
           element={<About></About>}
         ></Route>
-        {/*TEMP. FUTURE ROUTE: <Route
+        {/* EXTRA TEMP. FUTURE ROUTE: <Route
           path={navMenuOptionsArray[3].path}
           element={<Users></Users>}
         ></Route> */}
@@ -57,11 +57,11 @@ export function AppRouter() {
           path={linkOptionsArray[2].path}
           element={<DeleteGuitar></DeleteGuitar>}
         ></Route>
-        {/* TEMP. FUTURE ROUTE: <Route
+        {/* EXTRA TEMP. FUTURE ROUTE: <Route
           path={linkOptionsArray[3].path}
           element={<EditUser></EditUser>}
         ></Route>
-        TEMP. FUTURE ROUTE: <Route
+        EXTRA TEMP. FUTURE ROUTE: <Route
           path={linkOptionsArray[4].path}
           element={<DeleteUser></DeleteUser>}
         ></Route>  */}

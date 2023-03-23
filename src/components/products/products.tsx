@@ -17,6 +17,10 @@ export default function Products() {
 
   const allGuitarsArray = guitarsState.allGuitars;
 
+  const handlePage = (pageChange: number) => {
+    loadGuitars(pageChange);
+  };
+
   return (
     <section className={style.products}>
       <div className={style.productsHeader}>
@@ -37,7 +41,12 @@ export default function Products() {
       </div>
 
       <div className={style.productsButtons}>
-        <button className={style.productsButtonsPrev}>
+        <button
+          className={style.productsButtonsPrev}
+          onClick={() => {
+            handlePage(-1);
+          }}
+        >
           <img src="./images/prev-button.png" alt="Previous-button" />
         </button>
 
@@ -50,7 +59,12 @@ export default function Products() {
           </button>
         </Link>
 
-        <button className={style.productsButtonsNext}>
+        <button
+          className={style.productsButtonsNext}
+          onClick={() => {
+            handlePage(+1);
+          }}
+        >
           <img src="./images/next-button.png" alt="Next-button" />
         </button>
       </div>

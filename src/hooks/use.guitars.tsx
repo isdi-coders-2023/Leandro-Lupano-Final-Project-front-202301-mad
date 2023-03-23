@@ -18,12 +18,12 @@ export function useGuitars(repo: GuitarsApiRepo) {
   const guitarsDispatch = useDispatch<AppDispatch>();
 
   const loadGuitars = useCallback(
-    async (style?: string, page?: string) => {
+    async (pageChange: number = 0, style: string = 'All') => {
       try {
         const userToken = usersState.userLogged.token;
         if (!userToken) throw new Error('Not authorized');
 
-        const guitarsInfo = await repo.read(userToken, style, page);
+        const guitarsInfo = await repo.read(userToken, pageChange, style);
 
         guitarsDispatch(read(guitarsInfo.results));
       } catch (error) {

@@ -1,7 +1,7 @@
 import { GuitarServerResponse, GuitarStructure } from '../../models/guitar';
 
 export interface GuitarsRepo<T> {
-  read(token: string, style?: string, page?: string): Promise<T>;
+  read(token: string, pageChange: number, style: string): Promise<T>;
   readId(token: string, idGuitar: GuitarStructure['id']): Promise<T>;
   create(token: string, infoGuitar: Partial<GuitarStructure>): Promise<T>;
   update(
@@ -14,20 +14,28 @@ export interface GuitarsRepo<T> {
 
 export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   url: string;
+  actualPage: number;
 
   constructor() {
     this.url = 'http://localhost:5000/guitars';
+    this.actualPage = 1;
   }
 
   async read(
     token: string,
-    style?: string,
-    page?: string
+    pageChange: number,
+    style: string
   ): Promise<GuitarServerResponse> {
-    if (!style) style = '';
-    if (!page) page = '';
+    // if (!style) style = '';
+    // if (!page) page = '';
 
-    const url = this.url + '/products?style=' + style + '&page=' + page;
+    this.actualPage = this.actualPage + pageChange;
+
+    if (this.actualPage === 0) this.actualPage = 1;
+
+    const pageString = this.actualPage.toString();
+
+    const url = this.url + '/products?style=' + style + '&page=' + pageString;
 
     const resp = await fetch(url, {
       method: 'GET',
