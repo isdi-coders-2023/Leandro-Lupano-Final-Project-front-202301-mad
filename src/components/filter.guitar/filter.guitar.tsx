@@ -1,7 +1,6 @@
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useGuitars } from '../../hooks/use.guitars';
-import { useState } from 'react';
 
 import style from './filter.guitar.style.module.scss';
 
