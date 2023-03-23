@@ -11,7 +11,7 @@
     width: 100%;
 
     .guitarFormHeaderBackButton {
-      background-color: hsl(210, 11, 15, 0.95);
+      background-color: rgb(33, 37, 41, 95%);
       color: white;
       font-family: 'Lato', sans-serif;
       font-size: 1rem;
@@ -35,12 +35,12 @@
 
       label {
         font-family: 'Lato', sans-serif;
-        color: hsl(210, 11, 15, 0.95);
+        color: rgb(33, 37, 41, 95%);
         font-size: 1rem;
       }
 
       input {
-        background-color: hsl(0, 0, 45, 0.86);
+        background-color: rgb(116, 116, 116, 85%);
         border: none;
         border-radius: 0.7rem;
         padding: 0.5rem;
@@ -50,7 +50,7 @@
       }
 
       .guitarFormBodyPictureLabel {
-        background-color: hsl(0, 0, 45, 0.86);
+        background-color: rgb(116, 116, 116, 85%);
         border: none;
         border-radius: 0.7rem;
         padding: 0.5rem 0.8rem;
@@ -68,7 +68,7 @@
         padding: 0rem;
 
         .guitarFormBodyStyleOptions {
-          background-color: hsl(0, 0, 45, 0.86);
+          background-color: rgb(116, 116, 116, 85%);
           border: none;
           border-radius: 0.5rem;
           padding: 0.5rem;
@@ -78,7 +78,7 @@
       }
 
       button {
-        background-color: hsl(210, 11, 15, 0.95);
+        background-color: rgb(33, 37, 41, 95%);
         color: white;
         font-family: 'Lato', sans-serif;
         font-size: 1.2rem;
