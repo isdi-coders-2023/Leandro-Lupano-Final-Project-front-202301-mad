@@ -10,7 +10,7 @@ import userEvent from '@testing-library/user-event';
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 
 jest.mock('../guitar.card/guitar.card');
-jest.mock('../filter/filter.guitar');
+jest.mock('../filter.guitar/filter.guitar');
 jest.mock('../../hooks/use.guitars');
 
 describe('Given the Products component', () => {

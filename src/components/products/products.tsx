@@ -4,9 +4,9 @@ import { useEffect, useMemo } from 'react';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
 import { Link } from 'react-router-dom';
-
+import { FilterGuitar } from '../filter.guitar/filter.guitar';
 import style from './products.style.module.scss';
-import { FilterGuitar } from '../filter/filter.guitar';
+
 export default function Products() {
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
 

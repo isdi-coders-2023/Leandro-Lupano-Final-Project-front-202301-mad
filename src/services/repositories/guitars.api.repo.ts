@@ -26,12 +26,9 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
     pageChange: number,
     style: string
   ): Promise<GuitarServerResponse> {
-    // if (!style) style = '';
-    // if (!page) page = '';
-
     this.actualPage = this.actualPage + pageChange;
 
-    if (this.actualPage === 0) this.actualPage = 1;
+    if (this.actualPage === 0 || pageChange === 0) this.actualPage = 1;
 
     const pageString = this.actualPage.toString();
 
