@@ -1,11 +1,12 @@
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 import GuitarCard from '../guitar.card/guitar.card';
 import { useEffect, useMemo } from 'react';
-import style from './products.style.module.scss';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
 import { Link } from 'react-router-dom';
 
+import style from './products.style.module.scss';
+import { FilterGuitar } from '../filter/filter.guitar';
 export default function Products() {
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
 
@@ -25,7 +26,9 @@ export default function Products() {
     <section className={style.products}>
       <div className={style.productsHeader}>
         <h2 className={style.productsHeaderTitle}>Products</h2>
-        <div className={style.productsHeaderFilter}>FILTER</div>
+        <div className={style.productsHeaderFilter}>
+          <FilterGuitar></FilterGuitar>
+        </div>
       </div>
 
       <div className={style.productsCardList}>
