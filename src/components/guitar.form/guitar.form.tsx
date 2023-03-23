@@ -53,8 +53,6 @@ export default function GuitarForm() {
     const guitarId = guitar.id;
 
     updateGuitar(guitarId, guitarToEdit);
-    debugger;
-    console.log(guitarToEdit);
 
     formEditGuitar.reset();
   };
@@ -86,7 +84,6 @@ export default function GuitarForm() {
     };
 
     debugger;
-    console.log(guitarToCreate);
 
     createGuitar(guitarToCreate);
 

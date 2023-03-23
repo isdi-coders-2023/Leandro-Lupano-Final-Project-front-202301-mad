@@ -71,8 +71,6 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   ): Promise<GuitarServerResponse> {
     const url = this.url + '/create';
 
-    console.log(infoGuitar);
-
     const resp = await fetch(url, {
       method: 'POST',
       body: JSON.stringify(infoGuitar),
@@ -96,8 +94,6 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
     infoGuitar: Partial<GuitarStructure>
   ): Promise<GuitarServerResponse> {
     const url = this.url + '/edit/' + idGuitar;
-
-    console.log(infoGuitar, idGuitar, token);
 
     const resp = await fetch(url, {
       method: 'PATCH',
