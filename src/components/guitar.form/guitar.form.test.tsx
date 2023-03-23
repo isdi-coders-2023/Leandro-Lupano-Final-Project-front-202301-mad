@@ -138,13 +138,50 @@ describe('Given the GuitarForm component', () => {
         {
           brand: 'testBrand-edit',
           modelGuitar: 'testModel-edit',
-          picture: undefined,
+          picture: 'testPicture',
           style: 'Electric',
           material: 'testMaterial-edit',
           price: 10,
           description: 'testDescription-edit',
         }
       );
+    });
+
+    test('Then if the submit button is clicked, and a new picture is not upload, the updateGuitar function should be called with the original picture value', async () => {
+      const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
+      const locationEditForm = {
+        state: {
+          guitarProps: {
+            id: '1',
+            brand: 'testBrand',
+            modelGuitar: 'testModel',
+            picture: 'testPicture',
+            style: 'Electric',
+            material: 'testMaterial',
+            price: 1,
+            description: 'testDescription',
+          } as unknown as GuitarStructure,
+          actionProps: 'edit',
+        },
+      };
+
+      (useLocation as jest.Mock).mockReturnValue(locationEditForm);
+
+      const inputPicture = screen.getByLabelText(
+        'Upload picture'
+      ) as HTMLElement;
+
+      await userEvent.upload(
+        inputPicture,
+        new File(['test'], 'test.png', {
+          type: 'image/png',
+        })
+      );
+
+      const buttons = screen.getAllByRole('button');
+      await userEvent.click(buttons[1]);
+
+      expect(useGuitars(guitarsMockRepo).updateGuitar).toHaveBeenCalled();
     });
   });
 
