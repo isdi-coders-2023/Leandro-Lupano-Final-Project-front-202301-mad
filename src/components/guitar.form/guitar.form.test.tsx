@@ -167,9 +167,7 @@ describe('Given the GuitarForm component', () => {
 
       (useLocation as jest.Mock).mockReturnValue(locationEditForm);
 
-      const inputPicture = screen.getByLabelText(
-        'Upload picture'
-      ) as HTMLElement;
+      const inputPicture = screen.getByLabelText('Upload picture');
 
       await userEvent.upload(
         inputPicture,
