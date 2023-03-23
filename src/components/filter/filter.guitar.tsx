@@ -1,6 +1,7 @@
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 import { useMemo } from 'react';
 import { useGuitars } from '../../hooks/use.guitars';
+import { useState } from 'react';
 
 import style from './filter.guitar.style.module.scss';
 
@@ -9,16 +10,43 @@ export function FilterGuitar() {
 
   const { loadGuitars } = useGuitars(guitarRepo);
 
-  let isSelected: boolean = true;
+  const [isSelectedAll, setIsSelectedAll] = useState(true);
+  const [isSelectedElectric, setIsSelectedElectric] = useState(false);
+  const [isSelectedAcoustic, setIsSelectedAcoustic] = useState(false);
 
   const handleFilter = (style: string) => {
     loadGuitars(0, style);
+
+    switch (style) {
+      case 'All':
+        setIsSelectedAll(true);
+        setIsSelectedElectric(false);
+        setIsSelectedAcoustic(false);
+        break;
+
+      case 'Electric':
+        setIsSelectedAll(false);
+        setIsSelectedElectric(true);
+        setIsSelectedAcoustic(false);
+        break;
+
+      case 'Acoustic':
+        setIsSelectedAll(false);
+        setIsSelectedElectric(false);
+        setIsSelectedAcoustic(true);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
     <nav className={style.filter}>
       <button
-        className={isSelected ? style.filterOptionSelected : style.filterOption}
+        className={
+          isSelectedAll ? style.filterOptionSelected : style.filterOption
+        }
         onClick={() => {
           handleFilter('All');
         }}
@@ -27,7 +55,9 @@ export function FilterGuitar() {
       </button>
 
       <button
-        className={isSelected ? style.filterOptionSelected : style.filterOption}
+        className={
+          isSelectedElectric ? style.filterOptionSelected : style.filterOption
+        }
         onClick={() => {
           handleFilter('Electric');
         }}
@@ -36,7 +66,9 @@ export function FilterGuitar() {
       </button>
 
       <button
-        className={isSelected ? style.filterOptionSelected : style.filterOption}
+        className={
+          isSelectedAcoustic ? style.filterOptionSelected : style.filterOption
+        }
         onClick={() => {
           handleFilter('Acoustic');
         }}
