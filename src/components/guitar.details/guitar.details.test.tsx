@@ -45,7 +45,7 @@ describe('Given the GuitarDetails component', () => {
   });
 
   describe('When the component is rendered with guitarProps and the user click in Go Back button', () => {
-    test('Then the deleteOneGuitar function should be called', async () => {
+    test('Then the mockNavigate function should be called', async () => {
       const elements = screen.getAllByRole('button');
       await userEvent.click(elements[0]);
       expect(mockNavigate).toHaveBeenCalled();

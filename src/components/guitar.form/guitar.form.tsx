@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 import { SyntheticEvent, useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
+import { firebaseUrl } from '../../services/firebase/firebase.config';
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
 import style from './guitar.form.style.module.scss';
 
@@ -18,19 +19,35 @@ export default function GuitarForm() {
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
   const { updateGuitar, createGuitar } = useGuitars(guitarRepo);
 
-  const handleEditSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+  const handlerNavigateBack = () => {
+    navigate(-1);
+  };
+
+  const handleEditSubmit = async (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
     const formEditGuitar = ev.currentTarget;
 
+    const fileName = `${
+      (formEditGuitar.elements[0] as HTMLFormElement).value
+    }-${(formEditGuitar.elements[1] as HTMLFormElement).value}`;
+
+    const filePicture = (
+      formEditGuitar.elements[2] as HTMLInputElement
+    ).files?.item(0);
+
+    const urlPicture = await firebaseUrl(fileName, filePicture!);
+
     const guitarToEdit: Partial<GuitarStructure> = {
       brand: (formEditGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formEditGuitar.elements[1] as HTMLFormElement).value,
-      picture: (formEditGuitar.elements[2] as HTMLFormElement).value,
-      style: (formEditGuitar.elements[3] as HTMLFormElement).value,
-      material: (formEditGuitar.elements[4] as HTMLFormElement).value,
-      price: Number((formEditGuitar.elements[5] as HTMLFormElement).value),
-      description: (formEditGuitar.elements[6] as HTMLFormElement).value,
+      picture: urlPicture,
+      style: (formEditGuitar.elements.namedItem('style') as HTMLFormElement)
+        .value,
+      material: (formEditGuitar.elements[5] as HTMLFormElement).value,
+      price: Number((formEditGuitar.elements[6] as HTMLFormElement).value),
+      description: (formEditGuitar.elements[7] as HTMLFormElement).value,
     };
 
     const guitarId = guitar.id;
@@ -40,20 +57,33 @@ export default function GuitarForm() {
     formEditGuitar.reset();
   };
 
-  const handleCreateSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
+  const handleCreateSubmit = async (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
 
     const formCreateGuitar = ev.currentTarget;
 
+    const fileName = `${
+      (formCreateGuitar.elements[0] as HTMLFormElement).value
+    }-${(formCreateGuitar.elements[1] as HTMLFormElement).value}`;
+
+    const filePicture = (
+      formCreateGuitar.elements[2] as HTMLInputElement
+    ).files?.item(0);
+
+    const urlPicture = await firebaseUrl(fileName, filePicture!);
+
     const guitarToCreate: Partial<GuitarStructure> = {
       brand: (formCreateGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formCreateGuitar.elements[1] as HTMLFormElement).value,
-      picture: (formCreateGuitar.elements[2] as HTMLFormElement).value,
-      style: (formCreateGuitar.elements[3] as HTMLFormElement).value,
-      material: (formCreateGuitar.elements[4] as HTMLFormElement).value,
-      price: Number((formCreateGuitar.elements[5] as HTMLFormElement).value),
-      description: (formCreateGuitar.elements[6] as HTMLFormElement).value,
+      picture: urlPicture,
+      style: (formCreateGuitar.elements.namedItem('style') as HTMLInputElement)
+        .value,
+      material: (formCreateGuitar.elements[5] as HTMLFormElement).value,
+      price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
+      description: (formCreateGuitar.elements[7] as HTMLFormElement).value,
     };
+
+    debugger;
 
     createGuitar(guitarToCreate);
 
@@ -66,61 +96,100 @@ export default function GuitarForm() {
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
             <h2>Edit guitar</h2>
+
+            <button
+              className={style.guitarFormHeaderBackButton}
+              onClick={handlerNavigateBack}
+            >
+              ◄ Go back
+            </button>
           </div>
 
           <div className={style.guitarFormBody}>
             <form onSubmit={handleEditSubmit}>
-              <input
-                type="text"
-                name="brand"
-                placeholder={guitar.brand}
-                required
-              />
+              <label>
+                Brand:
+                <input
+                  type="text"
+                  name="brand"
+                  defaultValue={guitar.brand}
+                  required
+                />
+              </label>
 
-              <input
-                type="text"
-                name="modelGuitar"
-                placeholder={guitar.modelGuitar}
-                required
-              />
+              <label>
+                Model:
+                <input
+                  type="text"
+                  name="modelGuitar"
+                  defaultValue={guitar.modelGuitar}
+                  required
+                />
+              </label>
 
-              <input
-                type="file"
-                name="picture"
-                placeholder={guitar.picture}
-                role="textbox"
-                required
-              />
+              <label
+                htmlFor="guitarFormBodyPicture"
+                className={style.guitarFormBodyPictureLabel}
+              >
+                Upload picture
+                <input
+                  className={style.guitarFormBodyPicture}
+                  id="guitarFormBodyPicture"
+                  type="file"
+                  name="picture"
+                  role="textbox"
+                  required
+                />
+              </label>
 
-              <input
-                type="text"
-                name="style"
-                placeholder={guitar.style}
-                required
-              />
+              <div className={style.guitarFormBodyStyle}>
+                Style:
+                <label className={style.guitarFormBodyStyleOptions}>
+                  Electric
+                  <input
+                    type="radio"
+                    name="style"
+                    value="Electric"
+                    defaultChecked
+                  />
+                </label>
+                <label className={style.guitarFormBodyStyleOptions}>
+                  Acoustic
+                  <input type="radio" name="style" value="Acoustic" />
+                </label>
+              </div>
 
-              <input
-                type="text"
-                name="material"
-                placeholder={guitar.material}
-                required
-              />
+              <label>
+                Material:
+                <input
+                  type="text"
+                  name="material"
+                  defaultValue={guitar.material}
+                  required
+                />
+              </label>
 
-              <input
-                type="number"
-                name="price"
-                placeholder={guitar.price.toString()}
-                required
-              />
+              <label>
+                Price:
+                <input
+                  type="number"
+                  name="price"
+                  defaultValue={guitar.price.toString()}
+                  required
+                />
+              </label>
 
-              <input
-                type="text"
-                name="description"
-                placeholder={guitar.description}
-                required
-              />
+              <label>
+                Description:
+                <input
+                  type="text"
+                  name="description"
+                  defaultValue={guitar.description}
+                  required
+                />
+              </label>
 
-              <button type="submit">OK</button>
+              <button type="submit">Edit</button>
             </form>
           </div>
         </section>
@@ -128,46 +197,97 @@ export default function GuitarForm() {
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
             <h2>Create a new guitar</h2>
+
+            <button
+              className={style.guitarFormHeaderBackButton}
+              onClick={handlerNavigateBack}
+            >
+              ◄ Go back
+            </button>
           </div>
 
           <div className={style.guitarFormBody}>
             <form onSubmit={handleCreateSubmit}>
-              <input type="text" name="brand" placeholder="Brand:" required />
+              <label>
+                Brand:
+                <input type="text" name="brand" placeholder="Brand:" required />
+              </label>
 
-              <input
-                type="text"
-                name="modelGuitar"
-                placeholder="Model:"
-                required
-              />
+              <label>
+                Model:
+                <input
+                  type="text"
+                  name="modelGuitar"
+                  placeholder="Model:"
+                  required
+                />
+              </label>
 
-              <input
-                type="file"
-                name="picture"
-                placeholder="Upload picture:"
-                role="textbox"
-                required
-              />
+              <label
+                htmlFor="guitarFormBodyPicture"
+                className={style.guitarFormBodyPictureLabel}
+              >
+                Upload picture
+                <input
+                  className={style.guitarFormBodyPicture}
+                  id="guitarFormBodyPicture"
+                  type="file"
+                  name="picture"
+                  placeholder="Upload picture:"
+                  role="textbox"
+                  required
+                />
+              </label>
 
-              <input type="text" name="style" placeholder="Style:" required />
+              <div className={style.guitarFormBodyStyle}>
+                Style:
+                <label className={style.guitarFormBodyStyleOptions}>
+                  Electric
+                  <input
+                    type="radio"
+                    name="style"
+                    value="Electric"
+                    defaultChecked
+                    required
+                  />
+                </label>
+                <label className={style.guitarFormBodyStyleOptions}>
+                  Acoustic
+                  <input type="radio" name="style" value="Acoustic" />
+                </label>
+              </div>
 
-              <input
-                type="text"
-                name="material"
-                placeholder="Material:"
-                required
-              />
+              <label>
+                Material:
+                <input
+                  type="text"
+                  name="material"
+                  placeholder="Material:"
+                  required
+                />
+              </label>
 
-              <input type="number" name="price" placeholder="Price:" required />
+              <label>
+                Price:
+                <input
+                  type="number"
+                  name="price"
+                  placeholder="Price:"
+                  required
+                />
+              </label>
 
-              <input
-                type="text"
-                name="description"
-                placeholder="Description:"
-                required
-              />
+              <label>
+                Description:
+                <input
+                  type="text"
+                  name="description"
+                  placeholder="Description:"
+                  required
+                />
+              </label>
 
-              <button type="submit">OK</button>
+              <button type="submit">Create</button>
             </form>
           </div>
         </section>

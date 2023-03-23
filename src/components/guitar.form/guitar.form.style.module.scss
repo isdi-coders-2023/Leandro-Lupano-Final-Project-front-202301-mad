@@ -5,7 +5,90 @@
   padding: 1rem 1rem 4rem;
 
   .guitarFormHeader {
-    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+    .guitarFormHeaderBackButton {
+      background-color: rgb(33, 37, 41, 95%);
+      color: white;
+      font-family: 'Lato', sans-serif;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 0.5rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  .guitarFormBody {
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1.8rem;
+
+      ::placeholder {
+        color: white;
+      }
+
+      label {
+        font-family: 'Lato', sans-serif;
+        color: rgb(33, 37, 41, 95%);
+        font-size: 1rem;
+      }
+
+      input {
+        background-color: rgb(116, 116, 116, 85%);
+        border: none;
+        border-radius: 0.7rem;
+        padding: 0.5rem;
+        margin: 0rem 0.5rem;
+        color: white;
+        text-align: center;
+      }
+
+      .guitarFormBodyPictureLabel {
+        background-color: rgb(116, 116, 116, 85%);
+        border: none;
+        border-radius: 0.7rem;
+        padding: 0.5rem 0.8rem;
+        margin: 0rem 0.5rem;
+        color: white;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .guitarFormBodyPicture {
+        display: none;
+      }
+
+      .guitarFormBodyStyle {
+        padding: 0rem;
+
+        .guitarFormBodyStyleOptions {
+          background-color: rgb(116, 116, 116, 85%);
+          border: none;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          margin: 0rem 0.5rem;
+          color: white;
+        }
+      }
+
+      button {
+        background-color: rgb(33, 37, 41, 95%);
+        color: white;
+        font-family: 'Lato', sans-serif;
+        font-size: 1.2rem;
+
+        cursor: pointer;
+        border-radius: 0.7rem;
+
+        padding: 0.5rem 1.5rem;
+      }
+    }
   }
 }
 
@@ -15,7 +98,44 @@
     padding: 5rem 2rem 6rem;
 
     .guitarFormHeader {
-      font-size: 2rem;
+      font-size: 1.3rem;
+
+      .guitarFormHeaderBackButton {
+        font-size: 1.2rem;
+      }
+    }
+
+    .guitarFormBody {
+      form {
+        label {
+          font-size: 1.5rem;
+        }
+
+        input {
+          padding: 0.5rem 1rem;
+          margin: 0rem 1rem;
+        }
+
+        .guitarFormBodyPictureLabel {
+          padding: 0.5rem 0.8rem;
+        }
+
+        .guitarFormBodyStyle {
+          padding: 0rem 1rem;
+
+          .guitarFormBodyStyleOptions {
+            border-radius: 0.7rem;
+            padding: 0.5rem 1rem;
+            margin: 0rem 1rem;
+          }
+        }
+
+        button {
+          font-size: 1.8rem;
+
+          border-radius: 1rem;
+        }
+      }
     }
   }
 }

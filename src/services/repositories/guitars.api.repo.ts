@@ -76,6 +76,7 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
       body: JSON.stringify(infoGuitar),
       headers: {
         Authorization: 'Bearer ' + token,
+        'Content-type': 'application/json',
       },
     });
 
@@ -99,6 +100,7 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
       body: JSON.stringify(infoGuitar),
       headers: {
         Authorization: 'Bearer ' + token,
+        'Content-type': 'application/json',
       },
     });
 

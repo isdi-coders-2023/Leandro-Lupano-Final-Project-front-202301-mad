@@ -12,6 +12,7 @@ import userEvent from '@testing-library/user-event';
 import { GuitarStructure } from '../../models/guitar';
 
 jest.mock('../../hooks/use.guitars');
+jest.mock('../../services/firebase/firebase.config');
 
 const mockNavigate = jest.fn();
 
@@ -78,14 +79,19 @@ describe('Given the GuitarForm component', () => {
       expect(editInputs[2]).toBeInTheDocument();
     });
 
-    test('Then the style <input> should be in the document', () => {
-      const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[3]).toBeInTheDocument();
+    test('Then the Electric style <input> should be in the document', () => {
+      const editRadioInputs = screen.getAllByRole('radio');
+      expect(editRadioInputs[0]).toBeInTheDocument();
+    });
+
+    test('Then the Acoustic style <input> should be in the document', () => {
+      const editRadioInputs = screen.getAllByRole('radio');
+      expect(editRadioInputs[1]).toBeInTheDocument();
     });
 
     test('Then the material <input> should be in the document', () => {
       const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[4]).toBeInTheDocument();
+      expect(editInputs[3]).toBeInTheDocument();
     });
 
     test('Then the price <input> should be in the document', () => {
@@ -95,40 +101,48 @@ describe('Given the GuitarForm component', () => {
 
     test('Then the description <input> should be in the document', () => {
       const editInputs = screen.getAllByRole('textbox');
-      expect(editInputs[5]).toBeInTheDocument();
+      expect(editInputs[4]).toBeInTheDocument();
     });
 
-    test('Then the button should be in the document', () => {
-      const editButton = screen.getByRole('button');
-      expect(editButton).toBeInTheDocument();
+    test('Then the Edit button should be in the document', () => {
+      const buttons = screen.getAllByRole('button');
+      expect(buttons[1]).toBeInTheDocument();
+    });
+
+    test('Then if the user click on Back Button, the mockNavigate function should be called', async () => {
+      const elements = screen.getAllByRole('button');
+      await userEvent.click(elements[0]);
+      expect(mockNavigate).toHaveBeenCalled();
     });
 
     test('Then if the submit button is clicked, the updateGuitar function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const editInputs = screen.getAllByRole('textbox');
-      await userEvent.type(editInputs[0], 'brand-test');
-      await userEvent.type(editInputs[1], 'modelGuitar-test');
-      await userEvent.type(editInputs[2], 'picture-test');
-      await userEvent.type(editInputs[3], 'style-test');
-      await userEvent.type(editInputs[4], 'material-test');
-      await userEvent.type(editInputs[5], 'description-test');
+      await userEvent.type(editInputs[0], '-edit');
+      await userEvent.type(editInputs[1], '-edit');
+      await userEvent.type(editInputs[2], '-edit');
+      await userEvent.type(editInputs[3], '-edit');
+      await userEvent.type(editInputs[4], '-edit');
+
+      const editRadioInputs = screen.getAllByRole('radio');
+      await userEvent.click(editRadioInputs[0]);
 
       const input = screen.getByRole('spinbutton');
-      await userEvent.type(input, '1000');
+      await userEvent.type(input, '0');
 
-      const button = screen.getByRole('button');
-      await userEvent.click(button);
+      const buttons = screen.getAllByRole('button');
+      await userEvent.click(buttons[1]);
 
       expect(useGuitars(guitarsMockRepo).updateGuitar).toHaveBeenCalledWith(
         '1',
         {
-          brand: 'brand-test',
-          modelGuitar: 'modelGuitar-test',
-          picture: '',
-          style: 'style-test',
-          material: 'material-test',
-          price: 1000,
-          description: 'description-test',
+          brand: 'testBrand-edit',
+          modelGuitar: 'testModel-edit',
+          picture: undefined,
+          style: 'Electric',
+          material: 'testMaterial-edit',
+          price: 10,
+          description: 'testDescription-edit',
         }
       );
     });
@@ -176,21 +190,23 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createInputs[0], 'brand-create');
       await userEvent.type(createInputs[1], 'modelGuitar-create');
       await userEvent.type(createInputs[2], 'picture-create');
-      await userEvent.type(createInputs[3], 'style-create');
-      await userEvent.type(createInputs[4], 'material-create');
-      await userEvent.type(createInputs[5], 'description-create');
+      await userEvent.type(createInputs[3], 'material-create');
+      await userEvent.type(createInputs[4], 'description-create');
+
+      const createRadioInputs = screen.getAllByRole('radio');
+      await userEvent.click(createRadioInputs[0]);
 
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '2000');
 
-      const createButton = screen.getByRole('button');
-      await userEvent.click(createButton);
+      const buttons = screen.getAllByRole('button');
+      await userEvent.click(buttons[1]);
 
       expect(useGuitars(guitarsMockRepo).createGuitar).toHaveBeenCalledWith({
         brand: 'brand-create',
         modelGuitar: 'modelGuitar-create',
-        picture: '',
-        style: 'style-create',
+        picture: undefined,
+        style: 'Electric',
         material: 'material-create',
         price: 2000,
         description: 'description-create',

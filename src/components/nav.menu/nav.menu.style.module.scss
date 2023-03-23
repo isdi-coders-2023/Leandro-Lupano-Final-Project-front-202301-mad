@@ -36,15 +36,15 @@
     font-size: 1rem;
     cursor: pointer;
     width: 150px;
-    background-color: hsl(0, 0, 45, 0.99);
-    box-shadow: 2px 0px 2px 2px hsla(0, 1%, 32%, 0.99);
+    background-color: rgb(116, 116, 116, 99%);
+    box-shadow: 2px 0px 2px 2px rgb(116, 116, 116, 99%);
 
     li {
       padding: 0.7rem 1rem;
     }
 
     li:hover {
-      background-color: hsl(210, 11, 15, 0.95);
+      background-color: rgb(33, 37, 41, 95%);
       border-radius: 1rem;
     }
   }
@@ -86,7 +86,7 @@
       }
 
       li:hover {
-        background-color: hsl(0, 0, 45, 0.99);
+        background-color: rgb(116, 116, 116, 99%);
         border-radius: 1rem;
       }
     }
