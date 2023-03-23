@@ -15,15 +15,9 @@ export function FilterGuitar() {
   const [isSelectedAcoustic, setIsSelectedAcoustic] = useState(false);
 
   const handleFilter = (style: string) => {
-    loadGuitars(0, style);
+    loadGuitars(undefined, style);
 
     switch (style) {
-      case 'All':
-        setIsSelectedAll(true);
-        setIsSelectedElectric(false);
-        setIsSelectedAcoustic(false);
-        break;
-
       case 'Electric':
         setIsSelectedAll(false);
         setIsSelectedElectric(true);
@@ -37,6 +31,9 @@ export function FilterGuitar() {
         break;
 
       default:
+        setIsSelectedAll(true);
+        setIsSelectedElectric(false);
+        setIsSelectedAcoustic(false);
         break;
     }
   };

@@ -19,3 +19,13 @@
   padding: 0.2rem 0.5rem;
   margin: 0rem 0.2rem;
 }
+
+@media screen and (min-width: 750px) {
+  .filterOptionSelected,
+  .filterOption {
+    font-size: 1.2rem;
+    padding: 0.2rem 0.8rem;
+    margin: 0rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
