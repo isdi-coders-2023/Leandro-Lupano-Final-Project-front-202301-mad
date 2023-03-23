@@ -7,7 +7,7 @@ describe('Given the firebaseUrl function', () => {
   describe('When the function is called with a mockFileName and mockFile', () => {
     test('Then, the fetDownloadURL function should be called', async () => {
       const mockFileName = 'test';
-      const mockFile = new File(['avatar'], 'avatar.png', {
+      const mockFile = new File(['guitar-test'], 'guitar-test.png', {
         type: 'image/png',
       });
 

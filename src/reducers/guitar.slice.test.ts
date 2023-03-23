@@ -84,7 +84,7 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
         allGuitars: [mockPayload, mockGuitar],
         guitar: {} as GuitarStructure,
       };
-      debugger;
+
       const mockUpdateAction: PayloadAction<GuitarStructure> = {
         type: 'guitar/update',
         payload: {

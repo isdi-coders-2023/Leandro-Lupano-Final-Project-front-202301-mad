@@ -32,7 +32,7 @@ describe('Given GuitarsApiRepo class and its instance', () => {
         ]),
       });
 
-      const result = await repo.read('tokenMock');
+      const result = await repo.read('tokenMock', 1, 'All');
       expect(result).toEqual([
         {
           brand: 'test1',
@@ -56,7 +56,7 @@ describe('Given GuitarsApiRepo class and its instance', () => {
         ]),
       });
 
-      const result = await repo.read('tokenMock', 'mockStyle', 'mockPage');
+      const result = await repo.read('tokenMock', -1, 'mockStyle');
       expect(result).toEqual([
         {
           brand: 'test1',
@@ -70,7 +70,7 @@ describe('Given GuitarsApiRepo class and its instance', () => {
     test('Then if the fetch response is NOK, the result should throw an error', async () => {
       global.fetch = jest.fn().mockResolvedValue('Error Test');
 
-      const result = repo.read('tokenMock');
+      const result = repo.read('tokenMock', 0, 'All');
       await expect(result).rejects.toThrow();
     });
   });

@@ -1,0 +1,31 @@
+.filterOptionSelected {
+  background-color: rgb(33, 37, 41, 95%);
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0rem 0.2rem;
+}
+
+.filterOption {
+  color: rgb(33, 37, 41, 95%);
+  border: 1px solid rgb(33, 37, 41, 95%);
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0rem 0.2rem;
+}
+
+@media screen and (min-width: 750px) {
+  .filterOptionSelected,
+  .filterOption {
+    font-size: 1.2rem;
+    padding: 0.2rem 0.8rem;
+    margin: 0rem 0.5rem;
+    border-radius: 0.5rem;
+  }
+}
