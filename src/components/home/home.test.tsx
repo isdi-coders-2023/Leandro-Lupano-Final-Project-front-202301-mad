@@ -83,7 +83,7 @@ describe('Given Home component', () => {
     test('Then, the handleSubmit function should be called', async () => {
       jest.useFakeTimers();
       const button = screen.getByRole('button');
-      await act(() => {
+      act(() => {
         fireEvent.click(button);
         jest.advanceTimersByTime(2200);
       });
