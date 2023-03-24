@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { SyntheticEvent, useMemo } from 'react';
+import { SyntheticEvent, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
@@ -10,6 +11,11 @@ export default function Home() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
   const { registerUser } = useUsers(userRepo);
+
+  const navigate = useNavigate();
+
+  const [isRegister, setIsRegister] = useState(false);
+  // let isRegister: boolean = false;
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -23,6 +29,13 @@ export default function Home() {
     };
 
     registerUser(newUser);
+
+    setIsRegister(true);
+
+    setTimeout(() => {
+      setIsRegister(false);
+      navigate('/login');
+    }, 2000);
 
     formNewUser.reset();
   };
@@ -62,6 +75,10 @@ export default function Home() {
           </form>
         </div>
       </div>
+
+      <p className={isRegister ? style.homeMessage : style.homeMessageHidden}>
+        Registration completed successfully ✅
+      </p>
     </section>
   );
 }
