@@ -15,7 +15,6 @@ export default function Home() {
   const navigate = useNavigate();
 
   const [isRegister, setIsRegister] = useState(false);
-  // let isRegister: boolean = false;
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
