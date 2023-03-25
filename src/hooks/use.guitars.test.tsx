@@ -5,6 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
 import { GuitarStructure } from '../models/guitar';
 import { UserServerResponse, UserStructure } from '../models/user';
+import { GuitarState, pageUpdate } from '../reducers/guitar.slice';
+import { UserState } from '../reducers/user.slice';
 import { GuitarsApiRepo } from '../services/repositories/guitars.api.repo';
 import { UsersApiRepo } from '../services/repositories/users.api.repo';
 import { store } from '../store/store';
@@ -87,12 +89,14 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
         createGuitar,
         updateGuitar,
         deleteOneGuitar,
+        changePage,
+        changeStyle,
       } = useGuitars(mockGuitarRepo);
 
       return (
         <>
           <button onClick={() => loginUser(mockUserPayload)}>login</button>
-          <button onClick={() => loadGuitars()}>loadGuitars</button>
+          <button onClick={() => loadGuitars(1, 'All')}>loadGuitars</button>
           <button onClick={() => loadOneGuitar('mockIdGuitar')}>
             loadOneGuitar
           </button>
@@ -107,6 +111,8 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
           <button onClick={() => deleteOneGuitar('mockIdGuitar')}>
             deleteOneGuitar
           </button>
+          <button onClick={() => changePage(0)}>changePage</button>
+          <button onClick={() => changeStyle('All')}>changeStyle</button>
         </>
       );
     };
@@ -224,6 +230,39 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
       await act(async () => userEvent.click(elements[5]));
 
       expect(mockGuitarRepo.delete).not.toHaveBeenCalled();
+    });
+  });
+
+  describe.skip('When the TestGuitarComponent is rendered and the changePage button is clicked', () => {
+    const guitarsDispatch = {
+      users: {} as UserState,
+      guitars: {
+        actualPage: 0,
+        actualStyle: 'All',
+      } as GuitarState,
+    };
+
+    jest.mock('react-redux', () => ({
+      ...jest.requireActual('react-redux'),
+      useDispatch: () => guitarsDispatch,
+    }));
+
+    test('Then, if there is userToken,', async () => {
+      const elements = await screen.findAllByRole('button');
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[6]));
+
+      expect(pageUpdate).toHaveBeenCalled();
+    });
+
+    test('Then, if there is no userToken,', async () => {
+      const elements = await screen.findAllByRole('button');
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[6]));
+
+      expect(pageUpdate).not.toHaveBeenCalled();
     });
   });
 });

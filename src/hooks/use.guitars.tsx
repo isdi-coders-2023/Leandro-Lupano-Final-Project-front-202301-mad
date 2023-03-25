@@ -36,22 +36,30 @@ export function useGuitars(repo: GuitarsApiRepo) {
   );
 
   const changePage = (pageChange: number) => {
-    const userToken = usersState.userLogged.token;
-    if (!userToken) throw new Error('Not authorized');
+    try {
+      const userToken = usersState.userLogged.token;
+      if (!userToken) throw new Error('Not authorized');
 
-    let newPage = guitarsState.actualPage + pageChange;
+      let newPage = guitarsState.actualPage + pageChange;
 
-    if (newPage === 0) newPage = 1;
+      if (newPage === 0) newPage = 1;
 
-    guitarsDispatch(pageUpdate(newPage));
+      guitarsDispatch(pageUpdate(newPage));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   };
 
   const changeStyle = (styleChange: string) => {
-    const userToken = usersState.userLogged.token;
-    if (!userToken) throw new Error('Not authorized');
+    try {
+      const userToken = usersState.userLogged.token;
+      if (!userToken) throw new Error('Not authorized');
 
-    guitarsDispatch(pageUpdate(1));
-    guitarsDispatch(styleUpdate(styleChange));
+      guitarsDispatch(pageUpdate(1));
+      guitarsDispatch(styleUpdate(styleChange));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
   };
 
   const loadOneGuitar = async (idGuitar: GuitarStructure['id']) => {
