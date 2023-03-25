@@ -17,8 +17,11 @@ describe('Given the Products component', () => {
   const preparationTest = (role: string) => {
     (useGuitars as jest.Mock).mockReturnValue({
       loadGuitars: jest.fn(),
+      changePage: jest.fn(),
       guitarsState: {
         allGuitars: [{ id: '1' }, { id: '2' }],
+        actualPage: 1,
+        actualStyle: 'All',
       },
     });
 
@@ -51,7 +54,7 @@ describe('Given the Products component', () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const buttons = screen.getAllByRole('button');
       await userEvent.click(buttons[0]);
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changePage).toHaveBeenCalled();
     });
 
     test('Then if the user click the Next-Button, the loadGuitars should be called', async () => {
@@ -59,7 +62,7 @@ describe('Given the Products component', () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const buttons = screen.getAllByRole('button');
       await userEvent.click(buttons[2]);
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changePage).toHaveBeenCalled();
     });
   });
 });
