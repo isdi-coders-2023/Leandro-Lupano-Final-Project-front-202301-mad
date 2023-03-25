@@ -30,11 +30,7 @@ export function useUsers(repo: UsersApiRepo) {
   };
 
   const logoutUser = async () => {
-    try {
-      usersDispatch(logout());
-    } catch (error) {
-      console.log((error as Error).message);
-    }
+    usersDispatch(logout());
   };
 
   const userCart = async (idGuitar: GuitarStructure['id'], action: string) => {

@@ -13,6 +13,7 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestUserCompo
   let mockRepo: UsersApiRepo;
   let mockResponse: UserServerResponse;
   let mockResponseFalse: UserServerResponse;
+  let actualToken: string | undefined;
 
   beforeEach(async () => {
     mockPayload = {
@@ -43,13 +44,17 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestUserCompo
     } as unknown as UsersApiRepo;
 
     const TestUserComponent = function () {
-      const { registerUser, loginUser, userCart } = useUsers(mockRepo);
+      const { registerUser, loginUser, logoutUser, userCart, usersState } =
+        useUsers(mockRepo);
+
+      actualToken = usersState.userLogged.token;
 
       return (
         <>
           <button onClick={() => registerUser(mockPayload)}>register</button>
           <button onClick={() => loginUser(mockPayload)}>login</button>
           <button onClick={() => userCart('1', 'test')}>userCart</button>
+          <button onClick={() => logoutUser()}>Logout</button>
         </>
       );
     };
@@ -103,6 +108,16 @@ describe('Given the useUsers Custom Hook, a UserApiRepo mock and a TestUserCompo
       await act(async () => userEvent.click(elements[1]));
       await act(async () => userEvent.click(elements[2]));
       expect(mockRepo.update).not.toBeCalled();
+    });
+  });
+
+  describe('When the TestUserComponent is rendered and the Logout button is clicked', () => {
+    test('Then, the usersState.userLogged.token should be undefined', async () => {
+      const elements = await screen.findAllByRole('button');
+      (mockRepo.create as jest.Mock).mockResolvedValueOnce(mockResponse);
+      await act(async () => userEvent.click(elements[1]));
+      await act(async () => userEvent.click(elements[3]));
+      expect(actualToken).toBe(undefined);
     });
   });
 });
