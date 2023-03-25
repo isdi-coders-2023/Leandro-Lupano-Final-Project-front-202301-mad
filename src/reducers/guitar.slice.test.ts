@@ -11,6 +11,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
     mockInitialState = {
       allGuitars: [],
       guitar: {} as GuitarStructure,
+      actualPage: 1,
+      actualStyle: 'All',
     };
 
     mockPayload = {
@@ -46,6 +48,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       expect(result).toEqual({
         allGuitars: [mockPayload],
         guitar: {},
+        actualPage: 1,
+        actualStyle: 'All',
       });
     });
   });
@@ -60,6 +64,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       expect(result).toEqual({
         allGuitars: [],
         guitar: mockPayload,
+        actualPage: 1,
+        actualStyle: 'All',
       });
     });
   });
@@ -74,6 +80,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       expect(result).toEqual({
         allGuitars: [mockPayload],
         guitar: {},
+        actualPage: 1,
+        actualStyle: 'All',
       });
     });
   });
@@ -83,6 +91,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       mockInitialState = {
         allGuitars: [mockPayload, mockGuitar],
         guitar: {} as GuitarStructure,
+        actualPage: 1,
+        actualStyle: 'All',
       };
 
       const mockUpdateAction: PayloadAction<GuitarStructure> = {
@@ -114,6 +124,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
           mockGuitar,
         ],
         guitar: {},
+        actualPage: 1,
+        actualStyle: 'All',
       });
     });
   });
@@ -123,6 +135,8 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       mockInitialState = {
         allGuitars: [mockPayload, mockGuitar],
         guitar: {} as GuitarStructure,
+        actualPage: 1,
+        actualStyle: 'All',
       };
 
       const mockDeleteAction: PayloadAction<GuitarStructure['id']> = {
@@ -133,6 +147,54 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       expect(result).toEqual({
         allGuitars: [mockGuitar],
         guitar: {},
+        actualPage: 1,
+        actualStyle: 'All',
+      });
+    });
+  });
+
+  describe('When the pageUpdate action is called', () => {
+    test('Then, if the initial state actualPage is 1, it should return the payload in the actualPage property of the state', () => {
+      mockInitialState = {
+        allGuitars: [],
+        guitar: {} as GuitarStructure,
+        actualPage: 1,
+        actualStyle: 'All',
+      };
+
+      const mockPageUpdateAction: PayloadAction<number> = {
+        type: 'guitar/pageUpdate',
+        payload: 3,
+      };
+      const result = guitarReducer(mockInitialState, mockPageUpdateAction);
+      expect(result).toEqual({
+        allGuitars: [],
+        guitar: {},
+        actualPage: 3,
+        actualStyle: 'All',
+      });
+    });
+  });
+
+  describe('When the styleUpdate action is called', () => {
+    test('Then, if the initial state actualStyle is All, it should return the payload in the actualStyle property of the state', () => {
+      mockInitialState = {
+        allGuitars: [],
+        guitar: {} as GuitarStructure,
+        actualPage: 1,
+        actualStyle: 'All',
+      };
+
+      const mockStyleUpdateAction: PayloadAction<string> = {
+        type: 'guitar/styleUpdate',
+        payload: 'Electric',
+      };
+      const result = guitarReducer(mockInitialState, mockStyleUpdateAction);
+      expect(result).toEqual({
+        allGuitars: [],
+        guitar: {},
+        actualPage: 1,
+        actualStyle: 'Electric',
       });
     });
   });
