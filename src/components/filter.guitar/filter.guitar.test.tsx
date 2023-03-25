@@ -17,7 +17,7 @@ describe('Given the FilterGuitar component', () => {
     beforeEach(async () => {
       await act(async () => {
         (useGuitars as jest.Mock).mockReturnValue({
-          loadGuitars: jest.fn(),
+          changeStyle: jest.fn(),
         });
 
         render(
@@ -30,28 +30,28 @@ describe('Given the FilterGuitar component', () => {
       });
     });
 
-    test('Then if the user click on All Filter Button, the loadGuitar function should be called', async () => {
+    test('Then if the user click on All Filter Button, the changeStyle function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
 
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[0]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
 
-    test('Then if the user click on Electric Filter Button, the loadGuitar function should be called', async () => {
+    test('Then if the user click on Electric Filter Button, the changeStyle function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
 
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[1]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
 
-    test('Then if the user click on Acoustic Filter Button, the loadGuitar function should be called', async () => {
+    test('Then if the user click on Acoustic Filter Button, the changeStyle function should be called', async () => {
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
 
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[2]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
   });
 });
