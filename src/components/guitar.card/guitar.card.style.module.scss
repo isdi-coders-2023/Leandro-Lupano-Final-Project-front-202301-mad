@@ -53,7 +53,7 @@
   }
 
   .guitarCardMoreDetails:active {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   .guitarCardButtonsAdd {
@@ -63,11 +63,11 @@
     }
 
     img:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
 
     img:active {
-      transform: scale(1.4);
+      transform: scale(1.2);
     }
   }
 
@@ -78,11 +78,11 @@
     }
 
     img:hover {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
 
     img:active {
-      transform: scale(1.4);
+      transform: scale(1.2);
     }
   }
 }

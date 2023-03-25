@@ -31,7 +31,7 @@
     }
 
     .guitarDetailsHeaderBackButton:active {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
   }
 
@@ -85,7 +85,7 @@
           }
 
           .guitarDetailsBodyInfoButtonsEdit:active {
-            transform: scale(1.2);
+            transform: scale(1.1);
           }
 
           .guitarDetailsBodyInfoButtonsDelete {
@@ -95,11 +95,11 @@
             }
 
             img:hover {
-              transform: scale(1.2);
+              transform: scale(1.1);
             }
 
             img:active {
-              transform: scale(1.4);
+              transform: scale(1.2);
             }
           }
         }

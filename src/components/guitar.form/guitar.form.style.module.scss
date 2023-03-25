@@ -25,7 +25,7 @@
     }
 
     .guitarFormHeaderBackButton:active {
-      transform: scale(1.2);
+      transform: scale(1.1);
     }
   }
 
@@ -122,9 +122,20 @@
       }
 
       button:active {
-        transform: scale(1.2);
+        transform: scale(1.1);
       }
     }
+  }
+
+  .guitarFormMessageHidden {
+    display: none;
+  }
+
+  .guitarFormMessage {
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    color: rgba(0, 86, 42, 0.95);
+    font-size: 1.3rem;
   }
 }
 
