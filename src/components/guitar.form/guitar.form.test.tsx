@@ -199,42 +199,41 @@ describe('Given the GuitarForm component', () => {
   });
 
   describe('When the action is Create and the user complete the Create Guitar form', () => {
-    beforeEach(async () => {
-      await act(async () => {
-        (useGuitars as jest.Mock).mockReturnValue({
-          updateGuitar: jest.fn(),
-          createGuitar: jest.fn(),
-        });
-
-        const locationCreateForm = {
-          state: {
-            guitarProps: {
-              id: '1',
-              brand: 'testBrand',
-              modelGuitar: 'testModel',
-              picture: 'testPicture',
-              style: 'testStyle',
-              material: 'testMaterial',
-              price: 1,
-              description: 'testDescription',
-            } as unknown as GuitarStructure,
-            actionProps: 'create',
-          },
-        };
-
-        (useLocation as jest.Mock).mockReturnValue(locationCreateForm);
-
-        render(
-          <Provider store={store}>
-            <Router>
-              <GuitarForm></GuitarForm>
-            </Router>
-          </Provider>
-        );
+    const preparationCreateTest = (action: string) => {
+      (useGuitars as jest.Mock).mockReturnValue({
+        updateGuitar: jest.fn(),
+        createGuitar: jest.fn(),
       });
-    });
+
+      const locationCreateForm = {
+        state: {
+          guitarProps: {
+            id: '1',
+            brand: 'testBrand',
+            modelGuitar: 'testModel',
+            picture: 'testPicture',
+            style: 'testStyle',
+            material: 'testMaterial',
+            price: 1,
+            description: 'testDescription',
+          } as unknown as GuitarStructure,
+          actionProps: action,
+        },
+      };
+
+      (useLocation as jest.Mock).mockReturnValue(locationCreateForm);
+
+      render(
+        <Provider store={store}>
+          <Router>
+            <GuitarForm></GuitarForm>
+          </Router>
+        </Provider>
+      );
+    };
 
     test('Then if the submit button is clicked, the createGuitar function should be called', async () => {
+      preparationCreateTest('create');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const createInputs = screen.getAllByRole('textbox');
       await userEvent.type(createInputs[0], 'brand-create');
@@ -266,9 +265,10 @@ describe('Given the GuitarForm component', () => {
     });
 
     test.skip('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+      preparationCreateTest('create');
       jest.useFakeTimers();
       const buttons = screen.getAllByRole('button');
-      act(async () => {
+      await act(() => {
         fireEvent.click(buttons[1]);
         jest.advanceTimersByTime(2100);
       });
