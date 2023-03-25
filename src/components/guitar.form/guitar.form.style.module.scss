@@ -102,6 +102,8 @@
           text-align: start;
           word-wrap: break-word;
           word-break: break-all;
+          width: 180px;
+          font-size: 0.8rem;
         }
       }
 
@@ -121,6 +123,39 @@
 
       button:active {
         transform: scale(1.2);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .guitarForm {
+    .guitarFormBody {
+      form {
+        label {
+          font-size: 1.1rem;
+        }
+
+        input {
+          width: 170px;
+        }
+
+        .guitarFormBodyPictureLabel {
+          width: 150px;
+        }
+
+        .guitarFormBodyStyle {
+          .guitarFormBodyStyleOptions {
+            width: 110px;
+          }
+        }
+
+        .guitarFormBodyDescription {
+          input {
+            width: 300px;
+            font-size: 1rem;
+          }
+        }
       }
     }
   }
@@ -163,6 +198,13 @@
             padding: 0.5rem 1rem;
             margin: 0rem 1rem;
             width: 130px;
+          }
+        }
+
+        .guitarFormBodyDescription {
+          input {
+            width: 400px;
+            font-size: 1rem;
           }
         }
 
