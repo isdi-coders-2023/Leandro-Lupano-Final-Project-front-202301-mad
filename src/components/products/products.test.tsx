@@ -1,6 +1,4 @@
-/* eslint-disable testing-library/no-unnecessary-act */
-/* eslint-disable testing-library/no-render-in-setup */
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import Products from './products';
 import { Provider } from 'react-redux';
@@ -16,40 +14,40 @@ jest.mock('../../hooks/use.guitars');
 jest.mock('../../hooks/use.users');
 
 describe('Given the Products component', () => {
-  describe('When the component is rendered with Admin role', () => {
-    beforeEach(async () => {
-      await act(async () => {
-        (useGuitars as jest.Mock).mockReturnValue({
-          loadGuitars: jest.fn(),
-          guitarsState: {
-            allGuitars: [{ id: '1' }, { id: '2' }],
-          },
-        });
-
-        (useUsers as jest.Mock).mockReturnValue({
-          usersState: {
-            userLogged: {
-              role: 'Admin',
-            },
-          },
-        });
-
-        render(
-          <Provider store={store}>
-            <Router>
-              <Products></Products>
-            </Router>
-          </Provider>
-        );
-      });
+  const preparationTest = (role: string) => {
+    (useGuitars as jest.Mock).mockReturnValue({
+      loadGuitars: jest.fn(),
+      guitarsState: {
+        allGuitars: [{ id: '1' }, { id: '2' }],
+      },
     });
 
+    (useUsers as jest.Mock).mockReturnValue({
+      usersState: {
+        userLogged: {
+          role: role,
+        },
+      },
+    });
+
+    render(
+      <Provider store={store}>
+        <Router>
+          <Products></Products>
+        </Router>
+      </Provider>
+    );
+  };
+
+  describe('When the component is rendered with Admin role', () => {
     test('Then the main title should be in the document', () => {
+      preparationTest('User');
       const element = screen.getByRole('heading');
       expect(element).toBeInTheDocument();
     });
 
     test('Then if the user click the Prev-Button, the loadGuitars should be called', async () => {
+      preparationTest('Admin');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const buttons = screen.getAllByRole('button');
       await userEvent.click(buttons[0]);
@@ -57,44 +55,11 @@ describe('Given the Products component', () => {
     });
 
     test('Then if the user click the Next-Button, the loadGuitars should be called', async () => {
+      preparationTest('Admin');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
       const buttons = screen.getAllByRole('button');
       await userEvent.click(buttons[2]);
       expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
-    });
-  });
-
-  describe('When the component is rendered with User role', () => {
-    beforeEach(async () => {
-      await act(async () => {
-        (useGuitars as jest.Mock).mockReturnValue({
-          loadGuitars: jest.fn(),
-          guitarsState: {
-            allGuitars: [{ id: '1' }, { id: '2' }],
-          },
-        });
-
-        (useUsers as jest.Mock).mockReturnValue({
-          usersState: {
-            userLogged: {
-              role: 'User',
-            },
-          },
-        });
-
-        render(
-          <Provider store={store}>
-            <Router>
-              <Products></Products>
-            </Router>
-          </Provider>
-        );
-      });
-    });
-
-    test('Then the main title should be in the document', () => {
-      const element = screen.getByRole('heading');
-      expect(element).toBeInTheDocument();
     });
   });
 });
