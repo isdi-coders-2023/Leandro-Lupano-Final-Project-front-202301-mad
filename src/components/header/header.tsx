@@ -9,7 +9,7 @@ export default function Header() {
         <Link to="/home">
           <img
             className={style.headerLogoImg}
-            src="./images/guitar-world-logo.png"
+            src="./images/guitar-world-logo-white-transparent.png"
             alt="guitar-world-logo"
           />
         </Link>

@@ -13,9 +13,8 @@
     }
 
     .headerLogoImg {
-      width: 99px;
+      width: 100px;
       cursor: pointer;
-      border: 1px solid black;
     }
   }
 
@@ -26,15 +25,10 @@
 
 @media screen and (min-width: 750px) {
   .header {
-    // height: 120px;
     grid-template-columns: repeat(6, 1fr);
 
     .headerLogo {
       grid-column: 1/2;
-
-      // .headerLogoImg {
-      //   width: 120px;
-      // }
     }
 
     .headerNavMenu {

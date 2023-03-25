@@ -46,6 +46,14 @@
         width: 100px;
       }
 
+      .deleteGuitarBodyButtonsYes:hover {
+        background-color: rgb(33, 37, 41, 75%);
+      }
+
+      .deleteGuitarBodyButtonsYes:active {
+        transform: scale(1.2);
+      }
+
       .deleteGuitarBodyButtonsCancel {
         background-color: rgb(191, 61, 61, 95%);
         color: white;
@@ -55,6 +63,14 @@
         border-radius: 0.5rem;
         padding: 0.5rem 0.8rem;
         width: 100px;
+      }
+
+      .deleteGuitarBodyButtonsCancel:hover {
+        background-color: rgb(191, 61, 61, 75%);
+      }
+
+      .deleteGuitarBodyButtonsCancel:active {
+        transform: scale(1.2);
       }
     }
   }

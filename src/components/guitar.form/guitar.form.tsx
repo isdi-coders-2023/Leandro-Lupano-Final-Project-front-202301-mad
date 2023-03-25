@@ -182,7 +182,7 @@ export default function GuitarForm() {
                 />
               </label>
 
-              <label>
+              <label className={style.guitarFormBodyDescription}>
                 Description:
                 <input
                   type="text"
@@ -199,7 +199,7 @@ export default function GuitarForm() {
       ) : (
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
-            <h2>Create a new guitar</h2>
+            <h2>New guitar</h2>
 
             <button
               className={style.guitarFormHeaderBackButton}
@@ -280,7 +280,7 @@ export default function GuitarForm() {
                 />
               </label>
 
-              <label>
+              <label className={style.guitarFormBodyDescription}>
                 Description:
                 <input
                   type="text"
