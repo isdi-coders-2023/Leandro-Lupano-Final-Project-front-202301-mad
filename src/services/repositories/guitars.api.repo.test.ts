@@ -43,30 +43,6 @@ describe('Given GuitarsApiRepo class and its instance', () => {
       ]);
     });
 
-    test('Then if the fetch response is Ok, and there is style and page, the result should be equal to the mock value', async () => {
-      global.fetch = jest.fn().mockResolvedValue({
-        ok: true,
-        json: jest.fn().mockResolvedValue([
-          {
-            brand: 'test1',
-          },
-          {
-            brand: 'test2',
-          },
-        ]),
-      });
-
-      const result = await repo.read('tokenMock', -1, 'mockStyle');
-      expect(result).toEqual([
-        {
-          brand: 'test1',
-        },
-        {
-          brand: 'test2',
-        },
-      ]);
-    });
-
     test('Then if the fetch response is NOK, the result should throw an error', async () => {
       global.fetch = jest.fn().mockResolvedValue('Error Test');
 

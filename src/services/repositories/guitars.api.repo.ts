@@ -14,11 +14,9 @@ export interface GuitarsRepo<T> {
 
 export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   url: string;
-  // actualPage: number;
 
   constructor() {
     this.url = 'http://localhost:5000/guitars';
-    // this.actualPage = 1;
   }
 
   async read(
@@ -26,10 +24,6 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
     pageLoad: number,
     styleLoad: string
   ): Promise<GuitarServerResponse> {
-    // this.actualPage = this.actualPage + pageChange;
-
-    // if (this.actualPage === 0 || pageChange === 0) this.actualPage = 1;
-
     const pageString = pageLoad.toString();
 
     const url =
