@@ -8,32 +8,42 @@ import { store } from '../../store/store';
 import { useGuitars } from '../../hooks/use.guitars';
 import userEvent from '@testing-library/user-event';
 import { GuitarsApiRepo } from '../../services/repositories/guitars.api.repo';
+import { useUsers } from '../../hooks/use.users';
 
 jest.mock('../guitar.card/guitar.card');
 jest.mock('../filter.guitar/filter.guitar');
 jest.mock('../../hooks/use.guitars');
+jest.mock('../../hooks/use.users');
 
 describe('Given the Products component', () => {
-  beforeEach(async () => {
-    await act(async () => {
-      (useGuitars as jest.Mock).mockReturnValue({
-        loadGuitars: jest.fn(),
-        guitarsState: {
-          allGuitars: [{ id: '1' }, { id: '2' }],
-        },
+  describe('When the component is rendered with Admin role', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        (useGuitars as jest.Mock).mockReturnValue({
+          loadGuitars: jest.fn(),
+          guitarsState: {
+            allGuitars: [{ id: '1' }, { id: '2' }],
+          },
+        });
+
+        (useUsers as jest.Mock).mockReturnValue({
+          usersState: {
+            userLogged: {
+              role: 'Admin',
+            },
+          },
+        });
+
+        render(
+          <Provider store={store}>
+            <Router>
+              <Products></Products>
+            </Router>
+          </Provider>
+        );
       });
-
-      render(
-        <Provider store={store}>
-          <Router>
-            <Products></Products>
-          </Router>
-        </Provider>
-      );
     });
-  });
 
-  describe('When the component is rendered', () => {
     test('Then the main title should be in the document', () => {
       const element = screen.getByRole('heading');
       expect(element).toBeInTheDocument();
@@ -51,6 +61,40 @@ describe('Given the Products component', () => {
       const buttons = screen.getAllByRole('button');
       await userEvent.click(buttons[2]);
       expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+    });
+  });
+
+  describe('When the component is rendered with User role', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        (useGuitars as jest.Mock).mockReturnValue({
+          loadGuitars: jest.fn(),
+          guitarsState: {
+            allGuitars: [{ id: '1' }, { id: '2' }],
+          },
+        });
+
+        (useUsers as jest.Mock).mockReturnValue({
+          usersState: {
+            userLogged: {
+              role: 'User',
+            },
+          },
+        });
+
+        render(
+          <Provider store={store}>
+            <Router>
+              <Products></Products>
+            </Router>
+          </Provider>
+        );
+      });
+    });
+
+    test('Then the main title should be in the document', () => {
+      const element = screen.getByRole('heading');
+      expect(element).toBeInTheDocument();
     });
   });
 });
