@@ -19,16 +19,16 @@ export default function Products() {
 
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
 
-  const { guitarsState, loadGuitars } = useGuitars(guitarRepo);
+  const { guitarsState, loadGuitars, changePage } = useGuitars(guitarRepo);
 
   useEffect(() => {
-    loadGuitars();
-  }, [loadGuitars]);
+    loadGuitars(guitarsState.actualPage, guitarsState.actualStyle);
+  }, [loadGuitars, guitarsState.actualPage, guitarsState.actualStyle]);
 
   const allGuitarsArray = guitarsState.allGuitars;
 
   const handlePage = (pageChange: number) => {
-    loadGuitars(pageChange);
+    changePage(pageChange);
   };
 
   return (

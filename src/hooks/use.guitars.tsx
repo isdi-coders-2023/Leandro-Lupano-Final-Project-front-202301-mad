@@ -9,6 +9,8 @@ import {
   create,
   update,
   deleteGuitar,
+  pageUpdate,
+  styleUpdate,
 } from '../reducers/guitar.slice';
 
 export function useGuitars(repo: GuitarsApiRepo) {
@@ -18,12 +20,12 @@ export function useGuitars(repo: GuitarsApiRepo) {
   const guitarsDispatch = useDispatch<AppDispatch>();
 
   const loadGuitars = useCallback(
-    async (pageChange: number = 0, style: string = 'All') => {
+    async (pageLoad: number, styleLoad: string) => {
       try {
         const userToken = usersState.userLogged.token;
         if (!userToken) throw new Error('Not authorized');
 
-        const guitarsInfo = await repo.read(userToken, pageChange, style);
+        const guitarsInfo = await repo.read(userToken, pageLoad, styleLoad);
 
         guitarsDispatch(read(guitarsInfo.results));
       } catch (error) {
@@ -32,6 +34,25 @@ export function useGuitars(repo: GuitarsApiRepo) {
     },
     [guitarsDispatch, repo, usersState.userLogged.token]
   );
+
+  const changePage = (pageChange: number) => {
+    const userToken = usersState.userLogged.token;
+    if (!userToken) throw new Error('Not authorized');
+
+    let newPage = guitarsState.actualPage + pageChange;
+
+    if (newPage === 0) newPage = 1;
+
+    guitarsDispatch(pageUpdate(newPage));
+  };
+
+  const changeStyle = (styleChange: string) => {
+    const userToken = usersState.userLogged.token;
+    if (!userToken) throw new Error('Not authorized');
+
+    guitarsDispatch(pageUpdate(1));
+    guitarsDispatch(styleUpdate(styleChange));
+  };
 
   const loadOneGuitar = async (idGuitar: GuitarStructure['id']) => {
     try {
@@ -97,5 +118,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
     createGuitar,
     updateGuitar,
     deleteOneGuitar,
+    changePage,
+    changeStyle,
   };
 }

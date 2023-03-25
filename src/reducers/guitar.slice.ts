@@ -5,11 +5,15 @@ import { GuitarStructure } from '../models/guitar';
 export type GuitarState = {
   allGuitars: GuitarStructure[];
   guitar: GuitarStructure;
+  actualPage: number;
+  actualStyle: string;
 };
 
 const initialState: GuitarState = {
   allGuitars: [],
   guitar: {} as GuitarStructure,
+  actualPage: 1,
+  actualStyle: 'All',
 };
 
 const guitarSlice = createSlice({
@@ -44,9 +48,24 @@ const guitarSlice = createSlice({
         (item) => item.id !== action.payload
       );
     },
+
+    pageUpdate(state, action: PayloadAction<number>) {
+      state.actualPage = action.payload;
+    },
+
+    styleUpdate(state, action: PayloadAction<string>) {
+      state.actualStyle = action.payload;
+    },
   },
 });
 
-export const { read, readId, create, update, deleteGuitar } =
-  guitarSlice.actions;
+export const {
+  read,
+  readId,
+  create,
+  update,
+  deleteGuitar,
+  pageUpdate,
+  styleUpdate,
+} = guitarSlice.actions;
 export const guitarReducer = guitarSlice.reducer;

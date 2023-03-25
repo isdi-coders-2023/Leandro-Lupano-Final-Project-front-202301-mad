@@ -7,14 +7,14 @@ import style from './filter.guitar.style.module.scss';
 export function FilterGuitar() {
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
 
-  const { loadGuitars } = useGuitars(guitarRepo);
+  const { changeStyle } = useGuitars(guitarRepo);
 
   const [isSelectedAll, setIsSelectedAll] = useState(true);
   const [isSelectedElectric, setIsSelectedElectric] = useState(false);
   const [isSelectedAcoustic, setIsSelectedAcoustic] = useState(false);
 
   const handleFilter = (style: string) => {
-    loadGuitars(undefined, style);
+    changeStyle(style);
 
     switch (style) {
       case 'Electric':
