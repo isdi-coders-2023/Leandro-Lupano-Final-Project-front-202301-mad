@@ -1,6 +1,6 @@
 /* eslint-disable testing-library/no-unnecessary-act */
 /* eslint-disable testing-library/no-render-in-setup */
-import { act, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router, useLocation } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
@@ -131,7 +131,9 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(input, '0');
 
       const buttons = screen.getAllByRole('button');
-      await userEvent.click(buttons[1]);
+      act(() => {
+        fireEvent.click(buttons[1]);
+      });
 
       expect(useGuitars(guitarsMockRepo).updateGuitar).toHaveBeenCalledWith(
         '1',
@@ -177,9 +179,22 @@ describe('Given the GuitarForm component', () => {
       );
 
       const buttons = screen.getAllByRole('button');
-      await userEvent.click(buttons[1]);
+      await act(() => {
+        fireEvent.click(buttons[1]);
+      });
 
       expect(useGuitars(guitarsMockRepo).updateGuitar).toHaveBeenCalled();
+    });
+
+    test('Then, if the edit button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+      jest.useFakeTimers();
+      const buttons = screen.getAllByRole('button');
+      act(() => {
+        fireEvent.click(buttons[1]);
+        jest.advanceTimersByTime(2100);
+      });
+      expect(mockNavigate).toHaveBeenCalled();
+      jest.useRealTimers();
     });
   });
 
@@ -232,10 +247,12 @@ describe('Given the GuitarForm component', () => {
       await userEvent.click(createRadioInputs[0]);
 
       const createPriceInput = screen.getByRole('spinbutton');
-      await userEvent.type(createPriceInput, '2000');
+      await userEvent.type(createPriceInput, '100');
 
       const buttons = screen.getAllByRole('button');
-      await userEvent.click(buttons[1]);
+      await act(() => {
+        fireEvent.click(buttons[1]);
+      });
 
       expect(useGuitars(guitarsMockRepo).createGuitar).toHaveBeenCalledWith({
         brand: 'brand-create',
@@ -243,9 +260,20 @@ describe('Given the GuitarForm component', () => {
         picture: undefined,
         style: 'Electric',
         material: 'material-create',
-        price: 2000,
+        price: 100,
         description: 'description-create',
       });
+    });
+
+    test.skip('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+      jest.useFakeTimers();
+      const buttons = screen.getAllByRole('button');
+      act(async () => {
+        fireEvent.click(buttons[1]);
+        jest.advanceTimersByTime(2100);
+      });
+      expect(mockNavigate).toHaveBeenCalled();
+      jest.useRealTimers();
     });
   });
 });

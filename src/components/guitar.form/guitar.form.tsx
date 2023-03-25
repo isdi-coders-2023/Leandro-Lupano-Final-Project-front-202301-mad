@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { SyntheticEvent, useMemo } from 'react';
+import { SyntheticEvent, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
@@ -20,9 +20,12 @@ export default function GuitarForm() {
   const { updateGuitar, createGuitar } = useGuitars(guitarRepo);
 
   const navigate = useNavigate();
+
   const handlerNavigateBack = () => {
     navigate(-1);
   };
+
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleEditSubmit = async (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -60,6 +63,13 @@ export default function GuitarForm() {
 
     updateGuitar(guitarId, guitarToEdit);
 
+    setIsSubmit(true);
+
+    setTimeout(() => {
+      setIsSubmit(false);
+      navigate('/products');
+    }, 2000);
+
     formEditGuitar.reset();
   };
 
@@ -90,6 +100,13 @@ export default function GuitarForm() {
     };
 
     createGuitar(guitarToCreate);
+
+    setIsSubmit(true);
+
+    setTimeout(() => {
+      setIsSubmit(false);
+      navigate('/products');
+    }, 2000);
 
     formCreateGuitar.reset();
   };
@@ -195,6 +212,13 @@ export default function GuitarForm() {
               <button type="submit">Edit</button>
             </form>
           </div>
+          <p
+            className={
+              isSubmit ? style.guitarFormMessage : style.guitarFormMessageHidden
+            }
+          >
+            The guitar was edited successfully ✅
+          </p>
         </section>
       ) : (
         <section className={style.guitarForm}>
@@ -293,6 +317,13 @@ export default function GuitarForm() {
               <button type="submit">Create</button>
             </form>
           </div>
+          <p
+            className={
+              isSubmit ? style.guitarFormMessage : style.guitarFormMessageHidden
+            }
+          >
+            The guitar was created successfully ✅
+          </p>
         </section>
       )}
     </>
