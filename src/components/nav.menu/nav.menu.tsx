@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/use.users';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 import { NavOption, navMenuOptions } from '../app.router/nav.menu.options';
@@ -8,7 +8,7 @@ import style from './nav.menu.style.module.scss';
 export function NavMenu() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
-  const { usersState } = useUsers(userRepo);
+  const { usersState, logoutUser } = useUsers(userRepo);
 
   const isLogged: boolean =
     usersState.userLogged.token !== undefined ? true : false;
@@ -24,18 +24,36 @@ export function NavMenu() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutUser();
+    navigate('/login');
+  };
+
   return (
     <nav className={style.navMenu}>
-      <Link to={'/login'}>
-        <img
-          className={style.navMenuLogin}
-          src="./images/login-logo.png"
-          alt="login-logo"
-        />
-      </Link>
+      {!isLogged ? (
+        <Link to={'/login'}>
+          <img
+            className={style.navMenuLogin}
+            src="./images/login-logo.png"
+            alt="login-logo"
+          />
+        </Link>
+      ) : (
+        <></>
+      )}
 
       {isLogged ? (
         <>
+          <img
+            className={style.navMenuLogin}
+            src="./images/logout-button.png"
+            alt="login-logo"
+            onClick={handleLogout}
+          />
+
           <img
             className={style.navMenuBurger}
             src="./images/burger-menu.png"

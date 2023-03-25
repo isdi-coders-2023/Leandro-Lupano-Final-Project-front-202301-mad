@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { GuitarStructure } from '../models/guitar';
 import { UserStructure } from '../models/user';
-import { login, register, update } from '../reducers/user.slice';
+import { login, logout, register, update } from '../reducers/user.slice';
 import { UsersApiRepo } from '../services/repositories/users.api.repo';
 import { AppDispatch, RootState } from '../store/store';
 
@@ -29,6 +29,14 @@ export function useUsers(repo: UsersApiRepo) {
     }
   };
 
+  const logoutUser = async () => {
+    try {
+      usersDispatch(logout());
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
   const userCart = async (idGuitar: GuitarStructure['id'], action: string) => {
     try {
       const userToken = usersState.userLogged.token;
@@ -47,6 +55,7 @@ export function useUsers(repo: UsersApiRepo) {
     usersState,
     registerUser,
     loginUser,
+    logoutUser,
     userCart,
   };
 }

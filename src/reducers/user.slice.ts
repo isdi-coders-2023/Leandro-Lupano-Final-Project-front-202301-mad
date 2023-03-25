@@ -27,6 +27,10 @@ const userSlice = createSlice({
       state.userLogged = action.payload;
     },
 
+    logout(state) {
+      state.userLogged.token = undefined;
+    },
+
     readId(state, action: PayloadAction<UserStructure>) {
       state.user = action.payload;
     },
@@ -42,5 +46,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { register, login, readId, update } = userSlice.actions;
+export const { register, login, logout, readId, update } = userSlice.actions;
 export const userReducer = userSlice.reducer;
