@@ -29,7 +29,6 @@ const userSlice = createSlice({
 
     logout(state) {
       state.userLogged = {} as UserStructure;
-      // state.userLogged.token = undefined;
     },
 
     readId(state, action: PayloadAction<UserStructure>) {
