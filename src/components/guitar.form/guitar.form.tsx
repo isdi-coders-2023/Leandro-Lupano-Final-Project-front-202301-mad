@@ -201,8 +201,7 @@ export default function GuitarForm() {
 
               <label className={style.guitarFormBodyDescription}>
                 Description:
-                <input
-                  type="text"
+                <textarea
                   name="description"
                   defaultValue={guitar.description}
                   required
@@ -237,7 +236,12 @@ export default function GuitarForm() {
             <form onSubmit={handleCreateSubmit}>
               <label>
                 Brand:
-                <input type="text" name="brand" placeholder="Brand:" required />
+                <input
+                  type="text"
+                  name="brand"
+                  placeholder="Ex.: Gibson"
+                  required
+                />
               </label>
 
               <label>
@@ -245,7 +249,7 @@ export default function GuitarForm() {
                 <input
                   type="text"
                   name="modelGuitar"
-                  placeholder="Model:"
+                  placeholder="Ex.: Les Paul"
                   required
                 />
               </label>
@@ -260,7 +264,7 @@ export default function GuitarForm() {
                   id="guitarFormBodyPicture"
                   type="file"
                   name="picture"
-                  placeholder="Upload picture:"
+                  placeholder="File"
                   role="textbox"
                   required
                 />
@@ -289,7 +293,7 @@ export default function GuitarForm() {
                 <input
                   type="text"
                   name="material"
-                  placeholder="Material:"
+                  placeholder="Ex.: Mahogany"
                   required
                 />
               </label>
@@ -299,17 +303,16 @@ export default function GuitarForm() {
                 <input
                   type="number"
                   name="price"
-                  placeholder="Price:"
+                  placeholder="Ex.: 2200"
                   required
                 />
               </label>
 
               <label className={style.guitarFormBodyDescription}>
                 Description:
-                <input
-                  type="text"
+                <textarea
                   name="description"
-                  placeholder="Description:"
+                  placeholder="Ex.: This guitar is one of the..."
                   required
                 />
               </label>
