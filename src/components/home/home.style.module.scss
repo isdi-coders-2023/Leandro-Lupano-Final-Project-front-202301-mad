@@ -57,18 +57,30 @@
       button:active {
         background-color: rgb(116, 116, 116, 85%);
       }
+
+      .homeBodyFormLoginMessage {
+        display: inline-block;
+        font-family: 'Raleway', sans-serif;
+        color: rgb(33, 37, 41, 95%);
+        font-size: 0.9rem;
+
+        .homeBodyFormLoginMessageLink {
+          color: rgb(0, 0, 238, 90%);
+          cursor: pointer;
+        }
+      }
     }
   }
 
-  .homeMessageHidden {
+  .homeRegisterMessageHidden {
     display: none;
   }
 
-  .homeMessage {
+  .homeRegisterMessage {
     display: inline-block;
     font-family: 'Lato', sans-serif;
     color: rgba(0, 86, 42, 0.95);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
   }
 }
 
