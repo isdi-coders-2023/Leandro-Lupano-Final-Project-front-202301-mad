@@ -13,8 +13,8 @@ export default function GuitarForm() {
   const guitar: GuitarStructure = guitarProps;
   const action: string = actionProps;
 
-  let formAction: boolean;
-  formAction = action === 'edit' ? true : false;
+  let isEditForm: boolean;
+  isEditForm = action === 'edit' ? true : false;
 
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
   const { updateGuitar, createGuitar } = useGuitars(guitarRepo);
@@ -92,7 +92,7 @@ export default function GuitarForm() {
       brand: (formCreateGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formCreateGuitar.elements[1] as HTMLFormElement).value,
       picture: urlPicture,
-      style: (formCreateGuitar.elements.namedItem('style') as HTMLInputElement)
+      style: (formCreateGuitar.elements.namedItem('style') as HTMLFormElement)
         .value,
       material: (formCreateGuitar.elements[5] as HTMLFormElement).value,
       price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
@@ -113,7 +113,7 @@ export default function GuitarForm() {
 
   return (
     <>
-      {formAction ? (
+      {isEditForm ? (
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
             <h2>Edit guitar</h2>
@@ -279,7 +279,6 @@ export default function GuitarForm() {
                     name="style"
                     value="Electric"
                     defaultChecked
-                    required
                   />
                 </label>
                 <label className={style.guitarFormBodyStyleOptions}>

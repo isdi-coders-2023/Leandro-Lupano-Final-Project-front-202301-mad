@@ -23,112 +23,121 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Given the GuitarForm component', () => {
-  describe('When the component is rendered with the Edit action and the user complete the Edit Guitar form', () => {
-    beforeEach(async () => {
-      await act(async () => {
-        (useGuitars as jest.Mock).mockReturnValue({
-          updateGuitar: jest.fn(),
-          createGuitar: jest.fn(),
-        });
-
-        const locationEditForm = {
-          state: {
-            guitarProps: {
-              id: '1',
-              brand: 'testBrand',
-              modelGuitar: 'testModel',
-              picture: 'testPicture',
-              style: 'testStyle',
-              material: 'testMaterial',
-              price: 1,
-              description: 'testDescription',
-            } as unknown as GuitarStructure,
-            actionProps: 'edit',
-          },
-        };
-
-        (useLocation as jest.Mock).mockReturnValue(locationEditForm);
-
-        render(
-          <Provider store={store}>
-            <Router>
-              <GuitarForm></GuitarForm>
-            </Router>
-          </Provider>
-        );
-      });
+  const preparationTest = (action: string) => {
+    (useGuitars as jest.Mock).mockReturnValue({
+      updateGuitar: jest.fn(),
+      createGuitar: jest.fn(),
     });
 
+    const locationEditForm = {
+      state: {
+        guitarProps: {
+          id: '1',
+          brand: 'testBrand',
+          modelGuitar: 'testModel',
+          picture: 'testPicture',
+          style: 'Electric',
+          material: 'testMaterial',
+          price: 1,
+          description: 'testDescription',
+        } as unknown as GuitarStructure,
+        actionProps: action,
+      },
+    };
+
+    (useLocation as jest.Mock).mockReturnValue(locationEditForm);
+
+    render(
+      <Provider store={store}>
+        <Router>
+          <GuitarForm></GuitarForm>
+        </Router>
+      </Provider>
+    );
+  };
+  describe('When the component is rendered with the Edit action and the user complete the Edit Guitar form', () => {
     test('Then the main title should be in the document', () => {
+      preparationTest('edit');
       const element = screen.getByRole('heading');
       expect(element).toBeInTheDocument();
     });
 
     test('Then the Brand <input> should be in the document', () => {
+      preparationTest('edit');
       const editInputs = screen.getAllByRole('textbox');
       expect(editInputs[0]).toBeInTheDocument();
     });
 
     test('Then the modelGuitar <input> should be in the document', () => {
+      preparationTest('edit');
       const editInputs = screen.getAllByRole('textbox');
       expect(editInputs[1]).toBeInTheDocument();
     });
 
     test('Then the picture <input> should be in the document', () => {
+      preparationTest('edit');
       const editInputs = screen.getAllByRole('textbox');
       expect(editInputs[2]).toBeInTheDocument();
     });
 
     test('Then the Electric style <input> should be in the document', () => {
+      preparationTest('edit');
       const editRadioInputs = screen.getAllByRole('radio');
       expect(editRadioInputs[0]).toBeInTheDocument();
     });
 
     test('Then the Acoustic style <input> should be in the document', () => {
+      preparationTest('edit');
       const editRadioInputs = screen.getAllByRole('radio');
       expect(editRadioInputs[1]).toBeInTheDocument();
     });
 
     test('Then the material <input> should be in the document', () => {
+      preparationTest('edit');
       const editInputs = screen.getAllByRole('textbox');
       expect(editInputs[3]).toBeInTheDocument();
     });
 
     test('Then the price <input> should be in the document', () => {
+      preparationTest('edit');
       const editPriceInput = screen.getByRole('spinbutton');
       expect(editPriceInput).toBeInTheDocument();
     });
 
     test('Then the description <input> should be in the document', () => {
+      preparationTest('edit');
       const editInputs = screen.getAllByRole('textbox');
       expect(editInputs[4]).toBeInTheDocument();
     });
 
     test('Then the Edit button should be in the document', () => {
+      preparationTest('edit');
       const buttons = screen.getAllByRole('button');
       expect(buttons[1]).toBeInTheDocument();
     });
 
     test('Then if the user click on Back Button, the mockNavigate function should be called', async () => {
+      preparationTest('edit');
       const elements = screen.getAllByRole('button');
       await userEvent.click(elements[0]);
       expect(mockNavigate).toHaveBeenCalled();
     });
 
     test('Then if the submit button is clicked, the updateGuitar function should be called', async () => {
+      preparationTest('edit');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
+
       const editInputs = screen.getAllByRole('textbox');
       await userEvent.type(editInputs[0], '-edit');
       await userEvent.type(editInputs[1], '-edit');
-      await userEvent.type(editInputs[2], '-edit');
       await userEvent.type(editInputs[3], '-edit');
       await userEvent.type(editInputs[4], '-edit');
 
       const editRadioInputs = screen.getAllByRole('radio');
       await userEvent.click(editRadioInputs[0]);
 
-      const input = screen.getByRole('spinbutton');
-      await userEvent.type(input, '0');
+      const editPriceInput = screen.getByRole('spinbutton');
+      await userEvent.type(editPriceInput, '0');
 
       const buttons = screen.getAllByRole('button');
       act(() => {
@@ -149,34 +158,34 @@ describe('Given the GuitarForm component', () => {
       );
     });
 
-    test('Then if the submit button is clicked, and a new picture is not upload, the updateGuitar function should be called with the original picture value', async () => {
+    test('Then if the submit button is clicked, and a new picture is upload, the updateGuitar function should be called with the new picture', async () => {
+      preparationTest('edit');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-      const locationEditForm = {
-        state: {
-          guitarProps: {
-            id: '1',
-            brand: 'testBrand',
-            modelGuitar: 'testModel',
-            picture: 'testPicture',
-            style: 'Electric',
-            material: 'testMaterial',
-            price: 1,
-            description: 'testDescription',
-          } as unknown as GuitarStructure,
-          actionProps: 'edit',
-        },
-      };
 
-      (useLocation as jest.Mock).mockReturnValue(locationEditForm);
+      const createInputs = screen.getAllByRole('textbox');
+      await userEvent.type(createInputs[0], 'brand-create');
+      await userEvent.type(createInputs[1], 'modelGuitar-create');
+      await userEvent.type(createInputs[3], 'material-create');
+      await userEvent.type(createInputs[4], 'description-create');
 
       const inputPicture = screen.getByLabelText('Upload picture');
 
-      await userEvent.upload(
-        inputPicture,
-        new File(['test'], 'test.png', {
-          type: 'image/png',
-        })
-      );
+      act(() => {
+        userEvent.upload(
+          inputPicture,
+          new File(['test'], 'test.png', {
+            type: 'image/png',
+          })
+        );
+      });
+
+      const createRadioInputs = screen.getAllByRole('radio');
+      act(() => {
+        fireEvent.click(createRadioInputs[0]);
+      });
+
+      const createPriceInput = screen.getByRole('spinbutton');
+      await userEvent.type(createPriceInput, '100');
 
       const buttons = screen.getAllByRole('button');
       await act(() => {
@@ -187,6 +196,7 @@ describe('Given the GuitarForm component', () => {
     });
 
     test('Then, if the edit button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+      preparationTest('edit');
       jest.useFakeTimers();
       const buttons = screen.getAllByRole('button');
       act(() => {
@@ -199,42 +209,10 @@ describe('Given the GuitarForm component', () => {
   });
 
   describe('When the action is Create and the user complete the Create Guitar form', () => {
-    const preparationCreateTest = (action: string) => {
-      (useGuitars as jest.Mock).mockReturnValue({
-        updateGuitar: jest.fn(),
-        createGuitar: jest.fn(),
-      });
-
-      const locationCreateForm = {
-        state: {
-          guitarProps: {
-            id: '1',
-            brand: 'testBrand',
-            modelGuitar: 'testModel',
-            picture: 'testPicture',
-            style: 'testStyle',
-            material: 'testMaterial',
-            price: 1,
-            description: 'testDescription',
-          } as unknown as GuitarStructure,
-          actionProps: action,
-        },
-      };
-
-      (useLocation as jest.Mock).mockReturnValue(locationCreateForm);
-
-      render(
-        <Provider store={store}>
-          <Router>
-            <GuitarForm></GuitarForm>
-          </Router>
-        </Provider>
-      );
-    };
-
     test('Then if the submit button is clicked, the createGuitar function should be called', async () => {
-      preparationCreateTest('create');
+      preparationTest('create');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
+
       const createInputs = screen.getAllByRole('textbox');
       await userEvent.type(createInputs[0], 'brand-create');
       await userEvent.type(createInputs[1], 'modelGuitar-create');
@@ -243,7 +221,9 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createInputs[4], 'description-create');
 
       const createRadioInputs = screen.getAllByRole('radio');
-      await userEvent.click(createRadioInputs[0]);
+      act(() => {
+        fireEvent.click(createRadioInputs[0]);
+      });
 
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '100');
@@ -264,13 +244,38 @@ describe('Given the GuitarForm component', () => {
       });
     });
 
-    test.skip('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
-      preparationCreateTest('create');
-      jest.useFakeTimers();
-      const buttons = screen.getAllByRole('button');
+    test('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+      preparationTest('create');
+      const createInputs = screen.getAllByRole('textbox');
+      await userEvent.type(createInputs[0], 'brand-create');
+      await userEvent.type(createInputs[1], 'modelGuitar-create');
+      await userEvent.type(createInputs[3], 'material-create');
+      await userEvent.type(createInputs[4], 'description-create');
+
+      const inputPicture = screen.getByLabelText('Upload picture');
+
       await act(() => {
+        userEvent.upload(
+          inputPicture,
+          new File(['test'], 'test.png', {
+            type: 'image/png',
+          })
+        );
+      });
+
+      const createRadioInputs = screen.getAllByRole('radio');
+      await act(() => {
+        fireEvent.click(createRadioInputs[0]);
+      });
+
+      const createPriceInput = screen.getByRole('spinbutton');
+      await userEvent.type(createPriceInput, '100');
+
+      const buttons = screen.getAllByRole('button');
+      act(() => {
+        jest.useFakeTimers();
         fireEvent.click(buttons[1]);
-        jest.advanceTimersByTime(2100);
+        jest.advanceTimersByTime(2200);
       });
       expect(mockNavigate).toHaveBeenCalled();
       jest.useRealTimers();
