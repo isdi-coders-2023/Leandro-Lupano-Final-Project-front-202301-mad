@@ -86,7 +86,7 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
     });
   });
 
-  describe('When the update action is called', () => {
+  describe('When the updateGuitarSlice action is called', () => {
     test('Then, if the initial state allGuitars is an Array of mockPayload and mockGuitar, it should return the allGuitar state with the mockUpdateAction', () => {
       mockInitialState = {
         allGuitars: [mockPayload, mockGuitar],
@@ -96,7 +96,7 @@ describe('Given the guitarSlice with payload and initial state mocked', () => {
       };
 
       const mockUpdateAction: PayloadAction<GuitarStructure> = {
-        type: 'guitar/update',
+        type: 'guitar/updateGuitarSlice',
         payload: {
           id: '3',
           brand: 'test3-UPDATE',

@@ -33,7 +33,7 @@ const guitarSlice = createSlice({
       state.allGuitars = [...state.allGuitars, action.payload];
     },
 
-    update(state, action: PayloadAction<GuitarStructure>) {
+    updateGuitarSlice(state, action: PayloadAction<GuitarStructure>) {
       const actualInfo = [...state.allGuitars];
 
       state.allGuitars = actualInfo.map((item) =>
@@ -63,7 +63,7 @@ export const {
   read,
   readId,
   create,
-  update,
+  updateGuitarSlice,
   deleteGuitar,
   pageUpdate,
   styleUpdate,
