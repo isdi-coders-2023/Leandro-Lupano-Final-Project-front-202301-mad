@@ -16,6 +16,7 @@ export default function DeleteGuitar() {
 
   const handlerDeleteGuitar = () => {
     deleteOneGuitar(guitarId);
+    navigate('/products');
   };
 
   const navigate = useNavigate();
