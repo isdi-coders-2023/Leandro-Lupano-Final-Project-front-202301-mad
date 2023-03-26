@@ -10,12 +10,25 @@ import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 import Login from './login';
 
 jest.mock('../../hooks/use.users');
+jest.mock('../products/products');
+
+const mockNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
 
 describe('Given Login component', () => {
   beforeEach(async () => {
     await act(async () => {
       (useUsers as jest.Mock).mockReturnValue({
         loginUser: jest.fn(),
+        usersState: {
+          userLogged: {
+            token: 'tokenTest',
+          },
+        },
       });
       render(
         <Provider store={store}>

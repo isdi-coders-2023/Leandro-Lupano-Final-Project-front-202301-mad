@@ -10,9 +10,9 @@ export default function ErrorPage() {
       </div>
       <img src="./images/guitar-player.png" alt="Guitar player"></img>
       <p>
-        Let`s rock to
-        <Link to="./home">
-          <span> home page</span>
+        Let`s rock with
+        <Link to="/login">
+          <span> your account</span>
         </Link>
       </p>
     </section>

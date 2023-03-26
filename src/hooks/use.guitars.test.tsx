@@ -23,6 +23,9 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
   let falseToken: () => void;
   let trueToken: () => void;
 
+  let actualPageTest: number;
+  let actualStyleTest: string;
+
   beforeEach(async () => {
     mockGuitarRepo = {
       read: jest.fn(),
@@ -87,12 +90,18 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
         createGuitar,
         updateGuitar,
         deleteOneGuitar,
+        changePage,
+        changeStyle,
+        guitarsState,
       } = useGuitars(mockGuitarRepo);
+
+      actualPageTest = guitarsState.actualPage;
+      actualStyleTest = guitarsState.actualStyle;
 
       return (
         <>
           <button onClick={() => loginUser(mockUserPayload)}>login</button>
-          <button onClick={() => loadGuitars()}>loadGuitars</button>
+          <button onClick={() => loadGuitars(1, 'All')}>loadGuitars</button>
           <button onClick={() => loadOneGuitar('mockIdGuitar')}>
             loadOneGuitar
           </button>
@@ -107,6 +116,9 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
           <button onClick={() => deleteOneGuitar('mockIdGuitar')}>
             deleteOneGuitar
           </button>
+          <button onClick={() => changePage(0)}>changePage</button>
+          <button onClick={() => changePage(-1)}>changePage</button>
+          <button onClick={() => changeStyle('All')}>changeStyle</button>
         </>
       );
     };
@@ -224,6 +236,55 @@ describe('Given the useGuitars Custom Hook, a GuitarApiRepo mock and a TestGuita
       await act(async () => userEvent.click(elements[5]));
 
       expect(mockGuitarRepo.delete).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('When the TestGuitarComponent is rendered and the changePage button is clicked', () => {
+    test('Then, if there is userToken and the pageChange is 0, the actualPage should be 1', async () => {
+      const elements = await screen.findAllByRole('button');
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[6]));
+
+      expect(actualPageTest).toBe(1);
+    });
+
+    test('Then, if there is userToken and the pageChange is -1, the actualPage should be 1', async () => {
+      const elements = await screen.findAllByRole('button');
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[7]));
+
+      expect(actualPageTest).toBe(1);
+    });
+
+    test('Then, if there is no userToken, the actualPage should not change', async () => {
+      const elements = await screen.findAllByRole('button');
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[6]));
+
+      expect(actualPageTest).toBe(1);
+    });
+  });
+
+  describe('When the TestGuitarComponent is rendered and the changeStyle button is clicked', () => {
+    test('Then, if there is userToken and the styleChange is Electric, the actualStyle should be Electric', async () => {
+      const elements = await screen.findAllByRole('button');
+      trueToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[8]));
+
+      expect(actualStyleTest).toBe('All');
+    });
+
+    test('Then, if there is no userToken, the actualStyle should not change', async () => {
+      const elements = await screen.findAllByRole('button');
+      falseToken();
+      await act(async () => userEvent.click(elements[0]));
+      await act(async () => userEvent.click(elements[8]));
+
+      expect(actualStyleTest).toBe('All');
     });
   });
 });

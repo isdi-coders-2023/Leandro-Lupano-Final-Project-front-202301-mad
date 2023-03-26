@@ -48,10 +48,26 @@
     padding: 0.2rem 0.6rem;
   }
 
+  .guitarCardMoreDetails:hover {
+    background-color: rgb(33, 37, 41, 75%);
+  }
+
+  .guitarCardMoreDetails:active {
+    transform: scale(1.1);
+  }
+
   .guitarCardButtonsAdd {
     img {
       width: 40px;
       cursor: pointer;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    img:active {
+      transform: scale(1.2);
     }
   }
 
@@ -59,6 +75,14 @@
     img {
       width: 30px;
       cursor: pointer;
+    }
+
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    img:active {
+      transform: scale(1.2);
     }
   }
 }

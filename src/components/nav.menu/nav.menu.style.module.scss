@@ -47,6 +47,10 @@
       background-color: rgb(33, 37, 41, 95%);
       border-radius: 1rem;
     }
+
+    li:active {
+      background-color: rgb(33, 37, 41, 50%);
+    }
   }
 }
 
@@ -56,7 +60,7 @@
     justify-content: space-between;
 
     .navMenuLogin {
-      width: 70px;
+      width: 60px;
       cursor: pointer;
       margin: 1rem;
     }
@@ -88,6 +92,10 @@
       li:hover {
         background-color: rgb(116, 116, 116, 99%);
         border-radius: 1rem;
+      }
+
+      li:active {
+        background-color: rgb(116, 116, 116, 50%);
       }
     }
   }

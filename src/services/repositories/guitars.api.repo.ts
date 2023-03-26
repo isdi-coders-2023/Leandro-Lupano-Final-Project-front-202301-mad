@@ -14,25 +14,20 @@ export interface GuitarsRepo<T> {
 
 export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   url: string;
-  actualPage: number;
 
   constructor() {
     this.url = 'http://localhost:5000/guitars';
-    this.actualPage = 1;
   }
 
   async read(
     token: string,
-    pageChange: number,
-    style: string
+    pageLoad: number,
+    styleLoad: string
   ): Promise<GuitarServerResponse> {
-    this.actualPage = this.actualPage + pageChange;
+    const pageString = pageLoad.toString();
 
-    if (this.actualPage === 0 || pageChange === 0) this.actualPage = 1;
-
-    const pageString = this.actualPage.toString();
-
-    const url = this.url + '/products?style=' + style + '&page=' + pageString;
+    const url =
+      this.url + '/products?style=' + styleLoad + '&page=' + pageString;
 
     const resp = await fetch(url, {
       method: 'GET',

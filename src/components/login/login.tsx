@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 
-import { SyntheticEvent, useMemo } from 'react';
+import { SyntheticEvent, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
@@ -10,7 +11,9 @@ import style from './login.style.module.scss';
 export default function Login() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
-  const { loginUser } = useUsers(userRepo);
+  const { usersState, loginUser } = useUsers(userRepo);
+
+  const navigate = useNavigate();
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -26,6 +29,10 @@ export default function Login() {
 
     formLoginUser.reset();
   };
+
+  useEffect(() => {
+    if (usersState.userLogged.token !== undefined) navigate('/products');
+  }, [navigate, usersState.userLogged.token]);
 
   return (
     <section className={style.login}>
@@ -48,6 +55,16 @@ export default function Login() {
           />
 
           <button type="submit">Login</button>
+
+          <p className={style.loginBodyMessage}>
+            New user?
+            <Link to="/home">
+              <span className={style.loginBodyMessageLink}>
+                {' '}
+                Create an account here
+              </span>
+            </Link>
+          </p>
         </form>
       </div>
     </section>

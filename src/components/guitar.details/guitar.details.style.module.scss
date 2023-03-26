@@ -20,10 +20,18 @@
       background-color: rgb(33, 37, 41, 95%);
       color: white;
       font-family: 'Lato', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1rem;
       cursor: pointer;
       border-radius: 0.5rem;
       padding: 0.4rem 0.8rem;
+    }
+
+    .guitarDetailsHeaderBackButton:hover {
+      background-color: rgb(33, 37, 41, 75%);
+    }
+
+    .guitarDetailsHeaderBackButton:active {
+      transform: scale(1.1);
     }
   }
 
@@ -72,10 +80,26 @@
             padding: 0.3rem 0.8rem;
           }
 
+          .guitarDetailsBodyInfoButtonsEdit:hover {
+            background-color: rgb(33, 37, 41, 75%);
+          }
+
+          .guitarDetailsBodyInfoButtonsEdit:active {
+            transform: scale(1.1);
+          }
+
           .guitarDetailsBodyInfoButtonsDelete {
             img {
               width: 50px;
               cursor: pointer;
+            }
+
+            img:hover {
+              transform: scale(1.1);
+            }
+
+            img:active {
+              transform: scale(1.2);
             }
           }
         }
@@ -124,6 +148,10 @@
     .guitarDetailsHeader {
       .guitarDetailsHeaderTitle {
         font-size: 2rem;
+      }
+
+      .guitarDetailsHeaderBackButton {
+        font-size: 1.2rem;
       }
     }
 

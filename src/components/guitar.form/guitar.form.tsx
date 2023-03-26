@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { SyntheticEvent, useMemo } from 'react';
+import { SyntheticEvent, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useGuitars } from '../../hooks/use.guitars';
 import { GuitarStructure } from '../../models/guitar';
@@ -13,16 +13,19 @@ export default function GuitarForm() {
   const guitar: GuitarStructure = guitarProps;
   const action: string = actionProps;
 
-  let formAction: boolean;
-  formAction = action === 'edit' ? true : false;
+  let isEditForm: boolean;
+  isEditForm = action === 'edit' ? true : false;
 
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
   const { updateGuitar, createGuitar } = useGuitars(guitarRepo);
 
   const navigate = useNavigate();
+
   const handlerNavigateBack = () => {
     navigate(-1);
   };
+
+  const [isSubmit, setIsSubmit] = useState(false);
 
   const handleEditSubmit = async (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -60,6 +63,13 @@ export default function GuitarForm() {
 
     updateGuitar(guitarId, guitarToEdit);
 
+    setIsSubmit(true);
+
+    setTimeout(() => {
+      setIsSubmit(false);
+      navigate('/products');
+    }, 2000);
+
     formEditGuitar.reset();
   };
 
@@ -82,7 +92,7 @@ export default function GuitarForm() {
       brand: (formCreateGuitar.elements[0] as HTMLFormElement).value,
       modelGuitar: (formCreateGuitar.elements[1] as HTMLFormElement).value,
       picture: urlPicture,
-      style: (formCreateGuitar.elements.namedItem('style') as HTMLInputElement)
+      style: (formCreateGuitar.elements.namedItem('style') as HTMLFormElement)
         .value,
       material: (formCreateGuitar.elements[5] as HTMLFormElement).value,
       price: Number((formCreateGuitar.elements[6] as HTMLFormElement).value),
@@ -91,12 +101,19 @@ export default function GuitarForm() {
 
     createGuitar(guitarToCreate);
 
+    setIsSubmit(true);
+
+    setTimeout(() => {
+      setIsSubmit(false);
+      navigate('/products');
+    }, 2000);
+
     formCreateGuitar.reset();
   };
 
   return (
     <>
-      {formAction ? (
+      {isEditForm ? (
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
             <h2>Edit guitar</h2>
@@ -182,10 +199,9 @@ export default function GuitarForm() {
                 />
               </label>
 
-              <label>
+              <label className={style.guitarFormBodyDescription}>
                 Description:
-                <input
-                  type="text"
+                <textarea
                   name="description"
                   defaultValue={guitar.description}
                   required
@@ -195,11 +211,18 @@ export default function GuitarForm() {
               <button type="submit">Edit</button>
             </form>
           </div>
+          <p
+            className={
+              isSubmit ? style.guitarFormMessage : style.guitarFormMessageHidden
+            }
+          >
+            The guitar was edited successfully ✅
+          </p>
         </section>
       ) : (
         <section className={style.guitarForm}>
           <div className={style.guitarFormHeader}>
-            <h2>Create a new guitar</h2>
+            <h2>New guitar</h2>
 
             <button
               className={style.guitarFormHeaderBackButton}
@@ -213,7 +236,12 @@ export default function GuitarForm() {
             <form onSubmit={handleCreateSubmit}>
               <label>
                 Brand:
-                <input type="text" name="brand" placeholder="Brand:" required />
+                <input
+                  type="text"
+                  name="brand"
+                  placeholder="Ex.: Gibson"
+                  required
+                />
               </label>
 
               <label>
@@ -221,7 +249,7 @@ export default function GuitarForm() {
                 <input
                   type="text"
                   name="modelGuitar"
-                  placeholder="Model:"
+                  placeholder="Ex.: Les Paul"
                   required
                 />
               </label>
@@ -236,7 +264,7 @@ export default function GuitarForm() {
                   id="guitarFormBodyPicture"
                   type="file"
                   name="picture"
-                  placeholder="Upload picture:"
+                  placeholder="File"
                   role="textbox"
                   required
                 />
@@ -251,7 +279,6 @@ export default function GuitarForm() {
                     name="style"
                     value="Electric"
                     defaultChecked
-                    required
                   />
                 </label>
                 <label className={style.guitarFormBodyStyleOptions}>
@@ -265,7 +292,7 @@ export default function GuitarForm() {
                 <input
                   type="text"
                   name="material"
-                  placeholder="Material:"
+                  placeholder="Ex.: Mahogany"
                   required
                 />
               </label>
@@ -275,17 +302,16 @@ export default function GuitarForm() {
                 <input
                   type="number"
                   name="price"
-                  placeholder="Price:"
+                  placeholder="Ex.: 2200"
                   required
                 />
               </label>
 
-              <label>
+              <label className={style.guitarFormBodyDescription}>
                 Description:
-                <input
-                  type="text"
+                <textarea
                   name="description"
-                  placeholder="Description:"
+                  placeholder="Ex.: This guitar is one of the..."
                   required
                 />
               </label>
@@ -293,6 +319,13 @@ export default function GuitarForm() {
               <button type="submit">Create</button>
             </form>
           </div>
+          <p
+            className={
+              isSubmit ? style.guitarFormMessage : style.guitarFormMessageHidden
+            }
+          >
+            The guitar was created successfully ✅
+          </p>
         </section>
       )}
     </>

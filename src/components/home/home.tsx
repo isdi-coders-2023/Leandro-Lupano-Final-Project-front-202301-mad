@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import { SyntheticEvent, useMemo } from 'react';
+import { SyntheticEvent, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
@@ -10,6 +11,10 @@ export default function Home() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
   const { registerUser } = useUsers(userRepo);
+
+  const navigate = useNavigate();
+
+  const [isRegister, setIsRegister] = useState(false);
 
   const handleSubmit = (ev: SyntheticEvent<HTMLFormElement>) => {
     ev.preventDefault();
@@ -23,6 +28,13 @@ export default function Home() {
     };
 
     registerUser(newUser);
+
+    setIsRegister(true);
+
+    setTimeout(() => {
+      setIsRegister(false);
+      navigate('/login');
+    }, 2000);
 
     formNewUser.reset();
   };
@@ -59,9 +71,29 @@ export default function Home() {
             />
 
             <button type="submit">Register</button>
+
+            <p className={style.homeBodyFormLoginMessage}>
+              Already have an account?
+              <Link to="/login">
+                <span className={style.homeBodyFormLoginMessageLink}>
+                  {' '}
+                  Login here
+                </span>
+              </Link>
+            </p>
           </form>
         </div>
       </div>
+
+      <p
+        className={
+          isRegister
+            ? style.homeRegisterMessage
+            : style.homeRegisterMessageHidden
+        }
+      >
+        Registration completed successfully ✅
+      </p>
     </section>
   );
 }

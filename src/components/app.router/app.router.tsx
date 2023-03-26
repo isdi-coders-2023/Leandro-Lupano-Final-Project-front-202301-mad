@@ -42,7 +42,7 @@ export function AppRouter() {
           element={<About></About>}
         ></Route>
         {/* EXTRA TEMP. FUTURE ROUTE: <Route
-          path={navMenuOptionsArray[3].path}
+          path={'/users'}
           element={<Users></Users>}
         ></Route> */}
         <Route

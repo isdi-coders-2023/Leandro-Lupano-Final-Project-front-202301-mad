@@ -34,6 +34,14 @@
     align-items: center;
     gap: 1rem;
 
+    img:hover {
+      transform: scale(1.1);
+    }
+
+    img:active {
+      transform: scale(1.2);
+    }
+
     .productsButtonsPrev,
     .productsButtonsNext {
       width: 55px;

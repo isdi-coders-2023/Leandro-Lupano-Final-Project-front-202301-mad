@@ -6,20 +6,29 @@ import { GuitarStructure } from '../../models/guitar';
 import { Link } from 'react-router-dom';
 import { FilterGuitar } from '../filter.guitar/filter.guitar';
 import style from './products.style.module.scss';
+import { useUsers } from '../../hooks/use.users';
+import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 
 export default function Products() {
+  const userRepo = useMemo(() => new UsersApiRepo(), []);
+
+  const { usersState } = useUsers(userRepo);
+
+  const isAdmin: boolean =
+    usersState.userLogged.role === 'Admin' ? true : false;
+
   const guitarRepo = useMemo(() => new GuitarsApiRepo(), []);
 
-  const { guitarsState, loadGuitars } = useGuitars(guitarRepo);
+  const { guitarsState, loadGuitars, changePage } = useGuitars(guitarRepo);
 
   useEffect(() => {
-    loadGuitars();
-  }, [loadGuitars]);
+    loadGuitars(guitarsState.actualPage, guitarsState.actualStyle);
+  }, [loadGuitars, guitarsState.actualPage, guitarsState.actualStyle]);
 
   const allGuitarsArray = guitarsState.allGuitars;
 
   const handlePage = (pageChange: number) => {
-    loadGuitars(pageChange);
+    changePage(pageChange);
   };
 
   return (
@@ -53,14 +62,18 @@ export default function Products() {
           <img src="./images/prev-button.png" alt="Previous-button" />
         </button>
 
-        <Link
-          to="/guitar/form"
-          state={{ guitarProps: {}, actionProps: 'create' }}
-        >
-          <button className={style.productsButtonsCreate}>
-            <img src="./images/create-button.png" alt="Create-button" />
-          </button>
-        </Link>
+        {isAdmin ? (
+          <Link
+            to="/guitar/form"
+            state={{ guitarProps: {}, actionProps: 'create' }}
+          >
+            <button className={style.productsButtonsCreate}>
+              <img src="./images/create-button.png" alt="Create-button" />
+            </button>
+          </Link>
+        ) : (
+          <div></div>
+        )}
 
         <button
           className={style.productsButtonsNext}

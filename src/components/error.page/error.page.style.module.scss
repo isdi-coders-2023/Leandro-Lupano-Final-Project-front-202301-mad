@@ -31,12 +31,13 @@
 
   p {
     font-family: 'Raleway', sans-serif;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
 
     span {
       font-weight: bold;
       padding: 0rem 0rem 0.2rem;
-      border-bottom: 3px solid black;
+      color: rgb(0, 0, 238, 70%);
+      cursor: pointer;
     }
   }
 }

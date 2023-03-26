@@ -1,5 +1,4 @@
 /* eslint-disable testing-library/no-unnecessary-act */
-/* eslint-disable testing-library/no-render-in-setup */
 import { act, render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -14,44 +13,45 @@ jest.mock('../../hooks/use.guitars');
 
 describe('Given the FilterGuitar component', () => {
   describe('When the component is rendered', () => {
-    beforeEach(async () => {
-      await act(async () => {
-        (useGuitars as jest.Mock).mockReturnValue({
-          loadGuitars: jest.fn(),
-        });
-
-        render(
-          <Provider store={store}>
-            <Router>
-              <FilterGuitar></FilterGuitar>
-            </Router>
-          </Provider>
-        );
+    const testPreparation = (style: string) => {
+      (useGuitars as jest.Mock).mockReturnValue({
+        changeStyle: jest.fn(),
+        guitarsState: {
+          actualStyle: style,
+        },
       });
-    });
 
-    test('Then if the user click on All Filter Button, the loadGuitar function should be called', async () => {
+      render(
+        <Provider store={store}>
+          <Router>
+            <FilterGuitar></FilterGuitar>
+          </Router>
+        </Provider>
+      );
+    };
+
+    test('Then if the user click on All Filter Button, the changeStyle function should be called', async () => {
+      testPreparation('All');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[0]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
 
-    test('Then if the user click on Electric Filter Button, the loadGuitar function should be called', async () => {
+    test('Then if the user click on Electric Filter Button, the changeStyle function should be called', async () => {
+      testPreparation('Electric');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[1]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
 
-    test('Then if the user click on Acoustic Filter Button, the loadGuitar function should be called', async () => {
+    test('Then if the user click on Acoustic Filter Button, the changeStyle function should be called', async () => {
+      testPreparation('Acoustic');
       const guitarsMockRepo = {} as unknown as GuitarsApiRepo;
-
       const elements = screen.getAllByRole('button');
       await act(async () => userEvent.click(elements[2]));
-      expect(useGuitars(guitarsMockRepo).loadGuitars).toHaveBeenCalled();
+      expect(useGuitars(guitarsMockRepo).changeStyle).toHaveBeenCalled();
     });
   });
 });

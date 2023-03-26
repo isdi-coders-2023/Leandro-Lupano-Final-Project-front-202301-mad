@@ -61,6 +61,30 @@ describe('Given the userSlice with payload and initial state mocked', () => {
     });
   });
 
+  describe('When the logout action is called', () => {
+    test('Then, if the initial state userLogged is completed, it should return undefined in the userLogged token property of the state', () => {
+      const mockInitialStateLogout = {
+        userLogged: {
+          token: 'testToken',
+        } as UserStructure,
+        allUsers: [],
+        user: {} as UserStructure,
+      };
+
+      const mockLogoutAction = {
+        type: 'user/logout',
+      };
+      const result = userReducer(mockInitialStateLogout, mockLogoutAction);
+      expect(result).toEqual({
+        userLogged: {
+          token: undefined,
+        },
+        allUsers: [],
+        user: {},
+      });
+    });
+  });
+
   describe('When the readId action is called', () => {
     test('Then, if the initial state user is empty, it should return the payload in the user property of the state', () => {
       const mockReadIdAction: PayloadAction<UserStructure> = {
@@ -76,8 +100,8 @@ describe('Given the userSlice with payload and initial state mocked', () => {
     });
   });
 
-  describe('When the update action is called', () => {
-    test('Then, if the initial state allUsers is an Array with mockUser and mockPayload, it should return the update with mockUpdateAction', () => {
+  describe('When the updateUser action is called', () => {
+    test('Then, if the initial state allUsers is an Array with mockUser and mockPayload, it should return the updateUser with mockUpdateAction', () => {
       mockInitialState = {
         userLogged: {} as UserStructure,
         allUsers: [mockUser, mockPayload],
@@ -85,7 +109,7 @@ describe('Given the userSlice with payload and initial state mocked', () => {
       };
 
       const mockUpdateAction: PayloadAction<UserStructure> = {
-        type: 'user/update',
+        type: 'user/updateUser',
         payload: {
           username: 'Test3-UPDATE',
           email: 'test3',

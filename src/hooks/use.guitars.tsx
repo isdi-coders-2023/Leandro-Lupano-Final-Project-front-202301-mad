@@ -7,31 +7,60 @@ import {
   read,
   readId,
   create,
-  update,
+  updateGuitarSlice,
   deleteGuitar,
+  pageUpdate,
+  styleUpdate,
 } from '../reducers/guitar.slice';
 
 export function useGuitars(repo: GuitarsApiRepo) {
   const usersState = useSelector((state: RootState) => state.users);
   const guitarsState = useSelector((state: RootState) => state.guitars);
 
-  const guitarsDispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
 
   const loadGuitars = useCallback(
-    async (pageChange: number = 0, style: string = 'All') => {
+    async (pageLoad: number, styleLoad: string) => {
       try {
         const userToken = usersState.userLogged.token;
         if (!userToken) throw new Error('Not authorized');
 
-        const guitarsInfo = await repo.read(userToken, pageChange, style);
+        const guitarsInfo = await repo.read(userToken, pageLoad, styleLoad);
 
-        guitarsDispatch(read(guitarsInfo.results));
+        dispatch(read(guitarsInfo.results));
       } catch (error) {
         console.log((error as Error).message);
       }
     },
-    [guitarsDispatch, repo, usersState.userLogged.token]
+    [dispatch, repo, usersState.userLogged.token]
   );
+
+  const changePage = (pageChange: number) => {
+    try {
+      const userToken = usersState.userLogged.token;
+      if (!userToken) throw new Error('Not authorized');
+
+      let newPage = guitarsState.actualPage + pageChange;
+
+      if (newPage === 0) newPage = 1;
+
+      dispatch(pageUpdate(newPage));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
+
+  const changeStyle = (styleChange: string) => {
+    try {
+      const userToken = usersState.userLogged.token;
+      if (!userToken) throw new Error('Not authorized');
+
+      dispatch(pageUpdate(1));
+      dispatch(styleUpdate(styleChange));
+    } catch (error) {
+      console.log((error as Error).message);
+    }
+  };
 
   const loadOneGuitar = async (idGuitar: GuitarStructure['id']) => {
     try {
@@ -40,7 +69,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
 
       const guitarInfo = await repo.readId(userToken, idGuitar);
 
-      guitarsDispatch(readId(guitarInfo.results[0]));
+      dispatch(readId(guitarInfo.results[0]));
     } catch (error) {
       console.log((error as Error).message);
     }
@@ -53,7 +82,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
 
       const guitarInfo = await repo.create(userToken, infoGuitar);
 
-      guitarsDispatch(create(guitarInfo.results[0]));
+      dispatch(create(guitarInfo.results[0]));
     } catch (error) {
       console.log((error as Error).message);
     }
@@ -69,7 +98,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
 
       const guitarInfo = await repo.update(userToken, idGuitar, infoGuitar);
 
-      guitarsDispatch(update(guitarInfo.results[0]));
+      dispatch(updateGuitarSlice(guitarInfo.results[0]));
     } catch (error) {
       console.log((error as Error).message);
     }
@@ -84,7 +113,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
 
       await repo.delete(userToken, guitarId);
 
-      guitarsDispatch(deleteGuitar(guitarId));
+      dispatch(deleteGuitar(guitarId));
     } catch (error) {
       console.log((error as Error).message);
     }
@@ -97,5 +126,7 @@ export function useGuitars(repo: GuitarsApiRepo) {
     createGuitar,
     updateGuitar,
     deleteOneGuitar,
+    changePage,
+    changeStyle,
   };
 }
