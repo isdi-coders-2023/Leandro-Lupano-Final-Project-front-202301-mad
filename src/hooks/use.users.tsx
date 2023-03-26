@@ -30,7 +30,7 @@ export function useUsers(repo: UsersApiRepo) {
     }
   };
 
-  const logoutUser = async () => {
+  const logoutUser = () => {
     dispatch(logout());
     dispatch(pageUpdate(1));
     dispatch(styleUpdate('All'));
