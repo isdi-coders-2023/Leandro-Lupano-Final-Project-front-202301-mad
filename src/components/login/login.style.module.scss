@@ -49,8 +49,21 @@
         padding: 0.2rem;
         cursor: pointer;
       }
+
       button:active {
         background-color: rgb(116, 116, 116, 85%);
+      }
+
+      .loginBodyMessage {
+        display: inline-block;
+        font-family: 'Raleway', sans-serif;
+        color: rgb(33, 37, 41, 95%);
+        font-size: 0.9rem;
+
+        .loginBodyMessageLink {
+          color: rgb(0, 0, 238, 90%);
+          cursor: pointer;
+        }
       }
     }
   }

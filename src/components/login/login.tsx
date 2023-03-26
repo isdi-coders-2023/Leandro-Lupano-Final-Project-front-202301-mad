@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-redundant-roles */
 
 import { SyntheticEvent, useEffect, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
@@ -55,6 +55,16 @@ export default function Login() {
           />
 
           <button type="submit">Login</button>
+
+          <p className={style.loginBodyMessage}>
+            New user?
+            <Link to="/home">
+              <span className={style.loginBodyMessageLink}>
+                {' '}
+                Create an account here
+              </span>
+            </Link>
+          </p>
         </form>
       </div>
     </section>
