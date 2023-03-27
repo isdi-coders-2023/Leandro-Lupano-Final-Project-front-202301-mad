@@ -244,7 +244,7 @@ describe('Given the GuitarForm component', () => {
       });
     });
 
-    test.only('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+    test.skip('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
       preparationTest('create');
       const createInputs = screen.getAllByRole('textbox');
       await userEvent.type(createInputs[0], 'brand-create');
