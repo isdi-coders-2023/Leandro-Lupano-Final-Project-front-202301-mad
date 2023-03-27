@@ -140,7 +140,7 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(editPriceInput, '0');
 
       const buttons = screen.getAllByRole('button');
-      act(() => {
+      await act(async () => {
         fireEvent.click(buttons[1]);
       });
 
@@ -170,7 +170,7 @@ describe('Given the GuitarForm component', () => {
 
       const inputPicture = screen.getByLabelText('Upload picture');
 
-      act(() => {
+      await act(async () => {
         userEvent.upload(
           inputPicture,
           new File(['test'], 'test.png', {
@@ -180,7 +180,7 @@ describe('Given the GuitarForm component', () => {
       });
 
       const createRadioInputs = screen.getAllByRole('radio');
-      act(() => {
+      await act(async () => {
         fireEvent.click(createRadioInputs[0]);
       });
 
@@ -188,7 +188,7 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createPriceInput, '100');
 
       const buttons = screen.getAllByRole('button');
-      await act(() => {
+      await act(async () => {
         fireEvent.click(buttons[1]);
       });
 
@@ -199,7 +199,7 @@ describe('Given the GuitarForm component', () => {
       preparationTest('edit');
       jest.useFakeTimers();
       const buttons = screen.getAllByRole('button');
-      act(() => {
+      await act(async () => {
         fireEvent.click(buttons[1]);
         jest.advanceTimersByTime(2100);
       });
@@ -221,7 +221,7 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createInputs[4], 'description-create');
 
       const createRadioInputs = screen.getAllByRole('radio');
-      act(() => {
+      await act(async () => {
         fireEvent.click(createRadioInputs[0]);
       });
 
@@ -229,7 +229,7 @@ describe('Given the GuitarForm component', () => {
       await userEvent.type(createPriceInput, '100');
 
       const buttons = screen.getAllByRole('button');
-      await act(() => {
+      await act(async () => {
         fireEvent.click(buttons[1]);
       });
 
@@ -244,7 +244,7 @@ describe('Given the GuitarForm component', () => {
       });
     });
 
-    test.skip('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
+    test.only('Then, if the create button is clicked, after the setTimeout the mockNavigate function should be called', async () => {
       preparationTest('create');
       const createInputs = screen.getAllByRole('textbox');
       await userEvent.type(createInputs[0], 'brand-create');
@@ -254,7 +254,7 @@ describe('Given the GuitarForm component', () => {
 
       const inputPicture = screen.getByLabelText('Upload picture');
 
-      await act(() => {
+      await act(async () => {
         userEvent.upload(
           inputPicture,
           new File(['test'], 'test.png', {
@@ -264,16 +264,16 @@ describe('Given the GuitarForm component', () => {
       });
 
       const createRadioInputs = screen.getAllByRole('radio');
-      await act(() => {
+      await act(async () => {
         fireEvent.click(createRadioInputs[0]);
       });
 
       const createPriceInput = screen.getByRole('spinbutton');
       await userEvent.type(createPriceInput, '100');
 
+      jest.useFakeTimers();
       const buttons = screen.getAllByRole('button');
-      act(() => {
-        jest.useFakeTimers();
+      await act(async () => {
         fireEvent.click(buttons[1]);
         jest.advanceTimersByTime(2200);
       });
