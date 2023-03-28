@@ -1,10 +1,10 @@
 .deleteGuitar {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 3rem;
-  padding: 1rem 1rem 4rem;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  min-height: 75vh;
   width: 100%;
 
   .deleteGuitarTitle {
@@ -78,16 +78,16 @@
 
 @media screen and (min-width: 750px) {
   .deleteGuitar {
-    font-size: 1.3rem;
-    padding: 5rem 2rem 6rem;
+    // font-size: 1.3rem;
+    // padding: 5rem 2rem 6rem;
 
     .deleteGuitarTitle {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
     .deleteGuitarBody {
       img {
-        width: 180px;
+        width: 160px;
       }
 
       p {

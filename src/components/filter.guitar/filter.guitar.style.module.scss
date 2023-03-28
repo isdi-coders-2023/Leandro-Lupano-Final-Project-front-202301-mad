@@ -28,10 +28,10 @@
   transform: scale(1.1);
 }
 
-@media screen and (min-width: 750px) {
+@media screen and (min-width: 600px) {
   .filterOptionSelected,
   .filterOption {
-    font-size: 1.2rem;
+    font-size: 1rem;
     padding: 0.2rem 0.8rem;
     margin: 0rem 0.5rem;
     border-radius: 0.5rem;
