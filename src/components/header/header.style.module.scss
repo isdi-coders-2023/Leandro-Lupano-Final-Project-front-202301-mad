@@ -1,6 +1,6 @@
 .header {
   background-color: rgb(33, 37, 41, 95%);
-  height: 100px;
+  height: 15vh;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(1, 1fr);
@@ -13,7 +13,7 @@
     }
 
     .headerLogoImg {
-      width: 100px;
+      height: 15vh;
       cursor: pointer;
     }
   }

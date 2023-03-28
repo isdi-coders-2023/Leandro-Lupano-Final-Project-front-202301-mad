@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 2rem 1rem 9rem;
+  padding: 2rem 1rem;
+  min-height: 75vh;
 
   .loginHeader {
     display: flex;
@@ -25,14 +26,14 @@
       gap: 2rem;
 
       ::placeholder {
-        color: black;
+        color: rgb(33, 37, 41, 70%);
         font-size: 1.1rem;
         font-family: 'Lato', sans-serif;
       }
 
       input {
         background-color: white;
-        border: 2px solid black;
+        border: 2px solid rgb(33, 37, 41, 95%);
         border-radius: 0.7rem;
         padding: 0.5rem;
         width: 250px;
@@ -73,7 +74,6 @@
   .login {
     align-items: center;
     font-size: 1.1rem;
-    padding: 3rem 2rem 7rem;
 
     .loginHeader {
       align-items: center;

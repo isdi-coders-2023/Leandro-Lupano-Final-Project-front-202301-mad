@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   background-color: rgb(33, 37, 41, 95%);
-  padding: 1rem;
+  height: 10vh;
 
   .footerCopyright {
     font-family: 'Raleway', sans-serif;
@@ -32,11 +32,11 @@
   .footer {
     flex-direction: row;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 0rem 1rem;
 
     .footerPickLogo {
       display: flex;
-      width: 70px;
+      height: 9vh;
     }
 
     .footerFollowUs {
