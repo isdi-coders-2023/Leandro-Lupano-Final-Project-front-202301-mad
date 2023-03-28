@@ -8,8 +8,10 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 import Login from './login';
+import { useError } from '../../hooks/use.error';
 
 jest.mock('../../hooks/use.users');
+jest.mock('../../hooks/use.error');
 jest.mock('../products/products');
 
 const mockNavigate = jest.fn();
@@ -20,27 +22,33 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('Given Login component', () => {
-  beforeEach(async () => {
-    await act(async () => {
-      (useUsers as jest.Mock).mockReturnValue({
-        loginUser: jest.fn(),
-        usersState: {
-          userLogged: {
-            token: 'tokenTest',
-          },
-        },
-      });
-      render(
-        <Provider store={store}>
-          <Router>
-            <Login></Login>
-          </Router>
-        </Provider>
-      );
-    });
-  });
-
   describe('When the component is rendered', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        (useUsers as jest.Mock).mockReturnValue({
+          loginUser: jest.fn(),
+          usersState: {
+            userLogged: {
+              token: 'tokenTest',
+            },
+          },
+        });
+
+        (useError as jest.Mock).mockReturnValue({
+          errorState: {
+            errorStatus: false,
+          },
+        });
+
+        render(
+          <Provider store={store}>
+            <Router>
+              <Login></Login>
+            </Router>
+          </Provider>
+        );
+      });
+    });
     test('Then the heading <h2> should be in the document', () => {
       const element = screen.getByRole('heading');
       expect(element).toBeInTheDocument();
@@ -60,10 +68,8 @@ describe('Given Login component', () => {
       const element = screen.getByRole('button');
       expect(element).toBeInTheDocument();
     });
-  });
 
-  describe('When the submit button is clicked', () => {
-    test('Then, the handleSubmit function should be called', async () => {
+    test('Then, if the submit button is clicked, the handleSubmit function should be called', async () => {
       const usersMockRepo = {} as unknown as UsersApiRepo;
       const inputs = screen.getAllByRole('textbox');
       await userEvent.type(inputs[0], 'test');
@@ -74,6 +80,39 @@ describe('Given Login component', () => {
         username: 'test',
         password: 'test',
       });
+    });
+  });
+
+  describe('When the username or password are incorrect and the errorState.errorStatus is true', () => {
+    beforeEach(async () => {
+      await act(async () => {
+        (useUsers as jest.Mock).mockReturnValue({
+          loginUser: jest.fn(),
+          usersState: {
+            userLogged: {
+              token: 'tokenTest',
+            },
+          },
+        });
+
+        (useError as jest.Mock).mockReturnValue({
+          errorState: {
+            errorStatus: true,
+          },
+        });
+
+        render(
+          <Provider store={store}>
+            <Router>
+              <Login></Login>
+            </Router>
+          </Provider>
+        );
+      });
+    });
+    test('Then the error message should be in the document', () => {
+      const element = screen.getByText('Incorrect username or password ❌');
+      expect(element).toBeInTheDocument();
     });
   });
 });

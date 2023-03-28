@@ -68,6 +68,17 @@
       }
     }
   }
+
+  .loginErrorMessageHidden {
+    display: none;
+  }
+
+  .loginErrorMessage {
+    display: inline-block;
+    font-family: 'Lato', sans-serif;
+    color: rgb(200, 0, 0);
+    font-size: 1.3rem;
+  }
 }
 
 @media screen and (min-width: 600px) {
