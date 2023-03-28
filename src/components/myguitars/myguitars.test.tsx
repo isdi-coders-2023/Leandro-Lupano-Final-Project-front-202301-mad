@@ -1,6 +1,4 @@
-/* eslint-disable testing-library/no-unnecessary-act */
-/* eslint-disable testing-library/no-render-in-setup */
-import { act, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import MyGuitars from './myguitars';
 import { Provider } from 'react-redux';
@@ -11,29 +9,34 @@ jest.mock('../guitar.card/guitar.card');
 jest.mock('../../hooks/use.users');
 
 describe('Given the MyGuitars component', () => {
-  beforeEach(async () => {
-    await act(async () => {
-      (useUsers as jest.Mock).mockReturnValue({
-        usersState: {
-          userLogged: {
-            myGuitars: [{ id: '1' }, { id: '2' }],
-          },
+  function testPreparation(guitarArrayTest: Array<any>) {
+    (useUsers as jest.Mock).mockReturnValue({
+      usersState: {
+        userLogged: {
+          myGuitars: guitarArrayTest,
         },
-      });
-
-      render(
-        <Provider store={store}>
-          <Router>
-            <MyGuitars></MyGuitars>
-          </Router>
-        </Provider>
-      );
+      },
     });
-  });
+
+    render(
+      <Provider store={store}>
+        <Router>
+          <MyGuitars></MyGuitars>
+        </Router>
+      </Provider>
+    );
+  }
 
   describe('When the component is rendered', () => {
-    test('Then the main title should be in the document', () => {
+    test('Then if there is an Array in users MyGuitar, the main title should be in the document', () => {
+      testPreparation([{ id: '1' }, { id: '2' }]);
       const element = screen.getByRole('heading');
+      expect(element).toBeInTheDocument();
+    });
+
+    test('Then if there is an empty Array, the main title should be in the document', () => {
+      testPreparation([]);
+      const element = screen.getByRole('button');
       expect(element).toBeInTheDocument();
     });
   });
