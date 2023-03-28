@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { GuitarStructure } from '../models/guitar';
 import { UserStructure } from '../models/user';
+import { errorActive, errorDisable } from '../reducers/error.slice';
 import { pageUpdate, styleUpdate } from '../reducers/guitar.slice';
 import { login, logout, register, updateUser } from '../reducers/user.slice';
 import { UsersApiRepo } from '../services/repositories/users.api.repo';
@@ -25,8 +26,10 @@ export function useUsers(repo: UsersApiRepo) {
     try {
       const infoUser = await repo.create(userInfo, 'login');
       dispatch(login(infoUser.results[0]));
+      dispatch(errorDisable());
     } catch (error) {
       console.log((error as Error).message);
+      dispatch(errorActive((error as Error).message));
     }
   };
 

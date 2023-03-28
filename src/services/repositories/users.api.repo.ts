@@ -15,7 +15,11 @@ export class UsersApiRepo implements UserRepo<UserServerResponse> {
   url: string;
 
   constructor() {
-    this.url = 'http://localhost:5000/users';
+    // LOCAL HOST URL:
+    // this.url = 'http://localhost:5000/users';
+    // RENDER HOST URL:
+    this.url =
+      'https://leandro-lupano-final-project-back-202301.onrender.com/users';
   }
 
   async create(

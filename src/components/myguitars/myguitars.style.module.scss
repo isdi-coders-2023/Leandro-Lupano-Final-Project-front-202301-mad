@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  padding: 1rem 1rem 4rem;
+  padding: 1rem 1rem 2rem;
+  min-height: 75vh;
 
   .myguitarsHeaderTitle {
     font-size: 1.5rem;
@@ -10,13 +11,14 @@
 
   .myguitarsCardList {
     width: 100%;
-    justify-content: center;
-    align-items: center;
 
     .myguitarsCard {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 150px));
-      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+      grid-template-columns: repeat(2, minmax(150px, 200px));
+      column-gap: 1rem;
+      row-gap: 2rem;
     }
   }
 
@@ -59,7 +61,6 @@
   }
 
   .myguitarsNoGuitar {
-    min-height: 500px;
     padding: 2rem 1rem;
 
     .myguitarsNoGuitarMessage {
@@ -93,7 +94,8 @@
   .myguitars {
     .myguitarsCardList {
       .myguitarsCard {
-        gap: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 200px));
+        column-gap: 4rem;
       }
     }
   }
@@ -101,18 +103,10 @@
 
 @media screen and (min-width: 750px) {
   .myguitars {
-    font-size: 1.3rem;
-    padding: 5rem 2rem 6rem;
+    padding: 2rem;
 
     .myguitarsHeaderTitle {
-      font-size: 2rem;
-    }
-
-    .myguitarsCardList {
-      .myguitarsCard {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 200px));
-        gap: 4rem;
-      }
+      font-size: 1.8rem;
     }
 
     .myguitarsTotalPrice {

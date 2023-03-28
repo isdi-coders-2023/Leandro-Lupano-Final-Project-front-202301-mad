@@ -16,7 +16,11 @@ export class GuitarsApiRepo implements GuitarsRepo<GuitarServerResponse> {
   url: string;
 
   constructor() {
-    this.url = 'http://localhost:5000/guitars';
+    // LOCAL HOST URL:
+    // this.url = 'http://localhost:5000/guitars';
+    // RENDER HOST URL:
+    this.url =
+      'https://leandro-lupano-final-project-back-202301.onrender.com/guitars';
   }
 
   async read(

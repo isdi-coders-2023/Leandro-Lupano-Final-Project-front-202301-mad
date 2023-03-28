@@ -10,11 +10,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0.5rem 0rem;
     font-family: 'Raleway', sans-serif;
     color: rgb(33, 37, 41, 95%);
-    border: 2px solid rgb(33, 37, 41, 95%);
+    border: 2px solid rgb(33, 37, 41, 40%);
+    border-radius: 1rem;
     width: 100%;
-    height: 420px;
 
     .guitarCardInfoBrand {
       font-size: 1.2rem;
@@ -25,7 +26,8 @@
     }
 
     img {
-      height: 300px;
+      height: 320px;
+      padding: 0.5rem 0rem;
     }
 
     .guitarCardInfoStyle {
@@ -89,29 +91,11 @@
 
 @media screen and (min-width: 750px) {
   .guitarCard {
-    font-size: 1.3rem;
-    gap: 1rem;
+    font-size: 1.2rem;
 
     .guitarCardInfo {
-      height: 500px;
-      .guitarCardInfoBrand {
-        font-size: 1.3rem;
-      }
-
-      .guitarCardInfoModel {
-        font-size: 1.1rem;
-      }
-
       img {
-        height: 350px;
-      }
-
-      .guitarCardInfoStyle {
-        font-size: 1.1rem;
-      }
-
-      .guitarCardInfoPrice {
-        font-size: 1.5rem;
+        height: 360px;
       }
     }
 
