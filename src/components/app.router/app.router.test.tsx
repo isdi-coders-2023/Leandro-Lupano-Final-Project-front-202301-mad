@@ -68,7 +68,7 @@ describe('Given AppRouter component', () => {
   };
 
   describe('When it is rendered and the path is "/"', () => {
-    test('Then, the submit button of home page should be in the document', async () => {
+    test('Then, the submit button of Login page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(0));
       const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
@@ -76,7 +76,7 @@ describe('Given AppRouter component', () => {
   });
 
   describe('When it is rendered and the path is "/home"', () => {
-    test('Then, the submit button of home page should be in the document', async () => {
+    test('Then, the submit button of Home page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(1));
       const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe('Given AppRouter component', () => {
   });
 
   describe('When it is rendered and the path is "/login"', () => {
-    test('Then, the submit button of login page should be in the document', async () => {
+    test('Then, the submit button of Login page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(2));
       const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();

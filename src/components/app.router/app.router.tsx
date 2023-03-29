@@ -26,7 +26,7 @@ export function AppRouter() {
   return (
     <Suspense>
       <Routes>
-        <Route path={'/'} element={<Home></Home>}></Route>
+        <Route path={'/'} element={<Login></Login>}></Route>
         <Route path={'/home'} element={<Home></Home>}></Route>
         <Route path={'/login'} element={<Login></Login>}></Route>
         <Route
