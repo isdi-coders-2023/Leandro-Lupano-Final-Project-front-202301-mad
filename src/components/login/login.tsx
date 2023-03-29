@@ -68,7 +68,7 @@ export default function Login() {
 
           <p className={style.loginBodyMessage}>
             New user?
-            <Link to="/home">
+            <Link to="/register">
               <span className={style.loginBodyMessageLink}>
                 {' '}
                 Create an account here

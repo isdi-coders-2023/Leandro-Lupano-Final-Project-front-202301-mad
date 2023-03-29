@@ -49,7 +49,7 @@ describe('Given AppRouter component', () => {
         <Router
           initialEntries={[
             '/',
-            '/home',
+            '/register',
             '/login',
             '/products',
             '/myguitars',
@@ -75,8 +75,8 @@ describe('Given AppRouter component', () => {
     });
   });
 
-  describe('When it is rendered and the path is "/home"', () => {
-    test('Then, the submit button of Home page should be in the document', async () => {
+  describe('When it is rendered and the path is "/register"', () => {
+    test('Then, the submit button of Register page should be in the document', async () => {
       await waitFor(async () => prepareTestFunction(1));
       const element = await screen.findByRole('button');
       expect(element).toBeInTheDocument();

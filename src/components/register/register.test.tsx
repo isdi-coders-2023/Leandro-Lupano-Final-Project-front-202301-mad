@@ -5,9 +5,9 @@ import { useUsers } from '../../hooks/use.users';
 import { Provider } from 'react-redux';
 import { store } from '../../store/store';
 import { MemoryRouter as Router } from 'react-router-dom';
-import Home from './home';
 import userEvent from '@testing-library/user-event';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
+import Register from './register';
 
 jest.mock('../../hooks/use.users');
 jest.mock('../login/login');
@@ -19,7 +19,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('Given Home component', () => {
+describe('Given Register component', () => {
   beforeEach(async () => {
     await act(async () => {
       (useUsers as jest.Mock).mockReturnValue({
@@ -28,7 +28,7 @@ describe('Given Home component', () => {
       render(
         <Provider store={store}>
           <Router>
-            <Home></Home>
+            <Register></Register>
           </Router>
         </Provider>
       );

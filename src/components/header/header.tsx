@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className={style.header}>
       <div className={style.headerLogo}>
-        <Link to="/home">
+        <Link to="/register">
           <img
             className={style.headerLogoImg}
             src="./images/guitar-world-logo-white-transparent.png"
