@@ -85,11 +85,7 @@ export default function GuitarDetails() {
 
         <div className={style.guitarDetailsBodyDescription}>
           <p className={style.guitarDetailsBodyDescriptionText}>
-            Description: {guitar.description} Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Tempore, officiis est magni
-            consequatur nisi consectetur quasi nihil magnam, ipsam blanditiis
-            possimus sint suscipit animi eligendi architecto error nesciunt
-            provident? Facilis?
+            Description: {guitar.description}
           </p>
         </div>
       </div>

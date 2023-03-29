@@ -21,6 +21,9 @@ export default function Products() {
 
   const { guitarsState, loadGuitars, changePage } = useGuitars(guitarRepo);
 
+  const isLessPage: boolean = guitarsState.actualPage === 1 ? true : false;
+  const isMorePage: boolean = guitarsState.actualPage > 6 ? true : false;
+
   useEffect(() => {
     loadGuitars(guitarsState.actualPage, guitarsState.actualStyle);
   }, [loadGuitars, guitarsState.actualPage, guitarsState.actualStyle]);
@@ -53,14 +56,18 @@ export default function Products() {
       </div>
 
       <div className={style.productsButtons}>
-        <button
-          className={style.productsButtonsPrev}
-          onClick={() => {
-            handlePage(-1);
-          }}
-        >
-          <img src="./images/prev-button.png" alt="Previous-button" />
-        </button>
+        {isLessPage ? (
+          <div></div>
+        ) : (
+          <button
+            className={style.productsButtonsPrev}
+            onClick={() => {
+              handlePage(-1);
+            }}
+          >
+            <img src="./images/prev-button.png" alt="Previous-button" />
+          </button>
+        )}
 
         {isAdmin ? (
           <Link
@@ -75,14 +82,18 @@ export default function Products() {
           <div></div>
         )}
 
-        <button
-          className={style.productsButtonsNext}
-          onClick={() => {
-            handlePage(+1);
-          }}
-        >
-          <img src="./images/next-button.png" alt="Next-button" />
-        </button>
+        {isMorePage ? (
+          <div></div>
+        ) : (
+          <button
+            className={style.productsButtonsNext}
+            onClick={() => {
+              handlePage(+1);
+            }}
+          >
+            <img src="./images/next-button.png" alt="Next-button" />
+          </button>
+        )}
       </div>
     </section>
   );

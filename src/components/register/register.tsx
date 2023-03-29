@@ -5,9 +5,9 @@ import { useUsers } from '../../hooks/use.users';
 import { UserStructure } from '../../models/user';
 import { UsersApiRepo } from '../../services/repositories/users.api.repo';
 
-import style from './home.style.module.scss';
+import style from './register.style.module.scss';
 
-export default function Home() {
+export default function Register() {
   const userRepo = useMemo(() => new UsersApiRepo(), []);
 
   const { registerUser } = useUsers(userRepo);
@@ -40,18 +40,18 @@ export default function Home() {
   };
 
   return (
-    <section className={style.home}>
-      <div className={style.homeHeader}>
+    <section className={style.register}>
+      <div className={style.registerHeader}>
         <h2>Guitar World</h2>
         <p>Welcome to the best guitar shop</p>
         <p>Professional instruments, for professional musicians</p>
       </div>
 
-      <div className={style.homeBody}>
+      <div className={style.registerBody}>
         <h3>New user?</h3>
         <p>Be part of this magnificent world</p>
 
-        <div className={style.homeBodyForm}>
+        <div className={style.registerBodyForm}>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -72,10 +72,10 @@ export default function Home() {
 
             <button type="submit">Register</button>
 
-            <p className={style.homeBodyFormLoginMessage}>
+            <p className={style.registerBodyFormLoginMessage}>
               Already have an account?
               <Link to="/login">
-                <span className={style.homeBodyFormLoginMessageLink}>
+                <span className={style.registerBodyFormLoginMessageLink}>
                   {' '}
                   Login here
                 </span>
@@ -88,8 +88,8 @@ export default function Home() {
       <p
         className={
           isRegister
-            ? style.homeRegisterMessage
-            : style.homeRegisterMessageHidden
+            ? style.registerRegisterMessage
+            : style.registerRegisterMessageHidden
         }
       >
         Registration completed successfully ✅

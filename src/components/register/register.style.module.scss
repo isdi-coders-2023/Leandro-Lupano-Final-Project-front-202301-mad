@@ -1,17 +1,17 @@
-.home {
+.register {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   padding: 2rem 1rem;
   min-height: 75vh;
 
-  .homeHeader {
+  .registerHeader {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .homeBody {
+  .registerBody {
     display: flex;
     flex-direction: column;
 
@@ -59,13 +59,13 @@
         background-color: rgb(116, 116, 116, 85%);
       }
 
-      .homeBodyFormLoginMessage {
+      .registerBodyFormLoginMessage {
         display: inline-block;
         font-family: 'Raleway', sans-serif;
         color: rgb(33, 37, 41, 95%);
         font-size: 0.9rem;
 
-        .homeBodyFormLoginMessageLink {
+        .registerBodyFormLoginMessageLink {
           color: rgb(0, 0, 238, 90%);
           cursor: pointer;
         }
@@ -73,11 +73,11 @@
     }
   }
 
-  .homeRegisterMessageHidden {
+  .registerRegisterMessageHidden {
     display: none;
   }
 
-  .homeRegisterMessage {
+  .registerRegisterMessage {
     display: inline-block;
     font-family: 'Lato', sans-serif;
     color: rgba(0, 86, 42, 0.95);
@@ -86,15 +86,15 @@
 }
 
 @media screen and (min-width: 600px) {
-  .home {
+  .register {
     align-items: center;
     font-size: 1.1rem;
 
-    .homeHeader {
+    .registerHeader {
       align-items: center;
     }
 
-    .homeBody {
+    .registerBody {
       align-items: center;
 
       h3 {
